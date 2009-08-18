@@ -1,0 +1,13 @@
+
+
+The source code included in this file is licensed to you by Facebook under the Apache License, Version 2.0.  Accordingly, the following notice applies to the source code included in this file:
+
+Copyright © 2009 Facebook, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+
+The icons included in this file are licensed to you under the following trademark license:
+
+Facebook grants you a trademark license to use its F LOGO trademark, as well as the Facebook icons contained in this file (together, the “Facebook Marks”), for the sole purpose of accurately identifying the Facebook toolbar that you create using the source code provided to you in this file (“Your Facebook Toolbar”) as being compatible with the Facebook service.  You will make it clear to your users when you distribute Your Facebook Toolbar that it is your product, not Facebook’s, and that your own terms and privacy policies apply.  You may not make use of any of the Facebook Marks in any way that may suggest that Facebook is affiliated with, endorses, approves or sponsors you or Your Facebook Toolbar.  In addition, your use of the Facebook Marks shall be subject to the Platform Guidelines (http://wiki.developers.facebook.com/index.php/Platform_Guidelines) and to the Statement of Rights and Responsibilities (http://www.facebook.com/terms.php).  Except as expressly provided above, You shall not use any of the Facebook Marks, including but not limited to FACEBOOK, FACEBOOK LOGO, F LOGO, FB, WALL, and POKE or any trademarks or terms confusingly similar to the Facebook Marks.  Facebook may revoke your license to use the Facebook Marks at any time for any reason.  ALL RIGHTS NOT EXPRESSLY GRANTED HEREUNDER IN AND TO THE FACEBOOK MARKS ARE HEREBY RESERVED BY FACEBOOK AND ITS RESPECTIVE LICENSORS.  

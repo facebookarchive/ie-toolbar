@@ -1,0 +1,91 @@
+<project name="IE toolbar" basedir="." default="build_installer" >
+        <property file="build.properties" />
+        <property file="build-number.txt" />
+
+        <path id="jTaskdefs.classpath">
+            <pathelement location="External\jtaskdefs.jar" />
+        </path>
+        
+        <taskdef name='vc7' classname='net.sourceforge.jtaskdefs.VC7' classpathref="jTaskdefs.classpath" />
+
+        <target name="init" description="Configure dll version">
+          <!--Sources/FBIEToolbar/FBIEToolbar.rc-->
+          <replaceregexp file="Sources/FBIEToolbar/FBIEToolbar.rc" 
+            match="FILEVERSION.*" replace="FILEVERSION ${label.prefix}.${build.number}" byline="true" />        
+        
+          <replaceregexp file="Sources/FBIEToolbar/FBIEToolbar.rc" 
+            match="(FILEVERSION\s+)(\d+)\.(\d+)\.(\d+)\.(\d+)" replace="\1\2, \3, \4, \5" byline="false" flags="g"/>
+            
+          <replaceregexp file="Sources/FBIEToolbar/FBIEToolbar.rc" 
+            match="PRODUCTVERSION.*" replace="PRODUCTVERSION ${label.prefix}.${build.number}" byline="true" />        
+            
+          <replaceregexp file="Sources/FBIEToolbar/FBIEToolbar.rc" 
+            match="(PRODUCTVERSION\s+)(\d+)\.(\d+)\.(\d+)\.(\d+)" replace="\1\2, \3, \4, \5" byline="false" flags="g"/>
+        
+          <replaceregexp file="Sources/FBIEToolbar/FBIEToolbar.rc" 
+            match="VALUE &quot;FileVersion.*" replace="VALUE &quot;FileVersion&quot;,  &quot;${label.prefix}.${build.number}&quot;" byline="true" />        
+
+          <replaceregexp file="Sources/FBIEToolbar/FBIEToolbar.rc" 
+            match="VALUE &quot;ProductVersion.*" replace="VALUE &quot;ProductVersion&quot;,  &quot;${label.prefix}.${build.number}&quot;" byline="true" />        
+        
+          <!--Sources/FBClientService/FBClientService.rc-->
+          <replaceregexp file="Sources/FBClientService/FBClientService.rc" 
+            match="FILEVERSION.*" replace="FILEVERSION ${label.prefix}.${build.number}" byline="true" />        
+        
+          <replaceregexp file="Sources/FBClientService/FBClientService.rc" 
+            match="(FILEVERSION\s+)(\d+)\.(\d+)\.(\d+)\.(\d+)" replace="\1\2, \3, \4, \5" byline="false" flags="g"/>
+            
+          <replaceregexp file="Sources/FBClientService/FBClientService.rc" 
+            match="PRODUCTVERSION.*" replace="PRODUCTVERSION ${label.prefix}.${build.number}" byline="true" />        
+            
+          <replaceregexp file="Sources/FBClientService/FBClientService.rc" 
+            match="(PRODUCTVERSION\s+)(\d+)\.(\d+)\.(\d+)\.(\d+)" replace="\1\2, \3, \4, \5" byline="false" flags="g"/>
+        
+          <replaceregexp file="Sources/FBClientService/FBClientService.rc" 
+            match="VALUE &quot;FileVersion.*" replace="VALUE &quot;FileVersion&quot;,  &quot;${label.prefix}.${build.number}&quot;" byline="true" />        
+
+          <replaceregexp file="Sources/FBClientService/FBClientService.rc" 
+            match="VALUE &quot;ProductVersion.*" replace="VALUE &quot;ProductVersion&quot;,  &quot;${label.prefix}.${build.number}&quot;" byline="true" />        
+
+          <!--Sources/FBClientServiceUI/FBClientServiceUI.rc-->
+          <replaceregexp file="Sources/FBClientServiceUI/FBClientServiceUI.rc" 
+            match="FILEVERSION.*" replace="FILEVERSION ${label.prefix}.${build.number}" byline="true" />        
+        
+          <replaceregexp file="Sources/FBClientServiceUI/FBClientServiceUI.rc" 
+            match="(FILEVERSION\s+)(\d+)\.(\d+)\.(\d+)\.(\d+)" replace="\1\2, \3, \4, \5" byline="false" flags="g"/>
+            
+          <replaceregexp file="Sources/FBClientServiceUI/FBClientServiceUI.rc" 
+            match="PRODUCTVERSION.*" replace="PRODUCTVERSION ${label.prefix}.${build.number}" byline="true" />        
+            
+          <replaceregexp file="Sources/FBClientServiceUI/FBClientServiceUI.rc" 
+            match="(PRODUCTVERSION\s+)(\d+)\.(\d+)\.(\d+)\.(\d+)" replace="\1\2, \3, \4, \5" byline="false" flags="g"/>
+        
+          <replaceregexp file="Sources/FBClientServiceUI/FBClientServiceUI.rc" 
+            match="VALUE &quot;FileVersion.*" replace="VALUE &quot;FileVersion&quot;,  &quot;${label.prefix}.${build.number}&quot;" byline="true" />        
+
+          <replaceregexp file="Sources/FBClientServiceUI/FBClientServiceUI.rc" 
+            match="VALUE &quot;ProductVersion.*" replace="VALUE &quot;ProductVersion&quot;,  &quot;${label.prefix}.${build.number}&quot;" byline="true" />        
+
+          <!--Common\Install\msi\FBIE-MSI\FBIE-MSI.vdproj -->
+          <replaceregexp file="Common\Install\msi\FBIE-MSI\FBIE-MSI.vdproj" 
+            match="&quot;ProductVersion&quot; = &quot;8:1\.0\.(\d+)" replace="&quot;ProductVersion&quot; = &quot;8:1.0.${build.number}" byline="true" />        
+
+    
+        </target>
+        
+        <target name="compile" depends="init" description="Compile main sources">
+            <vc7  buildmode='release' projectrootfolder='${vc.projectrootfolder}'>
+               <targets dir='${vc.projectrootfolder}\Sources' includes='**/*.sln' />
+            </vc7>
+        </target>
+
+        <target name="build_installer" depends="compile"  description="Compiling MSI project">
+	    <copy todir="Common/Install/MSI/FBIE-MSI/data">
+        	 <fileset dir="${vc.projectrootfolder}/Sources/Release/"/>
+	    </copy>
+            <vc7  buildmode='release' projectrootfolder='Common\Install\msi'>
+               <targets dir='Common\Install\msi' includes='**/*.sln' />
+            </vc7>
+        </target>
+
+</project>

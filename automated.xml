@@ -1,0 +1,65 @@
+<project name="Facebook IE plugin" basedir="." default="automate">
+    
+    <property file="build.properties" />
+    <property file="build-number.txt" />
+    <property name="svnant.lib.dir" value="${basedir}\External\svnant-1.0.0" />
+    
+    <path id="svn.classpath">
+        <pathelement location="${svnant.lib.dir}\svnant.jar" />
+        <pathelement location="${svnant.lib.dir}\svnClientAdapter.jar"/>
+        <pathelement location="${svnant.lib.dir}\svnjavahl.jar"/> 
+    </path> 
+
+    <taskdef name="svn" classname="org.tigris.subversion.svnant.SvnTask" classpathref="svn.classpath"/>
+
+    <target name="update" description="Update from SVN repository">
+
+      <svn>
+        <update dir="${basedir}" /> 
+      </svn>
+    
+    </target>
+    
+    <target name="publish" depends="" description="Publish to the build share and Web">
+        <copy file="Common\Install\msi\FBIE-MSI\Release\fbie-msi.msi" tofile="${publish.dir}/${label.prefix}.${build.number}/MSI/setup ${label.prefix}.${build.number}.msi" />
+          
+        <mkdir dir="${publish.dir}/${label.prefix}.${build.number}" />
+        
+	<copy todir="${web.publish.dir}">
+          <fileset dir="${publish.dir}/${label.prefix}.${build.number}/MSI/" />
+        </copy>
+        
+    </target>
+    
+    <target name="publish-exe" depends="" description="Publish to the build share and Web">
+        <copy file="Common/Install/ISS/Output/setup.exe" tofile="${publish.dir}/${label.prefix}.${build.number}/MSI/setup ${label.prefix}.${build.number}.exe" />
+          
+        <mkdir dir="${publish.dir}/${label.prefix}.${build.number}" />
+        
+	<copy todir="${web.publish.dir}">
+          <fileset dir="${publish.dir}/${label.prefix}.${build.number}/MSI/" />
+        </copy>
+        
+    </target>
+
+    <target name="add_update" depends="" description="Add update to updates directory">
+        <copy file="Common\Install\msi\FBIE-MSI\Release\fbie-msi.msi" tofile="${updates.dir}/setup.${label.prefix}.${build.number}.msi" />
+    </target>
+
+    <target name="build" description="Call build.xml, target build_installer" >
+        <ant antfile="build.xml" target="build_installer" inheritAll="false" 
+            inheritRefs="false">
+        </ant>
+    </target>
+
+    <target name="automate" depends="clean,update,build,publish,add_update" description="Default target: clean,update,build,publish" />
+    
+    <target name="clean" description="Delete all project directories">
+      <delete dir="Cert"/>
+      <delete dir="Common"/>
+      <delete dir="Docs"/>
+      <delete dir="Research"/>
+      <delete dir="Sources"/>
+    </target>
+    
+</project>
