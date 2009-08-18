@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+<data name="languageName">Nederlands</data>
+<data name="facebookToolbar">Facebook-werkbalk</data>
+<data name="settingsConfigureTheFacebookToolbar">De Facebook-werkbalk configureren</data>
+<data name="settingsEnablePopUpNotification">Pop-up meldingen inschakelen</data>
+<data name="settingsNotificationAboutMe">Meldingen over mij</data>
+<data name="settingsNewFriendRequest">Nieuw vriendschapsverzoek</data>
+<data name="settingsNewMessage">Nieuw bericht</data>
+<data name="settingsNewPoke">Nieuwe por</data>
+<data name="settingsNewFriend">Nieuwe vriend</data>
+<data name="settingsNewEventInvite">Nieuwe evenementsuitnodigingen</data>
+<data name="settingsNewGroupInvite">Nieuwe groepsuitnodigingen</data>
+<data name="settingsNewShare">Nieuw gedeeld</data>
+<data name="settingsSomeoneWroteOnYourWall">Iemand heeft op je Prikbord geschreven</data>
+<data name="settingsNotificationAboutMyFriends">Meldingen over mijn vrienden</data>
+<data name="settingsAFriendUpdatedHisHerProfile">Een vriend heeft zijn/haar profiel bijgewerkt</data>
+<data name="settingsAFriendUpdatedHisHerStatus">Een vriend heeft zijn/haar status bijgewerkt</data>
+<data name="settingsAFriendUpdatedHisHerAlbums">Een vriend heeft zijn/haar albums bijgewerkt</data>
+<data name="settingsAFriendUpdatedHisHerWall">Een vriend heeft zijn/haar Prikbord bijgewerkt</data>
+<data name="settingsAFriendWroteANote">Een vriend heeft een bericht geschreven</data>
+<data name="settingsCheckForUpdates">Controleren op updates</data>
+<data name="buttonOk">OK</data>
+<data name="buttonCancel">Annuleren</data>
+<data name="buttonYes">Ja</data>
+<data name="buttonNo">Nee</data>
+
+<data name="sidebarFacebookSidebar">Facebook Sidebar</data>
+<data name="sidebarSettings">Instellingen</data>
+<data name="sidebarSortingByLastUpdate">Sorteren op meest recent</data>
+<data name="sidebarSortingByStatus">Sorteren op status</data>
+<data name="sidebarSortingByProfile">Sorteren op profiel</data>
+<data name="sidebarSortingByName">Sorteren op naam</data>
+
+<data name="sidebarMenuLastUpdateTime">Laatst bijgewerkt</data>
+<data name="sidebarMenuStatusUpdateTime">Status bijgewerkt</data>
+<data name="sidebarMenuProfileUpdateTime">Profiel bijgewerkt</data>
+<data name="sidebarMenuName">Naam</data>
+
+<data name="toolbarButtonQuickLinks">Snelkoppelingen</data>
+<data name="toolbarButtonLoginToFacebook">Aanmelden op Facebook</data>
+<data name="toolbarButtonLogout">Afmelden</data>
+<data name="toolbarButtonShare">Delen</data>
+
+<data name="toolbarSearchFacebook">Zoeken in Facebook</data>
+<data name="toolbarSetYourStatus">wijzig je status...</data>
+<data name="toolbarStatusPrefix">is </data>
+<data name="toolbarHintFacebookFriendsSidebar">Facebook Vriendensidebar</data>
+<data name="toolbarHintFacebookQuickLinks">Snelkoppelingen naar Facebook</data>
+<data name="toolbarHintGoToFacebook">Ga naar Facebook</data>
+<data name="toolbarHintNewPokes">Nieuwe porren</data>
+<data name="toolbarHintNewFriendRequests">Nieuwe vriendschapsverzoeken</data>
+<data name="toolbarHintNewMessages">Nieuwe berichten</data>
+<data name="toolbarHintNewEventInviations">Nieuwe evenementsuitnodigingen</data>
+<data name="toolbarHintNewGroupInvitations">Nieuwe groepsuitnodigingen</data>
+<data name="toolbarHintShareCurrentPageOnFacebook">Huidige pagina delen op Facebook</data>
+<data name="toolbarHintLoginToFacebook">Aanmelden op Facebook</data>
+<data name="toolbarHintLogoutFromFacebook">Afmelden van Facebook</data>
+
+<data name="toolbarMenuProfile">Profiel</data>
+<data name="toolbarMenuFriends">Vrienden</data>
+<data name="toolbarMenuNetworks">Netwerken</data>
+<data name="toolbarMenuInbox">Postvak IN</data>
+<data name="toolbarMenuPhotos">Foto' s</data>
+<data name="toolbarMenuNotes">Opmerkingen</data>
+<data name="toolbarMenuGroups">Groepen</data>
+<data name="toolbarMenuEvents">Evenementen</data>
+<data name="toolbarMenuPostedItems">Geplaatste berichten</data>
+<data name="toolbarMenuAccount">Account</data>
+<data name="toolbarMenuPrivacy">Privacy</data>
+<data name="toolbarMenuLanguage">Taal</data>
+<data name="toolbarMenuToolbarSettings">Werkbalkinstellingen</data>
+
+<data name="htmlNoFriendsToShow">Kan geen vrienden weergeven</data>
+<data name="htmlPressEnterToFindFriend">Druk op enter om vriend te vinden: {1} </data>
+<data name="htmlLoginFromTheToolbar">Meld je aan via de werkbalk om je vriendenlijst hier weer te geven.</data>
+<data name="htmlSeeAllFriends">Bekijk alle {1} vrienden</data>
+<data name="htmlLoadingFriendsList">Bezig met laden vriendenlijst ....</data>
+
+<data name="loginLoginToFacebook">Aanmelden op Facebook</data>
+<data name="loginCloseLoginWindow">Aanmeldvenster sluiten</data>
+
+<data name="notifierFacebookNotification">Facebook-melding</data>
+<data name="notifierYourStatusWasCleared">Je status is succesvol verwijderd.</data>
+<data name="notifierYourStatusWasSet">Je status is succesvol ingesteld.</data>
+<data name="notifierYouHaveANewMessage">Je hebt een nieuw bericht.</data>
+<data name="notifierYouHaveNewMessages">Je hebt nieuwe berichten.</data>
+
+<data name="notifierYouHaveBeenPoked">Je bent gepord.</data>
+<data name="notifierYouHaveBeenPokedTimes">Je bent {1} keer gepord.</data>
+<data name="notifierYouHaveBeenPokedManyTimes">Je bent heel vaak gepord.</data>
+
+<data name="notifierSmWantsToBeYourFriend">{1} wil je toevoegen als vriend.</data>
+<data name="notifierSmAddedNewPhotosTo">{1} heeft nieuwe foto's toegevoegd aan {2}</data>
+<data name="notifierSmCreatedTheAlbum">{1} heeft het album {2} aangemaakt</data>
+<data name="notifierSmWroteOnYourWall">Iemand heeft op je Prikbord geschreven</data>
+<data name="notifierSmIsNowYourFriend">Je bent nu vrienden met {1}</data>
+<data name="notifierSmWroteOnSmWall">Iemand heeft op het Prikbord van {1} geschreven</data>
+<data name="notifierSmUpdatedHisHerProfile">{1} heeft zijn/haar profiel bijgewerkt</data>
+<data name="notifierSmWroteANote">{1} heeft een bericht geschreven</data>
+<data name="notifierNewVersion">Er is een nieuwe versie van de Facebook-werkbalk beschikbaar. Wil je deze installeren?</data>
+<data name="notifierDoNotAskMeAgain">Niet meer vragen</data>
+<data name="notifierYesDescription">Ja - sluit de browser en installeer de update</data>
+<data name="notifierNoDescription">Nee - nu nog niet</data>
+
+<data name="htmlMessage">bericht</data>
+<data name="htmlPoke">por</data>
+<data name="htmlWallPost">Prikbordbericht</data>
+
+<data name="htmlPopupMessage">Stuur {1} een bericht</data>
+<data name="htmlPopupPoke">Por {1}</data>
+<data name="htmlPopupWallPost">Schrijf een bericht op het Prikbord van {1}</data>
+
+<data name="statusNoUpdates">Geen nieuwe updates beschikbaar</data>
+<data name="statusUpdateInProgress">Bezig met downloaden nieuwe updates...</data>
+<data name="statusUpdateAvailable">Nieuwe updates kunnen worden geïnstalleerd</data>
+<data name="notifierDownloadNewUpdates">Klik hier om de nieuwe versie van de Facebook-werkbalk te downloaden</data>
+<data name="notifierInstallNewUpdates">Klik hier om de nieuwe versie van de Facebook-werkbalk te installeren</data>
+
+<data name="Monday">maandag</data>
+<data name="Tuesday">dinsdag</data>
+<data name="Wednesday">woensdag</data>
+<data name="Thursday">donderdag</data>
+<data name="Friday">vrijdag</data>
+<data name="Saturday">zaterdag</data>
+<data name="Sunday">zondag</data>
+<data name="Yesterday">Gisteren</data>
+<data name="YesterdaySmall">gisteren</data>
+<data name="Today">Vandaag</data>
+<data name="TodaySmall">vandaag</data>
+</root>

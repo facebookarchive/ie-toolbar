@@ -1,0 +1,6 @@
+; FBClientServiceUI.def : Declares the module parameters for the DLL.
+
+LIBRARY      "FBClientServiceUI"
+
+EXPORTS
+    ; Explicit exports can go here

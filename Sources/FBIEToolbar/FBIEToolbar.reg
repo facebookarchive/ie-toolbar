@@ -1,0 +1,26 @@
+Windows Registry Editor Version 5.00
+[HKEY_CLASSES_ROOT\CLSID\{A823A630-78C6-4637-AF80-AEDCA5BB74C1}]
+@="Facebook Toolbar"
+
+[HKEY_CLASSES_ROOT\CLSID\{A823A630-78C6-4637-AF80-AEDCA5BB74C1}\InprocServer32]
+@="D:\\Projects\\fbtb\\trunk\\Sources\\Debug\\FBIEToolbar.dll"
+"ThreadingModel"="Apartment"
+
+[HKEY_CLASSES_ROOT\CLSID\{7202BDA4-2D1B-4ac1-9957-9A51E63F2551}]
+@="Facebook Sidebar"
+
+[HKEY_CLASSES_ROOT\CLSID\{7202BDA4-2D1B-4ac1-9957-9A51E63F2551}\InprocServer32]
+@="D:\\Projects\\fbtb\\trunk\\Sources\\Debug\\FBIEToolbar.dll"
+"ThreadingModel"="Apartment"
+
+[HKEY_CLASSES_ROOT\CLSID\{7202BDA4-2D1B-4ac1-9957-9A51E63F2551}\Implemented Categories\{00021493-0000-0000-C000-000000000046}]
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Explorer Bars]
+"{7202BDA4-2D1B-4ac1-9957-9A51E63F2551}"="Facebook Sidebar"
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Internet Explorer\Toolbar]
+"{A823A630-78C6-4637-AF80-AEDCA5BB74C1}"="Facebook Toolbar"
+
+[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved]
+"{A823A630-78C6-4637-AF80-AEDCA5BB74C1}"="Facebook Toolbar"
+"{7202BDA4-2D1B-4ac1-9957-9A51E63F2551}"="Facebook Sidebar"

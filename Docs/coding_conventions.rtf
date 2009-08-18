@@ -1,0 +1,140 @@
+{\rtf1\ansi\ansicpg1252\cocoartf949\cocoasubrtf270
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww14820\viewh18740\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 CppCodingConventions\
+\
+Facebook C++ Coding Conventions\
+Contents\
+\
+    * 1 Summary\
+    * 2 How This Document Should Be Used\
+    * 3 C++ Preprocessor\
+          o 3.1 Constants\
+          o 3.2 Macros\
+          o 3.3 #include Directives\
+          o 3.4 Other Directives\
+    * 4 Namespaces\
+    * 5 C++ Templates\
+    * 6 Object-Oriented Programming\
+          o 6.1 Structs\
+          o 6.2 Classes\
+    * 7 Assorted Language Features\
+\
+[edit] Summary\
+\
+    * See the sister doc on conventions: C++ Style Guide doc\
+\
+\
+[edit] How This Document Should Be Used\
+\
+    * Goal: To make Facebook C++ development more productive by encouraging standards which will make it easier to read, edit, maintain, debug, and interface with other developers' code. This doc covers issues like exceptions, templates, and other C++ language features, while the C++ Style doc covers the dry style aspects. Please read both!\
+    * Everything in this document that's not explicitly marked a recommendation (many things are) should always be followed, UNLESS you have a Good Reason.\
+    * If you have a Good Reason to stray from one of the guidelines, please send your example to cxx@lists.facebook.com -- it is likely that either the standard is faulty and should be updated to include your case, or there is a consensus on a better solution to your problem. If you really, truly have a special case, do whatever is best \
+\
+\
+[edit] C++ Preprocessor\
+\
+\
+[edit] Constants\
+\
+    * Strongly prefer 'const' variables and 'enum' to '#define' to define values. This will help with compilation errors and type safety. Furthermore, you can then encapsulate by making constants be inside namespaces and classes. Be aware that if you're defining string literals as constants, you should use "const char * const", not "const char *". \
+\
+\
+[edit] Macros\
+\
+    * Do not use them unless absolutely necessary. It's very useful to have well-designed macros in the common libraries to make certain common tasks syntactically more pleasant (logging error/info/debug output, unittesting, "registering" certain classes for reflection-like usage, stuff from Boost, etc.) However, most of the time, they're a big detriment, not type safe, and can have bad side effects -- use normal inline functions or templates instead.\
+    * When using macros, pay lots of attention to multiple argument evaluation and inputs that may be complex expressions rather than simple values. TODO: EXAMPLES.\
+    * When making macros that have multiple statements, use this idiom: "do \{ stmt1; stmt2; \} while (0)". This allows this block to act the most like a single statement, usable in if/for/while even if they don't use braces. \
+\
+\
+[edit] #include Directives\
+\
+    * All include files must have a single-inclusion guard using #ifdef. The name of the identifier to test on should be derived from the directory and the filename to make sure it's unique; for a directory such as "fbcode/myproject/foo/BarBaz.h" you should use "#ifndef __MYPROJECT_FOO_BARBAZ_H__".\
+    * Include files and 'using' declarations should all be at the top of the file, and ordered properly to make it easier to see what is included. You should have, in order: \
+\
+   1. If this is a '.cpp' file with a corresponding '.h', this '.h' should be included absolutely first. This will ensure that you #include everything you need in the '.h' without implicity grabbing includes from elsewhere.\
+   2. All C standard library and UNIX includes: #include <sys/time.h>\
+   3. All C++ standard lib includes: #include <iostream>\
+   4. All Boost includes: #include <boost/utility.hpp>\
+   5. All of our local FBcode includes ordered in alphabetical order: #include "admarket/admonitor/LogReader.h"\
+   6. All 'using' and 'using namespace' declarations. \
+\
+    * Includes should use the full path (relative to "fbcode/") to the ".h". You should do this even when the file is coming from your current directory.\
+    * Whenever possible, try to forward-declare as much as possible in the '.h' and only #include things you need the full implementation for. For instance, if you just use a 'Class*' or 'Class&' in a '.h', forward-declare 'Class'!\
+    * Put small "private" classes that will only get used in one place into a '.cpp' (a common example is a custom comparator class).\
+    * Be aware of what goes into your ".h" files. If possible, try to separate them into "Public API" .h files that may be included by external modules. These public ".h" files should contain only those classes that external users need to access. No large blocks of inline code should be in ".h" files that are widely included if these blocks aren't vital to all users of the ".h" -- split that them into a separate "-inl.h" file. Developers should be able to select whether they want your API or your whole implementation. TODO: Lots of specific guidelines/examples should be useful here. \
+\
+\
+[edit] Other Directives\
+\
+    * Unless absolutely necessary, don't use other directives such as '#pragma', '#error', etc. These aren't at all compatible cross-compiler. \
+\
+\
+[edit] Namespaces\
+\
+    * Namespace philosophy:\
+          o Namespaces should logically group related code and prevent identifier clashes.\
+          o Namespaces should make it EASIER to program, not harder. Diarrhea of the namespace can turn a nice, short, descriptive identifier such as SpinLock into a monstrosity like facebook::libfb::concurrency::locking::SpinLock. This is usually not helpful, and code should certainly not use the fully qualified name. \
+    * Creating namespaces:\
+          o All of our code should be inside \'93namespace facebook \{\'93.\
+          o Most sub-projects and libraries should define a sub-namespace, but it shouldn\'92t always be for every directory in our codebase. This kind of scheme works much better in Java, where import statements are more efficient and the compiler will let you know when things clash (plus code gets put into the correct namespace automatically). \
+    * Guidelines for importing namespaces:\
+          o Don\'92t use \'93using namespace xxxxx;\'94 \'96 the whole point of namespaces is obliterated when the code starts doing this prolifically. Use \'93using foo::bar::BazClass;\'94 instead. If most of your project\'92s code is in the same namespace, this is much easier.\
+          o It\'92s very useful to use short names for most standard C++ data structures, as it makes code more readable. It\'92s very unlikely that someone will define their own \'91string\'92 (it\'92s also against our class naming conventions:P). Thus, we\'92ll provide some common-declarations.h file that has forward declarations for common STL/stdlib objects, so people can use \'93string\'94, \'93vector\'94, \'93hash_set\'94, \'93cout\'94 without prefixing with std::.\
+          o \'93using namespace std;\'94 \'96 I believe that this exception should be allowed in .cc/.cpp files at least; argument about that and .h files is surely forthcoming \
+\
+\
+[edit] C++ Templates\
+\
+    * Hashed containers:\
+          o Programmers should be aware of the differences between hash_set/hash_map and set/map\
+          o We should make sure there\'92s no issues with these classes in our STL impl, and provide some of our own .h files that do hash<foo> for many common internal types from base libraries. \
+    * Smart pointers:\
+          o Strongly prefer scoped_ptr<> whenever possible. Out of all the smart pointers, it has by far the smallest overhead and very neatly ties allocation to de-allocation. It\'92s much easier to tell the lifespan of an object in a scoped_ptr<> (partially due to the drawback of not being able to use these in containers \'96 hm).\
+          o There should be lots of established common wisdom about these \'96 there\'92s a lot of myths, disagreements, etc. Let\'92s figure it out. \
+    * Google used linked_ptr<> instead of auto_ptr<> and shared_ptr<> for some reason \'96 does anyone know why? Better threading? Discuss.\
+          o Guidelines should exist for when function parameters should be T* and when some kind of smart_ptr<T> -- the latter locks the user into a particular type of smart pointer that must be used, but the former can result in memory management issues if the function stores the pointer. \
+    * Boost use:\
+          o I think we should clearly allow Boost use \'96 it\'92s too restrictive not to. However, there may be guidelines on what\'92s likely to be buggy/bloaty/etc. \
+\
+\
+[edit] Object-Oriented Programming\
+[edit] Structs\
+\
+    * Structs are great for grouping data together with minimal to no implementation.\
+    * Structs should have a minimal amount of code -- perhaps just the constructor. \
+\
+[edit] Classes\
+\
+    * Public/Protected/Private/Friend\
+          o All data members in "class" objects should be private -- make accessor functions!\
+          o All sections for a class (public/private/protected). should be explicitly labeled.\
+          o It is OK to repeat a section name to, for example, separate private data from private methods.\
+          o The section definitions should be in order of increasing privacy -- public first, then protected, then private last. \
+\
+    * Constructors, Destructors, Assignment Operators\
+          o Mark your classes as noncopyable unless you've explicitly designed them to handle that gracefully. Most classes whose only members are POD, STL containers, or smart pointers are fine; otherwise, it might be risky. The easiest way to protect yourself is to make all classes privately inherit from boost::noncopyable, or you can add private constructors and operator=() for the ones you don't use. This will prevent memory corruption and leaks if someone sticks your class in, say, a vector. \
+\
+\
+[edit] Assorted Language Features\
+\
+    * Exceptions\
+          o We need to establish very clear guidelines for their use \'96 how/when/etc. If we decide to use them heavily, we should get some heavy-gun low-level people to implement some base exceptions with good stack traces, no memory allocation problems for message text passed up the stack, etc. \
+\
+    * Const\
+          o All objects, whenever possible, should be passed to functions as const-refs (\'93const T&\'94). This makes APIs much clearer as to whether it\'92s an input or output arg, reduces the need for NULL-checks (and reduces crashing bugs), and helps enforce good encapsulation.\
+          o All functions on classes should be marked as \'91const\'92 if they don\'92t modify any members.\
+          o Don\'92t use const_cast<> unless absolutely necessary (usually due to someone else\'92s bad design). When possible and practical, fix their bad design \
+\
+    * References\
+          o I prefer the use of references mostly in their const form. I think output arguments for functions are far more clearly represented by passing pointers instead \'96 then the user has to volunteer the object for modification by passing in the pointer, or &(obj). \
+\
+    * goto\
+          o Never, ever use 'goto'. \
+\
+    * Increment Operator\
+          o Prefer the prefix operator (++i) to the postfix (i++) when the return value is not used, since the prefix operator does not need to make a copy of its operand. \
+}

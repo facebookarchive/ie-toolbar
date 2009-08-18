@@ -1,0 +1,189 @@
+{\rtf1\ansi\ansicpg1252\cocoartf949\cocoasubrtf270
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+\margl1440\margr1440\vieww15580\viewh19480\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\ql\qnatural\pardirnatural
+
+\f0\fs24 \cf0 CppStyle\
+\
+Facebook C++ Style Guidelines\
+Contents\
+\
+    * 1 Summary\
+    * 2 How This Document Should Be Used\
+    * 3 Naming Conventions\
+          o 3.1 Files and Directories\
+          o 3.2 Identifiers\
+    * 4 Code Formatting and Appearance\
+          o 4.1 Indentation, Width, Spacing\
+          o 4.2 Braces, Control Structures\
+    * 5 Comments\
+    * 6 Variables and Constants\
+          o 6.1 Variable Declarations\
+          o 6.2 Zero, Constants, Magic Numbers\
+    * 7 Code Organization\
+    * 8 Other Topics\
+          o 8.1 3rd-Party and Open-Source Code\
+          o 8.2 Research: Other C++ Style Guides on The Internets\
+\
+[edit] Summary\
+\
+    * See the sister doc on conventions: C++ Coding Conventions doc\
+\
+\
+\
+[edit] How This Document Should Be Used\
+\
+    * Goal: To make Facebook C++ development more productive by encouraging standards which will make it easier to read, edit, maintain, debug, and interface with other developers' code. This doc covers the dry style aspects of this, while the C++ Coding Conventions doc covers issues like exceptions, templates, and other C++ language features. Please read both!\
+    * Everything in this document that's not explicitly marked a recommendation (many things are) should always be followed, UNLESS you have a Good Reason.\
+    * If you have a Good Reason to stray from one of the guidelines, please send your example to cxx-style@lists.facebook.com -- it is likely that either the standard is faulty and should be updated to include your case, or there is a consensus on a better solution to your problem. If you really, truly have a special case, do whatever is best \
+\
+\
+[edit] Naming Conventions\
+\
+\
+[edit] Files and Directories\
+\
+    * Source files should be named using the style CamelCase.cpp, with the corresponding header file CamelCase.h.\
+          o If you have a header file that contains a large amount of templated/inline function code, use the style CamelCase-inl.h.\
+          o If your filename contains an acronym, only capitalize the first letter of that acronym (e.g. SmcUtil.h instead of SMCUtil.h). \
+    * The unittest for MyFoo.cpp should be named MyFooTest.cpp.\
+    * All directory names should be lowercase, with underscores added as needed to improve readability (e.g. my_complex_directory/Foo.h). \
+\
+\
+[edit] Identifiers\
+Identifier Type 	Style 	Example(s)\
+Namespaces 	lower_under 	namespace thift, namespace foo_bar\
+Classes, structs, and enums 	CamelCase 	class SimpleServer, enum ErrorCodes\
+Functions 	lowerCamelCase 	getCount(), setCount()\
+Member variables (public) 	lowerCamelCase 	bool extraLogging\
+Member variables (private/protected) 	lowerCamelCase_ 	Mutex* mapLock_\
+Constants (whether global or inside a class)discussion     	kCamelCase 	const int kMaxRetries\
+All other variables (local, global) 	lowerCamelCase 	int numErrors\
+Enum values 	UPPER_UNDER 	OK, SERVER_ERROR\
+Macros 	UPPER_UNDER 	TWIDDLE_BITS\
+Template arguments 	single uppercase letter     	template<class T, class R>\
+\
+\
+[edit] Code Formatting and Appearance\
+\
+\
+[edit] Indentation, Width, Spacing\
+\
+    * Indentation\
+          o Use 2 spaces per indentation level, no tabs.\
+          o Statements spanning multiple lines should line up code using the "auto-indent" fashion -- the continuation should be indented according to the logical level of the code it is continuing.\
+          o Namespace contents should NOT be indented despite the braces present.\
+          o Labels for 'public/protected/private' should be indented one space less than the following contents.discussion (TODO: Emacs c++ mode flushes left.)\
+          o Comments should be indented at the level of the surrounding statements.\
+          o TODO: Make sure predefined VIM/Emacs config files make these rules easy. \
+\
+    * Line Width\
+          o Try to keep lines to within 80 characters whenever possible; however, for really long constants or compound expressions, it's OK to exceed this limit if breaking up the line would be hard to read.\
+          o When breaking long boolean expressions, break consistently either before or after the boolean operators.discussion \
+\
+    * Spaces and Parentheses\
+          o Space before and after all infix binary operators except "." and "->" ("2 + x * 2", not "2+x*2")\
+          o Space after all commas, semicolons (if not at end of line).\
+          o Space after all reserved words (except sizeof).\
+          o Space before parentheses for control structures (if, while, switch, for, etc.); no space inside those parens: use "if (foo)", not "if ( foo )" or "if(foo)"\
+          o No space before open parenthesis for function calls.\
+          o No parens for keywords that don't require it (delete, return) -- exception for: sizeof(type) \
+\
+    * Blank Lines\
+          o Separate logical blocks inside methods with a blank line -- this makes it much easier to read.\
+          o Separate method declarations or definitions within a class with at least one blank line (unless it's a series of quick accessors). When using JavaDoc, using two or three blank lines may make these more readable. \
+\
+\
+[edit] Braces, Control Structures\
+\
+    * Braces Style\
+          o Opening braces should always be on the same line as the statement/declaration that precedes them.\
+          o Else blocks should look like "\} else \{" or "\} else if () \{" \
+\
+    * Control Structures (if, while, for, case, etc.)\
+          o Do not put single statements on the same line as the if/for/while/do.\
+          o Always use braces for all if/for/while/do statements, even for single-line-body ones.\
+          o For if/else statements, prefer to put the shorter block first, and the longer block second (unless it makes the conditional far harder to read).\
+          o Prefer "if (count != 0)" or "if (count > 0)" to "if (count)" for variables which are counters -- "if (handle)" is OK for a handle or hash. \
+\
+\
+[edit] Comments\
+\
+    * Header Comment for source files:\
+          o All source files (.h and .cpp) should have a standard header in a large comment block at the top; this should include a standard copyright notice, the author, and a brief file description. \
+\
+    * For single line comments, always use "//" \
+\
+    * For multi-line comments:\
+          o Headers for classes, functions, methods, member variables should use JavaDoc style ("///" for single line, "/** ... */" for multiline -- we will use Doxygen to build docs for our codebase).\
+          o For multi-line comments within actual code blocks, just use "//" at the front of each line. Don't do old-style "/* */" comments inside code. \
+\
+    * Guidelines on what should be commented:\
+          o Every File\
+          o Every Class\
+          o Every method that's not an obvious getter/setter\
+          o Every member variable (often just a couple words will suffice, just '//' style for private members). \
+\
+    * Doxygen guidelines:\
+          o Put doxygen-style comments only the .h -- they are best for defining an interface and externally-visible behavior, not to mark details of implementation. Feel free to have large comment blocks in the .cpp, but not doxygen-style.\
+          o Document public subclasses and public members using Doxygen-style, but not private class members. \
+\
+    * Special comments:\
+          o Use "// TODO: " comments when something needs to be fixed; use "// TODO(username): " when someone should do it (most often you :P). \
+\
+\
+[edit] Variables and Constants\
+\
+\
+[edit] Variable Declarations\
+\
+    * Do not declare more than one variable on a line (this helps accomplish the other guidelines, promotes commenting, is good for tagging).\
+    * Initialize most variables at the time of declaration (unless they are class objects w/ default constructors).\
+    * Declare your variables in the smallest scope possible.\
+    * Declare your variables as close to the usage point as possible within the given scope. Don't group all your variables at the top of scope -- this makes the code much harder to follow.\
+    * If the variable or function parameter is a pointer or reference type, group the "*" or "&" with the type -- pointer-ness or reference-ness is an attribute of the type, not the name. "int* foo; const Bar& bar;", NOT "int *foo; Bar &bar;". \
+\
+\
+[edit] Zero, Constants, Magic Numbers\
+\
+    * Use 'NULL' if you need a constant that represents a null pointer (T* for some T), use 0 otherwise for a zero value.\
+    * Do not use magic numbers in the code (no literals of any numbers other than 0, 1, -1 except as the initializer for a constant). In some cases, if there's no chance the value will be used elsewhere, it can be more readable to use a magic number inline if accompanied by a comment explaining the value.\
+    * Do not use string literals without declaring a named constant for them.\
+    * For floating point literals, never omit the initial 0 before the decimal point (always "0.5", not ".5"). \
+\
+\
+[edit] Code Organization\
+\
+    * Do not use subdirectories like "lib", "cpp", or "trunk" under FBCode unless you really have code in a multitude of languages -- "fbcode/projname/lib/cpp" should most often just be "fbcode/projname".\
+    * Use an "if" subdirectory to store your ".thrift" files, like "fbcode/projname/if"\
+    * ".h" files should be in same dir with corresponding ".cpp" files\
+    * Unittest files should be in same dir with corresponding ".cpp" files, or potentially under a "test" subdirectory. \
+\
+\
+[edit] Other Topics\
+\
+\
+[edit] 3rd-Party and Open-Source Code\
+\
+    * Intent: It is NOT this document's intent to limit the use of open source or other 3rd-party code in our development. The goal is to make sure the code WE produce on our own is consistent and maximally interoperable. Since we can't have complete standards across the codebase when we use 3rd-party code, we will focus on local consistency in these sub-projects.\
+    * Definition: 3PC = third-party code (could be a tool, a library, etc.)\
+    * Guidelines:\
+          o When using 3PC "as-is", don't make any changes just to make it fit style-wise.\
+                + Changes to help it build in our build system, or other interoperability changes are obviously ok. \
+          o When making changes to 3PC, (even if they're extensive), follow the conventions used in the 3PC!\
+                + It's more important to stay consistent within the project, and will make that code easier to understand and maintain in the long-run than if it's half their style and half ours.\
+                + This is particularly important if you expect you might patch your changes back into their mainline, or we might re-release it as our own open-source. \
+          o If it'll be useful, write wrappers in our style that others can use.\
+                + For instance, there can be an easy-to-use wrapper to make libEvent or libPNG written in our style, so most people will be able to interact with familiar-looking and familiar-functioning code instead of learning the different conventions used in each sub-library we use.\
+                + This can be particularly useful for adapting idioms (such as bringing C-style libs into the C++ world, etc.) \
+          o We may choose to keep most 3PC in a separate code tree to indicate that it's different (styled differently, built with the help of custom Makefiles, etc.) \
+\
+\
+[edit] Research: Other C++ Style Guides on The Internets\
+\
+These are here to compare, learn from, etc.\
+\
+    * http://geosoft.no/development/cppstyle.html\
+    * http://www.possibility.com/Cpp/CppCodingStandard.html\
+    * http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml }

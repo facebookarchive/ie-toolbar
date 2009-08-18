@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<root>
+<data name="languageName">Svenska</data>
+<data name="facebookToolbar">Facebook-verktygsfält</data>
+<data name="settingsConfigureTheFacebookToolbar">Konfigurera Facebook-verktygsfältet</data>
+<data name="settingsEnablePopUpNotification">Aktivera popup-meddelande</data>
+<data name="settingsNotificationAboutMe">Meddelande om mig</data>
+<data name="settingsNewFriendRequest">Ny vänförfrågan</data>
+<data name="settingsNewMessage">Nytt meddelande</data>
+<data name="settingsNewPoke">Ny puff</data>
+<data name="settingsNewFriend">Ny vän</data>
+<data name="settingsNewEventInvite">Ny evenemangsinbjudan</data>
+<data name="settingsNewGroupInvite">Ny gruppinbjudan</data>
+<data name="settingsNewShare">Ny delning</data>
+<data name="settingsSomeoneWroteOnYourWall">Någon har skrivit i din logg.</data>
+<data name="settingsNotificationAboutMyFriends">Meddelande om mina vänner</data>
+<data name="settingsAFriendUpdatedHisHerProfile">En vän har uppdaterat sin profil</data>
+<data name="settingsAFriendUpdatedHisHerStatus">En vän har uppdaterat sin status</data>
+<data name="settingsAFriendUpdatedHisHerAlbums">En vän har uppdaterat sina album</data>
+<data name="settingsAFriendUpdatedHisHerWall">En vän har uppdaterat sin logg</data>
+<data name="settingsAFriendWroteANote">En vän har skrivit ett meddelande</data>
+<data name="settingsCheckForUpdates">Sök efter uppdateringar</data>
+<data name="buttonOk">OK</data>
+<data name="buttonCancel">Avbryt</data>
+<data name="buttonYes">Ja</data>
+<data name="buttonNo">Nej</data>
+
+<data name="sidebarFacebookSidebar">Facebook-sidofält</data>
+<data name="sidebarSettings">Inställningar</data>
+<data name="sidebarSortingByLastUpdate">Sortera efter senaste uppdateringen</data>
+<data name="sidebarSortingByStatus">Sortera efter status</data>
+<data name="sidebarSortingByProfile">Sortera efter profil</data>
+<data name="sidebarSortingByName">Sortera efter namn</data>
+
+<data name="sidebarMenuLastUpdateTime">Senaste uppdateringen</data>
+<data name="sidebarMenuStatusUpdateTime">Status update time</data>
+<data name="sidebarMenuProfileUpdateTime">Profile update time</data>
+<data name="sidebarMenuName">Namn</data>
+
+<data name="toolbarButtonQuickLinks">Snabblänkar</data>
+<data name="toolbarButtonLoginToFacebook">Logga in på Facebook</data>
+<data name="toolbarButtonLogout">Logga ut</data>
+<data name="toolbarButtonShare">Dela</data>
+
+<data name="toolbarSearchFacebook">Sök på Facebook:</data>
+<data name="toolbarSetYourStatus">ange din status...</data>
+<data name="toolbarStatusPrefix">  </data>
+<data name="toolbarHintFacebookFriendsSidebar">Sidofält för Facebook-vänner</data>
+<data name="toolbarHintFacebookQuickLinks">Facebook-snabblänkar</data>
+<data name="toolbarHintGoToFacebook">Gå till Facebook</data>
+<data name="toolbarHintNewPokes">Nya puffar</data>
+<data name="toolbarHintNewFriendRequests">Nya vänförfrågningar</data>
+<data name="toolbarHintNewMessages">Nya meddelanden</data>
+<data name="toolbarHintNewEventInviations">Nya evenemangsinbjudningar</data>
+<data name="toolbarHintNewGroupInvitations">Nya gruppinbjudningar</data>
+<data name="toolbarHintShareCurrentPageOnFacebook">Dela den aktuella sidan på Facebook</data>
+<data name="toolbarHintLoginToFacebook">Logga in på Facebook</data>
+<data name="toolbarHintLogoutFromFacebook">Logga ut från Facebook</data>
+
+<data name="toolbarMenuProfile">Profil</data>
+<data name="toolbarMenuFriends">Vänner</data>
+<data name="toolbarMenuNetworks">Nätverk</data>
+<data name="toolbarMenuInbox">Inkorg</data>
+<data name="toolbarMenuPhotos">Bilder</data>
+<data name="toolbarMenuNotes">Anteckningar</data>
+<data name="toolbarMenuGroups">Grupper</data>
+<data name="toolbarMenuEvents">Evenemang</data>
+<data name="toolbarMenuPostedItems">Länkar</data>
+<data name="toolbarMenuAccount">Användarkonto</data>
+<data name="toolbarMenuPrivacy">Sekretess</data>
+<data name="toolbarMenuLanguage">Språk</data>
+<data name="toolbarMenuToolbarSettings">Inställningar för verktygsfält</data>
+
+<data name="htmlNoFriendsToShow">Det finns inga vänner att visa.</data>
+<data name="htmlPressEnterToFindFriend">Tryck på Enter om du vill söka efter en vän: {1} </data>
+<data name="htmlLoginFromTheToolbar">Logga in från verktygsfältet om du vill visa vänlistan.</data>
+<data name="htmlSeeAllFriends">Visa alla {1} vänner</data>
+<data name="htmlLoadingFriendsList">Laddar vänlistan ...</data>
+
+<data name="loginLoginToFacebook">Logga in på Facebook</data>
+<data name="loginCloseLoginWindow">Stäng inloggningsfönstret</data>
+
+<data name="notifierFacebookNotification">Facebook-meddelande</data>
+<data name="notifierYourStatusWasCleared">Din status har tömts.</data>
+<data name="notifierYourStatusWasSet">Din status har angetts.</data>
+<data name="notifierYouHaveANewMessage">Du har ett nytt meddelande.</data>
+<data name="notifierYouHaveNewMessages">Du har nya meddelanden.</data>
+
+<data name="notifierYouHaveBeenPoked">Du har blivit puffad.</data>
+<data name="notifierYouHaveBeenPokedTimes">Du har blivit puffad {1} gånger.</data>
+<data name="notifierYouHaveBeenPokedManyTimes">Du har blivit puffad många gånger.</data>
+
+<data name="notifierSmWantsToBeYourFriend">{1} vill bli din vän.</data>
+<data name="notifierSmAddedNewPhotosTo">{1} har lagt till nya foton i {2}.</data>
+<data name="notifierSmCreatedTheAlbum">{1} har skapat albumet {2}</data>
+<data name="notifierSmWroteOnYourWall">Någon har skrivit i din logg.</data>
+<data name="notifierSmIsNowYourFriend">{1} är nu din vän</data>
+<data name="notifierSmWroteOnSmWall">Någon har skrivit i {1}s logg</data>
+<data name="notifierSmUpdatedHisHerProfile">{1} har uppdaterat sin profil.</data>
+<data name="notifierSmWroteANote">{} har gjort en anteckning.</data>
+<data name="notifierNewVersion">Det finns en ny version av Facebook-verktygsfältet att hämta. Vill du installera den?</data>
+<data name="notifierDoNotAskMeAgain">Fråga mig inte igen</data>
+<data name="notifierYesDescription">Ja – stäng webbläsaren och installera uppdateringen</data>
+<data name="notifierNoDescription">Nej – inte just nu.</data>
+
+<data name="htmlMessage">meddelande</data>
+<data name="htmlPoke">puffa</data>
+<data name="htmlWallPost">logginlägg</data>
+
+<data name="htmlPopupMessage">Skicka ett meddelande till {1}</data>
+<data name="htmlPopupPoke">Puffa {1}</data>
+<data name="htmlPopupWallPost">Skriv i {1}s logg</data>
+
+<data name="statusNoUpdates">Det finns inga nya uppdateringar</data>
+<data name="statusUpdateInProgress">Hämtar nya uppdateringar...</data>
+<data name="statusUpdateAvailable">Det finns nya uppdateringar att installera</data>
+<data name="notifierDownloadNewUpdates">Klicka här om du vill ladda ner den nya versionen av Facebook-verktygsfältet</data>
+<data name="notifierInstallNewUpdates">Klicka här om du vill installera den nya versionen av Facebook-verktygsfältet</data>
+
+<data name="Monday">måndag</data>
+<data name="Tuesday">tisdag</data>
+<data name="Wednesday">onsdag</data>
+<data name="Thursday">torsdag</data>
+<data name="Friday">fredag</data>
+<data name="Saturday">lördag</data>
+<data name="Sunday">söndag</data>
+<data name="Yesterday">Igår</data>
+<data name="YesterdaySmall">igår</data>
+<data name="Today">Idag</data>
+<data name="TodaySmall">idag</data>
+</root>

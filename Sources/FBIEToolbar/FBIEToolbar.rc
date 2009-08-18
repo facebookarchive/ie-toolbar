@@ -1,0 +1,357 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// English (Neutral) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_UPDATEURLPROMPT DIALOGEX 0, 0, 241, 78
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Provide the update url prefix"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,69,57,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,123,57,50,14
+    LTEXT           "Please enter update url prefix, for example: http://test :",IDC_STATIC,26,13,190,8
+    EDITTEXT        IDC_PREFIX_EDIT,33,32,176,14,ES_AUTOHSCROLL
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_UPDATEURLPROMPT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 234
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 71
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (Neutral) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_CONFIGURE DIALOGEX 0, 0, 191, 285
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Configure the Facebook Toolbar"
+FONT 9, "MS Shell Dlg", 400, 0, 0xCC
+BEGIN
+    CONTROL         "Enable Pop-up Notification",IDC_CHK_POPUP_NOTIF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,5,6,181,9
+    GROUPBOX        "Notification about me",IDC_STATIC_GR1,6,19,180,128
+    CONTROL         "New friend request",IDC_CHK_NFRIEND_REQ,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,32,165,9
+    CONTROL         "New message",IDC_CHK_NMESSAGE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,47,162,9
+    CONTROL         "New poke",IDC_CHK_NPOKE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,61,163,9
+    CONTROL         "New friend",IDC_CHK_NFRIEND,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,76,164,9
+    CONTROL         "New event invite",IDC_CHK_NEVENT_INV,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,91,164,9
+    CONTROL         "New group invite",IDC_CHK_GROUP_INV,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,105,163,9
+    CONTROL         "New share",IDC_CHK_NSHARE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,119,162,9
+    CONTROL         "Someone wrote on your wall",IDC_CHK_SWROTE_WALL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,133,163,9
+    GROUPBOX        "Notification about my friends",IDC_STATIC_GR2,6,149,180,81
+    CONTROL         "A friend updated his/her profile",IDC_CHK_AFU_PROFILE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,162,165,9
+    CONTROL         "A friend updated his/her status",IDC_CHK_AFU_STATUS,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,176,165,9
+    CONTROL         "A friend updated his/her albums",IDC_CHK_AFU_ALBUMS,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,189,165,9
+    CONTROL         "A friend updated his/her wall",IDC_CHK_AFU_WALL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,203,164,9
+    CONTROL         "A friend wrote a note",IDC_CHK_AF_NOTE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,216,165,9
+    PUSHBUTTON      "OK",IDOK,97,267,43,13
+    PUSHBUTTON      "Cancel",IDCANCEL,143,267,43,13
+    CONTROL         "Check For Updates",IDC_CHK_UPDATES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,237,173,9
+    LTEXT           "",IDC_UPDATE_STATUS,14,250,164,8
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_CONFIGURE, DIALOG
+    BEGIN
+        LEFTMARGIN, 6
+        RIGHTMARGIN, 186
+        VERTGUIDE, 14
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 280
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// HTML
+//
+
+IDR_MESSAGE_VIEW        HTML                    "res\\view-message.htm"
+IDR_TDEFAULT            HTML                    "res\\t_default.jpg"
+IDR_ONE_FRIEND_VIEW     HTML                    "res\\view-one-friend.xsl"
+IDR_POPUP_VIEW          HTML                    "res\\view-popup.xsl"
+IDR_SIDEBAR_VIEW        HTML                    "res\\view-sidebar.xsl"
+IDR_TOOLBAR_CSS         HTML                    "res\\toolbar.css"
+IDR_TOOLBAR_JS          HTML                    "res\\toolbar.js"
+IDR_LIB_JS              HTML                    "res\\lib.js"
+IDR_LANGUAGE_FILE       HTML                    "res\\messages.default.xml"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_BMP_TOOLBAR_HOT     BITMAP                  "res\\toolbar_hot.bmp"
+IDR_BMP_TOOLBAR         BITMAP                  "res\\toolbar.bmp"
+IDR_TLB_FBIETOOLS       BITMAP                  "res\\tlb_fbie.bmp"
+IDB_IETOOLBAR_BUTTONS   BITMAP                  "res\\toolbar_buttons.bmp"
+IDB_IETOOLBAR_HOT_BUTTONS BITMAP                  "res\\toolbar_hot_buttons.bmp"
+IDB_SMALL_LOGO          BITMAP                  "res\\facebook_small_logo.bmp"
+IDB_SHARE_PLUS          BITMAP                  "res\\share_plus.bmp"
+IDB_SHARE_HOT_PLUS      BITMAP                  "res\\share_plus_hot.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_TLB_FBIETOOLS TOOLBAR  17, 17
+BEGIN
+    BUTTON      ID_BTNTB_QUICKLINKS
+    SEPARATOR
+    BUTTON      ID_BTNTB_HOME
+    SEPARATOR
+    BUTTON      ID_BTNTB_NEWPOKES
+    SEPARATOR
+    BUTTON      ID_BTN_NEWFRREQ
+    BUTTON      ID_BTN_NEWMESSAGE
+    BUTTON      ID_BTNTB_NEI
+    SEPARATOR
+    BUTTON      ID_BTNTB_NGI
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MENU_POPUP MENU 
+BEGIN
+    POPUP "Quick Links"
+    BEGIN
+        MENUITEM "Profile",                     ID_QL_PROFILE
+        MENUITEM "Friends",                     ID_QL_FRIENDS
+        MENUITEM "Networks",                    ID_QL_NETWORKS
+        MENUITEM "Inbox",                       ID_QL_INBOX
+        MENUITEM SEPARATOR
+        MENUITEM "Photos",                      ID__FRIENDS
+        MENUITEM "Notes",                       ID__NETWORKS
+        MENUITEM "Groups",                      ID__INBOX
+        MENUITEM "Events",                      ID__
+        MENUITEM "Posted Items",                ID__NOTES
+        MENUITEM SEPARATOR
+        MENUITEM "Account",                     ID__GROUPS
+        MENUITEM "Privacy",                     ID__EVENTS
+        MENUITEM SEPARATOR
+        POPUP "Language"
+        BEGIN
+            MENUITEM "Default",                     ID_LANGUAGE_ENGLISH
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Toolbar Settings",            ID__POSTEDITEMS
+    END
+    POPUP "Sort selection"
+    BEGIN
+        MENUITEM "sidebarMenuLastUpdateTime",   ID_SORT_LAST_UPDATE_TIME
+        MENUITEM "sidebarMenuStatusUpdateTime", ID_SORT_STATUS_UPDATE_TIME
+        MENUITEM "sidebarMenuProfileUpdateTime", ID_SORT_PROFILE_UPDATE_TIME
+        MENUITEM "sidebarMenuName",             ID_SORT_NAME
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// XSLT
+//
+
+IDR_POPUP_FRIEND_LIST_XSLT XSLT                    "res\\view-popup.xsl"
+IDR_SIDEBAR_FRIEND_LIST_XSLT XSLT                    "res\\view-sidebar.xsl"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,93
+ PRODUCTVERSION 1,0,0,93
+ FILEFLAGSMASK 0x17L
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000904b0"
+        BEGIN
+            VALUE "CompanyName", "Facebook"
+            VALUE "FileDescription", "Facebook IE Toolbar library"
+            VALUE "FileVersion", "1.0.0.93"
+            VALUE "InternalName", "FBIEToolbar"
+            VALUE "LegalCopyright", "Copyright (C) 2009"
+            VALUE "OriginalFilename", "FBIEToolbar.dll"
+            VALUE "ProductName", "Facebook Toolbar for Internet Explorer"
+            VALUE "ProductVersion", "1.0.0.93"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x9, 1200
+    END
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""afxres.h\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_COUNTITEM_INVALIDTEXT "?"
+    IDS_STRING133           "v"
+END
+
+STRINGTABLE 
+BEGIN
+    IDC_TBI_SIDEBAR         "toolbarHintFacebookFriendsSidebar"
+    IDC_TBI_QUICKLINKS      "toolbarHintFacebookQuickLinks"
+    IDC_TBI_HOME            "toolbarHintGoToFacebook"
+    IDC_TBI_POKES           "toolbarHintNewPokes"
+    IDC_TBI_REQUESTS        "toolbarHintNewFriendRequests"
+    IDC_TBI_MESSAGES        "toolbarHintNewMessages"
+    IDC_TBI_EVENTINVS       "toolbarHintNewEventInviations"
+    IDC_TBI_GROUPINVS       "toolbarHintNewGroupInvitations"
+    IDC_TBI_SHARE           "toolbarHintShareCurrentPageOnFacebook"
+    IDC_TBI_LOGIN           "toolbarHintLoginToFacebook"
+    IDC_TBI_LOGOUT          "toolbarHintLogoutFromFacebook"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_SORT_LAST_UPDATE_TIME "sidebarMenuLastUpdateTime"
+    ID_SORT_STATUS_UPDATE_TIME "sidebarMenuStatusUpdateTime"
+    ID_SORT_PROFILE_UPDATE_TIME "sidebarMenuProfileUpdateTime"
+    ID_SORT_NAME            "sidebarMenuName"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_QL_PROFILE           "toolbarMenuProfile"
+    ID_QL_FRIENDS           "toolbarMenuFriends"
+    ID_QL_NETWORKS          "toolbarMenuNetworks"
+    ID_QL_INBOX             "toolbarMenuInbox"
+    ID__FRIENDS             "toolbarMenuPhotos"
+    ID__NETWORKS            "toolbarMenuNotes"
+    ID__INBOX               "toolbarMenuGroups"
+    ID__                    "toolbarMenuEvents"
+    ID__NOTES               "toolbarMenuPostedItems"
+    ID__GROUPS              "toolbarMenuAccount"
+    ID__EVENTS              "toolbarMenuPrivacy"
+    ID__POSTEDITEMS         "toolbarMenuToolbarSettings"
+END
+
+STRINGTABLE 
+BEGIN
+    ID_LANGUAGE_ENGLISH     "toolbarMenuLanguage"
+END
+
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

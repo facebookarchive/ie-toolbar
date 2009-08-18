@@ -1,0 +1,23 @@
+HKCR
+{
+	Facebook.ClientService.1 = s 'FBClientService Class'
+	{
+		CLSID = s '{E051840E-5790-4795-B3C8-DCBFCFE303D8}'
+	}
+	Facebook.ClientService = s 'FBClientService Class'
+	{
+		CLSID = s '{E051840E-5790-4795-B3C8-DCBFCFE303D8}'
+		CurVer = s 'Facebook.ClientService.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {E051840E-5790-4795-B3C8-DCBFCFE303D8} = s 'FBClientService Class'
+		{
+			ProgID = s 'Facebook.ClientService.1'
+			VersionIndependentProgID = s 'Facebook.ClientService'
+			ForceRemove 'Programmable'
+			LocalServer32 = s '%MODULE%'
+			'TypeLib' = s '{457BCC59-E8CE-44BD-B197-0FAD2B875FCF}'
+		}
+	}
+}

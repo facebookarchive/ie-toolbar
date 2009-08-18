@@ -1,0 +1,83 @@
+import "oaidl.idl";
+import "ocidl.idl";
+
+
+typedef
+[
+   uuid(C74DDA8C-4B3D-4ca2-A4F2-5250AA9459DB),
+   version(1.0),
+   helpstring("User data structure")
+]
+struct FBUserData{
+   BSTR id;
+   BSTR name;
+   BSTR pic;
+   BSTR pic_sq;
+   BSTR status;
+   ULONG ptime;
+   ULONG stime;
+   ULONG notes;
+   ULONG wall;
+   BSTR cookies;
+} FBUserData;
+
+
+[
+	object,
+	uuid(72E79C06-3ABF-4C54-91CE-5DD63EE67006),
+	dual,
+	nonextensible,
+	helpstring("IFBClientService Interface"),
+	pointer_default(unique)
+]
+interface IFBClientService : IDispatch{
+   [id(1), helpstring("Returns number of pokes.")] HRESULT getPokesCount([out,retval] ULONG* pokesCount);
+   [id(2), helpstring("Returns user data.")] HRESULT getUser([out,retval] FBUserData* userData);
+   [id(3), helpstring("Returns friends data")] HRESULT getFriends([out,retval] SAFEARRAY(FBUserData)* usersData);
+   [id(4), helpstring("method getMessagesCount")] HRESULT getMessagesCount([out] ULONG* messagesCount);
+   [id(5), helpstring("method getRequestsCount")] HRESULT getRequestsCount([out] ULONG* requestsCount);
+   [id(6), helpstring("method getEventsCount")] HRESULT getEventsCount([out] ULONG* eventsCount);
+   [id(7), helpstring("method getGroupsInvsCount")] HRESULT getGroupsInvsCount([out] ULONG* groupsInvsCount);
+   [id(8), helpstring("method login")] HRESULT login([in] ULONG parentWindow);
+   [id(9), helpstring("method logout")] HRESULT logout(void);
+   [id(10), helpstring("method isLoggedIn")] HRESULT isLoggedIn([out] USHORT* loggedIn);
+   [id(11), helpstring("method setStatus")] HRESULT setStatus([in] BSTR statusMessage);
+   [id(12), helpstring("method canChangeStatus")] HRESULT canChangeStatus([out,retval] USHORT* allowed);
+   [id(13), helpstring("method languageUpdate")] HRESULT updateView([in] ULONG changeId);
+};
+
+
+[
+	uuid(457BCC59-E8CE-44BD-B197-0FAD2B875FCF),
+	version(1.0),
+	helpstring("FBClientService 1.0 Type Library")
+]
+library FBClientServiceLib
+{
+
+   importlib("stdole32.tlb");
+	importlib("stdole2.tlb");
+
+   struct FBUserData;
+
+	[
+		uuid(A821A7CC-ABC7-4A90-896B-EA7710C57B77),
+		helpstring("IFBClientServiceEvents Interface")
+	]
+	dispinterface IFBClientServiceEvents
+	{
+		properties:
+		methods:
+         [id(1), helpstring("Raised when any data updated")] HRESULT dataUpdated([in] ULONG dataId);
+   };
+
+	[
+		uuid(E051840E-5790-4795-B3C8-DCBFCFE303D8),
+		helpstring("FBClientService Class")
+	]
+	coclass FBClientService
+	{
+		[default] interface IFBClientService;
+		[default, source] dispinterface IFBClientServiceEvents;
+	};
+};

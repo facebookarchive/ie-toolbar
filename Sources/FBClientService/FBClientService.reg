@@ -1,0 +1,10 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\Facebook.ClientService.1\CLSID]
+@="{E051840E-5790-4795-B3C8-DCBFCFE303D8}"
+
+[HKEY_CLASSES_ROOT\CLSID\{E051840E-5790-4795-B3C8-DCBFCFE303D8}]
+@="Facebook.ClientService.1"
+
+[HKEY_CLASSES_ROOT\CLSID\{E051840E-5790-4795-B3C8-DCBFCFE303D8}\LocalServer32]
+@="D:\\Projects\\facebook_initial\\FBIETools\\Debug\\FBClientService.exe"

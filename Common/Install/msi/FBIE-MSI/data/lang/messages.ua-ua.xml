@@ -1,0 +1,130 @@
+﻿<root>
+<data name="languageName">Українська</data>
+<data name="facebookToolbar">Фейсбук Тулбар</data>
+<data name="settingsConfigureTheFacebookToolbar">Налаштування Фейсбук Тулбару</data>
+<data name="settingsEnablePopUpNotification">Дозволити вспливаючі сповіщення</data>
+<data name="settingsNotificationAboutMe">Сповіщення про мене</data>
+<data name="settingsNewFriendRequest">Новий запит дружби</data>
+<data name="settingsNewMessage">Нове повідомлення</data>
+<data name="settingsNewPoke">Нове штурхання</data>
+<data name="settingsNewFriend">Новий друг</data>
+<data name="settingsNewEventInvite">Нове запрошення на подію</data>
+<data name="settingsNewGroupInvite">Нове запрошення в групу</data>
+<data name="settingsNewShare">Нові об'єкти</data>
+<data name="settingsSomeoneWroteOnYourWall">Хтось написав на моїй стіні</data>
+<data name="settingsNotificationAboutMyFriends">Сповіщення про моїх друзів</data>
+<data name="settingsAFriendUpdatedHisHerProfile">Друг оновив свій обліковий запис</data>
+<data name="settingsAFriendUpdatedHisHerStatus">Друг оновив свій статус</data>
+<data name="settingsAFriendUpdatedHisHerAlbums">Друг оновив свої альбоми</data>
+<data name="settingsAFriendUpdatedHisHerWall">Друг оновив свою стіну</data>
+<data name="settingsAFriendWroteANote">Друг написав нотатку</data>
+<data name="settingsCheckForUpdates">Перевіряти оновлення</data>
+<data name="buttonOk">Гаразд</data>
+<data name="buttonCancel">Відміна</data>
+<data name="buttonYes">Так</data>
+<data name="buttonNo">Ні</data>
+
+<data name="sidebarFacebookSidebar">Бокова панель Фейсбуку</data>
+<data name="sidebarSettings">Налаштування</data>
+<data name="sidebarSortingByLastUpdate">Сортування за останньою зміною</data>
+<data name="sidebarSortingByStatus">Сортування за статусом</data>
+<data name="sidebarSortingByProfile">Сортування за обліковим записом</data>
+<data name="sidebarSortingByName">Сортування за іменем</data>
+
+<data name="sidebarMenuLastUpdateTime">Час останньої зміни</data>
+<data name="sidebarMenuStatusUpdateTime">Час зміни статусу</data>
+<data name="sidebarMenuProfileUpdateTime">Час зміни запису</data>
+<data name="sidebarMenuName">Ім'я</data>
+
+<data name="toolbarButtonQuickLinks">Швидкі закладки</data>
+<data name="toolbarButtonLoginToFacebook">Залогуватися до Фейсбуку</data>
+<data name="toolbarButtonLogout">Вийти</data>
+<data name="toolbarButtonShare">Поділитися</data>
+
+<data name="toolbarSearchFacebook">Пошук у Фейсбуку</data>
+<data name="toolbarSetYourStatus">вкажіть статус...</data>
+<data name="toolbarStatusPrefix"></data>
+<data name="toolbarHintFacebookFriendsSidebar">Бокова панель</data>
+<data name="toolbarHintFacebookQuickLinks">Швидкі закладки</data>
+<data name="toolbarHintGoToFacebook">Перейти до Фейсбуку</data>
+<data name="toolbarHintNewPokes">Нові Штурхання</data>
+<data name="toolbarHintNewFriendRequests">Нові запити дружби</data>
+<data name="toolbarHintNewMessages">Нові повідомлення</data>
+<data name="toolbarHintNewEventInviations">Нові запрошення на подію</data>
+<data name="toolbarHintNewGroupInvitations">Нові запрошення в групу</data>
+<data name="toolbarHintShareCurrentPageOnFacebook">Поділитись поточною сторінкою у Фейсбуці</data>
+<data name="toolbarHintLoginToFacebook">Залогуватися до Фейсбуку</data>
+<data name="toolbarHintLogoutFromFacebook">Вийти з Фейсбуку</data>
+
+<data name="toolbarMenuProfile">Обліковий запис</data>
+<data name="toolbarMenuFriends">Друзі</data>
+<data name="toolbarMenuNetworks">Мережа</data>
+<data name="toolbarMenuInbox">Вхідна скринька</data>
+<data name="toolbarMenuPhotos">Фотографії</data>
+<data name="toolbarMenuNotes">Нотатки</data>
+<data name="toolbarMenuGroups">Групи</data>
+<data name="toolbarMenuEvents">Події</data>
+<data name="toolbarMenuPostedItems">Відіслані</data>
+<data name="toolbarMenuAccount">Рахунок</data>
+<data name="toolbarMenuPrivacy">Таємність</data>
+<data name="toolbarMenuLanguage">Мова</data>
+<data name="toolbarMenuToolbarSettings">Налаштування тулбару</data>
+
+<data name="htmlNoFriendsToShow">Не знайдено друзів.</data>
+<data name="htmlPressEnterToFindFriend">Натисніть ентер, щоб знайти друга: {1}</data>
+<data name="htmlLoginFromTheToolbar">Залогуйтеся з тулбару, щоб побачити список друзів.</data>
+<data name="htmlSeeAllFriends">Побачити усіх {1} друзів</data>
+<data name="htmlLoadingFriendsList">Завантаження списку друзів ....</data>
+
+<data name="loginLoginToFacebook">Залогуватися до Фейсбуку</data>
+<data name="loginCloseLoginWindow">Закрити логін вікно</data>
+
+<data name="notifierFacebookNotification">Сповіщення Фейсбуку</data>
+<data name="notifierYourStatusWasCleared">Ваш статус очищено успішно.</data>
+<data name="notifierYourStatusWasSet">Ваш статус встановлено успішно.</data>
+<data name="notifierYouHaveANewMessage">У вас нове повідомлення.</data>
+<data name="notifierYouHaveNewMessages">У вас нові повідомлення.</data>
+
+<data name="notifierYouHaveBeenPoked">Вас штурхнули.</data>
+<data name="notifierYouHaveBeenPokedTimes">Вас штурхнули {1} рази.</data>
+<data name="notifierYouHaveBeenPokedManyTimes">Вас штурхнули багато раз.</data>
+
+<data name="notifierSmWantsToBeYourFriend">{1} хоче бути вашим другом</data>
+<data name="notifierSmAddedNewPhotosTo">{1} додав(ла) нові світлини до {2}</data>
+<data name="notifierSmCreatedTheAlbum">{1} створив(ла) альбом {2}</data>
+<data name="notifierSmWroteOnYourWall">Хтось написав у вас на стіні</data>
+<data name="notifierSmIsNowYourFriend">{1} тепер ваш друг</data>
+<data name="notifierSmWroteOnSmWall">Хтось написав у {1} на стіні</data>
+<data name="notifierSmUpdatedHisHerProfile">{1} оновив(ла) свій обліковий запис</data>
+<data name="notifierSmWroteANote">{1} написав(ла) нотатку</data>
+<data name="notifierNewVersion">Вийшла нова версія тулбару. Бажаєте завантажити?</data>
+<data name="notifierDoNotAskMeAgain">Не запитувати мене надалі</data>
+<data name="notifierYesDescription">Так - розпочати скачування нової версії</data>
+<data name="notifierNoDescription">Ні - пропустити інсталяцію оновлення</data>
+
+<data name="htmlMessage">повідомлення</data>
+<data name="htmlPoke">штурхнути</data>
+<data name="htmlWallPost">напис на стіні</data>
+
+<data name="htmlPopupMessage">Відіслати {1} повідомлення</data>
+<data name="htmlPopupPoke">Штурхнути {1}</data>
+<data name="htmlPopupWallPost">Написати у {1} на стіні</data>
+
+<data name="statusNoUpdates">Оноволень не знайдено</data>
+<data name="statusUpdateInProgress">Оновдення завантажуються...</data>
+<data name="statusUpdateAvailable">Оновлення готові для встановлення</data>
+<data name="notifierDownloadNewUpdates">Будь-ласка клацніть тут для завантаження нової версії Фейсбук Тулбару</data>
+<data name="notifierInstallNewUpdates">Будь-ласка клацніть тут для встановлення нової версії Фейсбук Тулбару</data>
+
+<data name="Monday">Понеділок</data>
+<data name="Tuesday">Вівторок</data>
+<data name="Wednesday">Середа</data>
+<data name="Thursday">Четвер</data>
+<data name="Friday">П`ятниця</data>
+<data name="Saturday">Субота</data>
+<data name="Sunday">неділя</data>
+<data name="Yesterday">Вчора</data>
+<data name="YesterdaySmall">вчора</data>
+<data name="Today">Сьогодні</data>
+<data name="TodaySmall">сьогодні</data>
+</root>
