@@ -1,0 +1,204 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Ukrainian resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_UKR)
+#ifdef _WIN32
+LANGUAGE LANG_UKRAINIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#include ""res\\setup.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""     // Standard components\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Ukrainian resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.S.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// RCDATA
+//
+
+IDR_1028                RCDATA                  "..\\transforms\\1028.mst"
+IDR_3082                RCDATA                  "..\\transforms\\3082.mst"
+IDR_1031                RCDATA                  "..\\transforms\\1031.mst"
+IDR_1036                RCDATA                  "..\\transforms\\1036.mst"
+IDR_1040                RCDATA                  "..\\transforms\\1040.mst"
+IDR_1041                RCDATA                  "..\\transforms\\1041.mst"
+IDR_1046                RCDATA                  "..\\transforms\\1046.mst"
+IDR_2052                RCDATA                  "..\\transforms\\2052.mst"
+IDR_MSI                 RCDATA                  "..\\FBIE-MSI\\Release\\FBIE-MSI.msi"
+IDR_1030                RCDATA                  "..\\transforms\\1030.mst"
+IDR_1057                RCDATA                  "..\\transforms\\1057.mst"
+IDR_1043                RCDATA                  "..\\transforms\\1043.mst"
+IDR_1053                RCDATA                  "..\\transforms\\1053.mst"
+IDR_1055                RCDATA                  "..\\transforms\\1055.mst"
+IDR_1037                RCDATA                  "..\\transforms\\1037.mst"
+IDR_1025                RCDATA                  "..\\transforms\\1025.mst"
+IDR_1058                RCDATA                  "..\\transforms\\1058.mst"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "..\\FBIE-MSI\\data\\fbfavicon.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_SETUP_DIALOG DIALOGEX 0, 0, 331, 235
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "Facebook IE Toolbar"
+FONT 8, "Microsoft Sans Serif", 400, 0, 0xCC
+BEGIN
+    DEFPUSHBUTTON   "&Next >",IDOK,274,215,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,161,215,50,14
+    PUSHBUTTON      "< &Back",ID_DISBL,217,215,50,14,WS_DISABLED
+    LTEXT           "The installer will guide you through the steps required to install Facebbok IE Toolbar on your computer.",IDC_MAINTEXT,8,52,296,17
+    LTEXT           "WARNING: This computer program is protected by copyright law and international treaties. Unauthorized duplication or distribution of this program, or any portion of it, may result in severe civil",IDC_WARN,8,152,312,18
+    LTEXT           "Select the language for this installation and toolbar from the choices below.",IDC_LANGTEXT,8,86,236,8
+    COMBOBOX        IDC_LANGCOMBO,30,102,149,70,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "",IDC_LINE,0,206,331,8,SS_SUNKEN
+    LTEXT           "",IDC_LINE2,0,43,331,8,SS_SUNKEN
+    CONTROL         "",IDC_BKG,"Static",SS_WHITERECT,0,0,331,43
+    CONTROL         129,IDC_LOGO,"Static",SS_BITMAP,286,3,32,30
+    LTEXT           "or criminal penalties, and will be prosecuted to the maximum extent possible under the law.",IDC_WARN2,8,168,312,11
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 1,0,0,1
+ PRODUCTVERSION 1,0,0,1
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904e4"
+        BEGIN
+            VALUE "CompanyName", "Facebook"
+            VALUE "FileVersion", "1.0.0.1"
+            VALUE "InternalName", "setup.exe"
+            VALUE "LegalCopyright", "(c) Facebook.  All rights reserved."
+            VALUE "OriginalFilename", "setup.exe"
+            VALUE "ProductName", "Facebook IE Toolbar"
+            VALUE "ProductVersion", "1.0.0.1"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1252
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_LOGO                BITMAP                  "res\\logo.bmp"
+#endif    // English (U.S.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#include "res\setup.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"     // Standard components
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

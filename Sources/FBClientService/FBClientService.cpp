@@ -14,8 +14,8 @@
 #include "../util/ModuleUtils.h"
 #include "../util/RegistryUtils.h"
 #include "../util/ScopeGuard.h"
+#include "../util/ShellUtils.h"
 #include "../util/StringUtils.h"
-
 
 using namespace ATL;
 
@@ -122,7 +122,7 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE,
   }
   // if there is an closeall call - just close all the exes and exit
   if (parameters.find(_T("-closeall")) != facebook::String.npos) {
-    terminateAllInstances(_T("FBClientService.exe"));
+    terminateAllProcesses(_T("FBClientService.exe"));
     return 0;
   }
 

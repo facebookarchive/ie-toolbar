@@ -114,7 +114,7 @@ const int kUpdatesTimeoutDefault = 3;
 
 // HTML View actions
 const String kNoFriendToShow = _T("");
-const String kPressEnterToFindFriend = _T("srch.php_%s");
+const String kPressEnterToFindFriend = _T("s.php_%s");
 const String kSeeAllFriends = _T("allFriends");
 const String kPleaseLogin = _T("login_fakeid");
 const String kLoadingFriendsList = _T("");

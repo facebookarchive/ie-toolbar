@@ -58,15 +58,6 @@ String getModuleFileName(const HMODULE moduleHandle = 0);
  */
 String getModuleVersion(const HMODULE moduleHandle = 0);
 
-
-/**
- * Close all the instances of the process by name
- *
- * @param processName - name of the proces to terminate
- */
-void terminateAllInstances(facebook::String processName);
-
-
 } // !namespace facebook
 
 

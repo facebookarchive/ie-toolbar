@@ -42,25 +42,22 @@
 namespace facebook{
 
 
-/**
- * Returns window handle
- *
- * @param window object (by const-ref)
- *
- * @return handle (by value)
- */
-inline HWND getHandle(const CWnd& window){
+ /**
+  * Returns window handle
+  * @param window object (by const-ref)
+  * @return handle (by value)
+  */
+inline HWND getHandle(const CWnd& window) {
    return window.GetSafeHwnd();
 }
 
 
-/**
- * Checks if message in pending in window message queue
- *
- * @param window handle (by const-value)
- * @param message id (by const-value)
- */
-inline bool isMessagePending(const HWND window, const UINT messageCode){
+ /**
+  * Checks if message in pending in window message queue
+  * @param window handle (by const-value)
+  * @param message id (by const-value)
+  */
+inline bool isMessagePending(const HWND window, const UINT messageCode) {
    MSG message = {0};
    const BOOL peekResult = PeekMessage(&message, window, messageCode,
          messageCode, PM_NOREMOVE);
@@ -69,53 +66,46 @@ inline bool isMessagePending(const HWND window, const UINT messageCode){
 }
 
 
-/**
+ /**
   * Checks if message in pending in window message queue
-  *
   * @param window object (by const-value)
   * @param message id (by const-value)
   */
-inline bool isMessagePending(const CWnd& window, const UINT messageCode){
+inline bool isMessagePending(const CWnd& window, const UINT messageCode) {
    return isMessagePending(getHandle(window), messageCode);
 }
 
 
-/**
+ /**
   * Calculates window rect
-  *
   * @param window object (by const-value)
-  *
   * @return window rect (by value)
   */
-inline CRect getWindowRect(const CWnd& window){
+inline CRect getWindowRect(const CWnd& window) {
    CRect rect;
    window.GetWindowRect(rect);
 
    return rect;
 }
 
-/**
+ /**
   * Calculates window client rect
-  *
   * @param window object (by const-value)
-  *
   * @return window client rect (by value)
   */
-inline CRect getClientRect(const CWnd& window){
+inline CRect getClientRect(const CWnd& window) {
    CRect rect;
    window.GetClientRect(rect);
 
    return rect;
 }
 
-/**
+ /**
   * Calculates edit rect
-  *
   * @param window object (by const-value)
-  *
   * @return formatting rect (by value)
   */
-inline CRect getFormattingRect(const CEdit& window){
+inline CRect getFormattingRect(const CEdit& window) {
    CRect rect;
    window.GetRect(rect);
 
@@ -123,151 +113,150 @@ inline CRect getFormattingRect(const CEdit& window){
 }
 
 
-/**
+ /**
   * Calculates left top point of the rect
-  *
   * @param rect (by const-value)
-  *
   * @return left top point (by value)
   */
-inline CPoint getLeftTop(const CRect& rect){
+inline CPoint getLeftTop(const CRect& rect) {
    return rect.TopLeft();
 }
 
 
-/**
+ /**
   * Calculates right bottom point of the rect
-  *
   * @param rect (by const-value)
-  *
   * @return right bottom point (by value)
   */
-inline CPoint getRightBottom(const CRect& rect){
+inline CPoint getRightBottom(const CRect& rect) {
    return rect.BottomRight();
 }
 
 
-/**
+ /**
   * Calculates left bottom point of the rect
-  *
   * @param rect (by const-value)
-  *
   * @return left bottom point (by value)
   */
-inline CPoint getLeftBottom(const CRect& rect){
+inline CPoint getLeftBottom(const CRect& rect) {
    return CPoint(rect.left, rect.bottom);
 }
 
 
-/**
+ /**
   * Calculates right top point of the rect
-  *
   * @param rect (by const-value)
-  *
   * @return right top point (by value)
   */
-inline CPoint getRightTop(const CRect& rect){
+inline CPoint getRightTop(const CRect& rect) {
    return CPoint(rect.right, rect.top);
 }
 
 
-/**
+ /**
   * Calculates center of the rect
-  *
   * @param rect (by const-value)
-  *
   * @return central point (by value)
   */
-inline CPoint getCenter(const CRect& rect){
+inline CPoint getCenter(const CRect& rect) {
    return rect.CenterPoint();
 }
 
-/**
+ /**
   * Returns window caption
-  *
   * @param window object (by const-value)
-  *
   * @return window text (by value)
   */
-inline CString getWindowText(const CWnd& window){
+inline CString getWindowText(const CWnd& window) {
    CString text;
    window.GetWindowText(text);
 
    return text;
 }
 
-/**
+ /**
   * Sets window caption
-  *
   * @param window object (by const-value)
   * @param text to set to window (by const-value)
-  *
   */
-inline void setWindowText(CWnd& window, const String& text){
+inline void setWindowText(CWnd& window, const String& text) {
    window.SetWindowText(text.c_str());
 }
 
 
 // window style set/get functions ....
 
-inline LONG getStyle(const HWND window){
+inline LONG getStyle(const HWND window) {
    return GetWindowLong(window, GWL_STYLE);
 }
 
-
-inline LONG setStyle(const HWND window, const LONG style){
-   return SetWindowLong(window, GWL_STYLE, style);
+inline LONG getExStyle(const HWND window) {
+   return GetWindowLong(window, GWL_EXSTYLE);
 }
 
 
-inline bool hasStyle(const HWND window, const LONG style){
+inline LONG setStyle(const HWND window, const LONG style) {
+   return SetWindowLong(window, GWL_STYLE, style);
+}
+
+inline LONG setExStyle(const HWND window, const LONG style) {
+   return SetWindowLong(window, GWL_EXSTYLE, style);
+}
+
+
+inline bool hasStyle(const HWND window, const LONG style) {
    return (getStyle(window) & style) == style;
 }
 
 
-inline LONG addStyle(const HWND window, const LONG style){
+inline LONG addStyle(const HWND window, const LONG style) {
    return setStyle(window, getStyle(window) | style);
 }
 
+inline LONG addExStyle(const HWND window, const LONG style, bool redrawWindow = false) {
+  LONG result = setExStyle(window, getExStyle(window) | style);
+  if (redrawWindow) {
+    ::InvalidateRect(window, NULL, TRUE);
+  }
+  return result;
+}
 
-inline LONG getStyle(const CWnd& window){
+inline LONG getStyle(const CWnd& window) {
    return getStyle(getHandle(window));
 }
 
 
-inline LONG setStyle(CWnd& window, const LONG style){
+inline LONG setStyle(CWnd& window, const LONG style) {
    return setStyle(getHandle(window), style);
 }
 
-
-inline bool hasStyle(const CWnd& window, const LONG style){
+inline bool hasStyle(const CWnd& window, const LONG style) {
    return hasStyle(getHandle(window), style);
 }
 
 
-inline LONG addStyle(CWnd& window, const LONG style){
+inline LONG addStyle(CWnd& window, const LONG style) {
    return addStyle(getHandle(window), style);
 }
 
-
 //Window state functions ....
 
-inline bool isActive(const CWnd& window){
+inline bool isActive(const CWnd& window) {
    return CWnd::GetActiveWindow() == &window;
 }
 
 
-inline bool hasCapture(const CWnd& window){
+inline bool hasCapture(const CWnd& window) {
    return CWnd::GetCapture() == &window;
 }
 
 
-inline bool windowHasFocus(const CWnd& window){
+inline bool windowHasFocus(const CWnd& window) {
    return CWnd::GetFocus() == &window;
 }
 
 
-inline bool anyChildHasFocus(const CWnd& window){
+inline bool anyChildHasFocus(const CWnd& window) {
    const CWnd* childWindow = window.GetWindow(GW_CHILD);
 
    while (childWindow){
@@ -280,10 +269,26 @@ inline bool anyChildHasFocus(const CWnd& window){
 }
 
 
-inline bool hasFocus(const CWnd& window){
+inline bool hasFocus(const CWnd& window) {
    return windowHasFocus(window) || anyChildHasFocus(window);
 }
 
+/**
+ * Set Ok and Cancel button position for arabic localization
+ * @param dialog owner of buttons
+ */ 
+inline void alignDialogButtons(CDialog* dialog) {
+  const int buttonMargin = 8;
+  CRect rectOk, rectCancel;
+  dialog->GetDlgItem(IDOK)->GetWindowRect(&rectOk);
+  dialog->GetDlgItem(IDCANCEL)->GetWindowRect(&rectCancel);
+  dialog->ScreenToClient(&rectOk);
+  dialog->ScreenToClient(&rectCancel);
+  dialog->GetDlgItem(IDCANCEL)->SetWindowPos(NULL, buttonMargin, rectOk.top, 0, 0,
+    SWP_NOZORDER | SWP_NOSIZE);
+  dialog->GetDlgItem(IDOK)->SetWindowPos(NULL, 2 *buttonMargin + rectCancel.Width(), 
+    rectCancel.top, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
+}
 
 }
 

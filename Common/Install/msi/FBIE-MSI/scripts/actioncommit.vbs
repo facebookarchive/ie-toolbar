@@ -14,7 +14,7 @@ End Sub
 
 'force IE to reload sidebars and toolbars
 RegDeleteEntry "HKCR\Component Categories\{00021493-0000-0000-C000-000000000046}\Enum\"
-RegDeleteEntry "HKCR\Component Categories\{00021494-0000-0000-C000-000000000046}\Enum\"
+RegDeleteEntry "HKCR\Component Categories\{00021494-0000-0000-C000-000000000046}\Enum\"'
 
 RegDeleteEntry "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\Component Categories\{00021493-0000-0000-C000-000000000046}\Enum\"
 RegDeleteEntry "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Discardable\PostSetup\Component Categories\{00021494-0000-0000-C000-000000000046}\Enum\"
@@ -25,7 +25,7 @@ Set fso = CreateObject("Scripting.FileSystemObject")
 If fso.FileExists("""" + curDir + "FBClientService.exe""") Then
   If Not wshShell Is Nothing Then
   	wshShell.Run """" & curDir & "FBClientService.exe""" & " -closeall", 0, True	
-    wshShell.Run """" & curDir & "FBClientService.exe""" & " -unregister", 0, True
+   wshShell.Run """" & curDir & "FBClientService.exe""" & " -unregister", 0, True
   End If
 End If
 

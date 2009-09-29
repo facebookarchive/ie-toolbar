@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="FBClientService"
 	ProjectGUID="{CD99E340-3A17-4229-8996-8F66FAB2F96E}"
 	RootNamespace="FBClientService"
@@ -77,7 +77,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="true"
-				AdditionalDependencies="Winmm.lib iepmapi.lib Wininet.lib Version.lib Psapi.lib"
+				AdditionalDependencies="Winmm.lib iepmapi.lib Wininet.lib Version.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../lib/"
 				IgnoreDefaultLibraryNames=""
@@ -167,7 +167,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Winmm.lib iepmapi.lib Wininet.lib Version.lib Psapi.lib"
+				AdditionalDependencies="Winmm.lib iepmapi.lib Wininet.lib Version.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../lib/"
 				IgnoreDefaultLibraryNames=""
@@ -262,7 +262,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				IgnoreImportLibrary="true"
-				AdditionalDependencies="Winmm.lib iepmapi.lib Wininet.lib  Version.lib log4cplusud.lib Psapi.lib"
+				AdditionalDependencies="Winmm.lib iepmapi.lib Wininet.lib  Version.lib log4cplusud.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../lib/"
 				IgnoreDefaultLibraryNames=""
@@ -352,7 +352,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Winmm.lib iepmapi.lib Wininet.lib Version.lib log4cplusu.lib Psapi.lib"
+				AdditionalDependencies="Winmm.lib iepmapi.lib Wininet.lib Version.lib log4cplusu.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../lib/"
 				IgnoreDefaultLibraryNames=""
@@ -692,6 +692,14 @@
 			</File>
 			<File
 				RelativePath="..\util\ScopeGuard.h"
+				>
+			</File>
+			<File
+				RelativePath="..\util\ShellUtils.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\util\ShellUtils.h"
 				>
 			</File>
 			<File

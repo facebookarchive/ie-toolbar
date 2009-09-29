@@ -55,49 +55,50 @@
 namespace facebook{
 
 String buildShareContentURL(const String& contentUrl) {
-   StringStream ss;
-   ss << kFacebookRoot 
-      << kSharePage 
-      <<  _T("?src=tb&v=4&u=") 
-      << contentUrl;
-   return ss.str(); 
+  StringStream ss;
+  ss << kFacebookRoot 
+    << kSharePage 
+    <<  _T("?src=tb&v=4&u=") 
+    << contentUrl;
+  return ss.str(); 
 }
 
 String buildActionURL(const String& actionPage, 
                       const String& userID) {
-   StringStream ss;
-   ss << kFacebookRoot << actionPage;
-   
-   String targetPageInUpperCase = boost::to_upper_copy(actionPage);
-   boost::trim(targetPageInUpperCase);
-   if (targetPageInUpperCase ==   boost::to_upper_copy(kSearchPage))
-      ss << _T("?nm=");
-   else
-      ss << _T("?id=");
-   
-   ss  << encodeUrl(userID);
-   
-   return ss.str(); 
+  StringStream ss;
+  ss << kFacebookRoot << actionPage;
+
+  String targetPageInUpperCase = boost::to_upper_copy(actionPage);
+  boost::trim(targetPageInUpperCase);
+  if (targetPageInUpperCase ==   boost::to_upper_copy(kSearchPage)) {
+    ss << _T("?q=");
+  } else {
+    ss << _T("?id=");
+  }
+
+  ss  << encodeUrl(userID);
+
+  return ss.str(); 
 }
 
 String buildSearchURL(const String& searchQuery) {
   StringStream ss;
   ss << kFacebookRoot 
      << kSearchPage 
-     << _T("?nm=") 
+     << _T("?q=") 
      << encodeUrl(searchQuery);
   return ss.str(); 
 
 }
 
 String buildUserProfileUrl(const String& userID) {
-   StringStream ss;
-   ss << kFacebookRoot 
-      << kProfilePage 
-      << _T("?id=")  
-      << userID; 
+  StringStream ss;
+  ss << kFacebookRoot 
+    << kProfilePage 
+    << _T("?id=")  
+    << userID; 
 
-   return ss.str(); 
+  return ss.str(); 
 }
 
 String buildHtmlResourceUrl(const String& moduleName, const UINT resID) {
@@ -107,88 +108,88 @@ String buildHtmlResourceUrl(const String& moduleName, const UINT resID) {
 }
 
 String buildResourceUrl(const String& moduleName, const UINT resType, const UINT resID) {
-   StringStream ss;
-   String newPath = boost::replace_all_copy(moduleName, _T("\\"), _T("\\\\"));
-   ss << _T("res://") 
-      <<  newPath  
-      << "/" 
-      << resType 
-      << "/" 
-      << resID;
-   return ss.str(); 
+  StringStream ss;
+  String newPath = boost::replace_all_copy(moduleName, _T("\\"), _T("\\\\"));
+  ss << _T("res://") 
+    <<  newPath  
+    << "/" 
+    << resType 
+    << "/" 
+    << resID;
+  return ss.str(); 
 }
 
 String buildUserStatusUrl(const String& userID) {
-   StringStream ss;
-   ss << kFacebookRoot 
-      << kProfilePage 
-      << _T("?id=")  
-      << userID
-      << _T("#status\n");
+  StringStream ss;
+  ss << kFacebookRoot 
+    << kProfilePage 
+    << _T("?id=")  
+    << userID
+    << _T("#status\n");
 
-   return ss.str(); 
+  return ss.str(); 
 }
 
 String buildUserInboxUrl() {
-   StringStream ss;
+  StringStream ss;
 
-   ss << kFacebookRoot 
-      << kMessagesPage
-      << "\n";
+  ss << kFacebookRoot 
+    << kMessagesPage
+    << "\n";
 
-   return ss.str(); 
+  return ss.str(); 
 }
 
 String buildPokeFriendUrl() {
-   StringStream ss;
+  StringStream ss;
 
-   ss << kFacebookRoot 
-      << kHomePage
-      << "\n";
+  ss << kFacebookRoot 
+    << kHomePage
+    << "\n";
 
-   return ss.str(); 
+  return ss.str(); 
 }
 
 String buildFriendsRequestUrl() {
-   StringStream ss;
+  StringStream ss;
 
-   ss << kFacebookRoot 
-      << kRequestsPage
-      << "\n";
+  ss << kFacebookRoot 
+    << kRequestsPage
+    << "\n";
 
-   return ss.str(); 
+  return ss.str(); 
 }
 
 String buildUserWallUrl(const String& userID) {
-   StringStream ss;
-   ss << kFacebookRoot 
-      << kProfilePage 
-      << _T("?id=")  
-      << userID
-      << _T("#wall\n");
+  StringStream ss;
+  ss << kFacebookRoot 
+    << kProfilePage 
+    << _T("?id=")  
+    << userID
+    << _T("#wall\n");
 
-   return ss.str(); 
+  return ss.str(); 
 }
 
 String buildUserNotesUrl(const String& userID) {
-   StringStream ss;
-   ss << kFacebookRoot 
-      << kNotesPage 
-      << _T("?id=")  
-      << userID;
+  StringStream ss;
+  ss << kFacebookRoot 
+    << kNotesPage 
+    << _T("?id=")  
+    << userID;
 
-   return ss.str(); 
+  return ss.str(); 
 }
 
 String buildUpdateProfileUrl(const String& userID) {
-   StringStream ss;
-   ss << kFacebookRoot 
-      << kProfilePage 
-      << _T("?id=")  
-      << userID
-      << _T("&highlight");
+  StringStream ss;
+  ss << kFacebookRoot 
+    << kProfilePage 
+    << _T("?id=")  
+    << userID
+    << _T("&highlight");
 
-   return ss.str(); 
+  return ss.str(); 
 }
 
 bool isCustomAction(const String& url) {

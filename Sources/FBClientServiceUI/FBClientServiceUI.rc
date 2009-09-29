@@ -87,6 +87,7 @@ IDR_PHOTO               HTML                    "res\\photo.gif"
 IDR_WALL_POST           HTML                    "res\\wall_post.gif"
 IDR_TDEFAULT            HTML                    "res\\tdefault.jpg"
 IDR_HTML_NOTIFIER       HTML                    "res\\notifier.html"
+IDR_HTML_NOTIFIER_RTL   HTML                    "res\\notifierRtl.html"
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////

@@ -36,8 +36,6 @@
 #include "StdAfx.h"
 #include "ModuleUtils.h"
 
-#include "psapi.h"
-
 namespace facebook{
 
 String getModuleFileName(const HMODULE moduleHandle) {
@@ -93,37 +91,6 @@ String getModuleVersion(const HMODULE moduleHandle) {
 
 	return result;
 
-}
-
-void terminateAllInstances(facebook::String processName) {
-  DWORD processes[1024]; 
-  DWORD processListSize = 0;
-  if ( !EnumProcesses( processes, sizeof(processes), &processListSize)) {
-					return;
-  }
-  // Calculate how many process identifiers were returned.
-	DWORD processCount = processListSize / sizeof(DWORD);
-  for (unsigned int i = 0; i < processCount; ++i ) {
-		facebook::Char moduleName[MAX_PATH] = _T("<unknown>");
-		// Get a handle to the process.
-		HANDLE processHandle = OpenProcess( PROCESS_QUERY_INFORMATION | PROCESS_VM_READ | PROCESS_TERMINATE,
-      FALSE, processes[i] );
-		// Get the process name.
-		if (NULL != processHandle) {
-			HMODULE moduleHandle;
-			DWORD neededSize;
-			if ( EnumProcessModules( processHandle, &moduleHandle, 
-        sizeof(moduleHandle), &neededSize) ) {
-
-				GetModuleBaseName(processHandle, moduleHandle, moduleName, sizeof(moduleName));
-				if (_wcsicmp(moduleName, processName.c_str()) == 0) {
-					TerminateProcess(processHandle, 0);
-				}
-			}
-      CloseHandle(processHandle);
-		}
-		
-	}
 }
 
 }// !namespace facebook

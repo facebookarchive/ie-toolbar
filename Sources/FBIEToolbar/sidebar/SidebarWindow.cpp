@@ -52,6 +52,7 @@
 #include "../../common/ResourceMessages.h"
 #include "../../util/LogUtils.h"
 #include "../../util/RegistryUtils.h"
+#include "../../util/ShellUtils.h"
 
 namespace facebook{
 
@@ -214,27 +215,27 @@ void SidebarWindow::changeFilter(const String& filter) {
 }
 
 void SidebarWindow::loggedOut() {
-  LOG4CPLUS_DEBUG(LogUtils::getLogger(), "SidebarWindow::loggedOut");
+  //LOG4CPLUS_DEBUG(LogUtils::getLogger(), "SidebarWindow::loggedOut");
   friendsView_->loggedOut();
 }
 
 void SidebarWindow::loading() {
-  LOG4CPLUS_DEBUG(LogUtils::getLogger(), "SidebarWindow::loading");
+  //LOG4CPLUS_DEBUG(LogUtils::getLogger(), "SidebarWindow::loading");
   friendsView_->loading();
 }
 
 void SidebarWindow::loaded(const FriendsList& friendsList) {
-  LOG4CPLUS_DEBUG(LogUtils::getLogger(), "SidebarWindow::loaded");
+ // LOG4CPLUS_DEBUG(LogUtils::getLogger(), "SidebarWindow::loaded");
   friendsView_->loaded(friendsList);
   friendsView_->changeSortMode(activeSortMode_);
 }
 
 void SidebarWindow::refresh(bool loggedin) {
-  LOG4CPLUS_DEBUG(LogUtils::getLogger(), 
-    "SidebarWindow::refresh current state = " << 
-    friendsView_->getViewState() <<
-    ", new state = " << loggedin <<
-    ", is currently visible = " << RuntimeContext::isSidebarOpened());
+  //LOG4CPLUS_DEBUG(LogUtils::getLogger(), 
+ //   "SidebarWindow::refresh current state = " << 
+ //   friendsView_->getViewState() <<
+ //   ", new state = " << loggedin <<
+ //   ", is currently visible = " << RuntimeContext::isSidebarOpened());
   switch (friendsView_->getViewState()) {
     case SidebarHtmlView::VS_LOADING_FRIENDS:
       break;
@@ -381,7 +382,7 @@ BOOL SidebarWindow::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult) {
       ToolbarWindow::updateItem(sortSubMenu, index);
     }
 
-    const UINT trackFlags = TPM_LEFTALIGN | TPM_RIGHTBUTTON;
+    const UINT trackFlags = TPM_BOTTOMALIGN | TPM_LEFTALIGN | TPM_RIGHTBUTTON;
     CRect sortButtonRect = settingsSortToolbar_.getItemRect(
       sortButtonIndex_);
 
@@ -390,8 +391,11 @@ BOOL SidebarWindow::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult) {
     sortSubMenu->CheckMenuRadioItem(ID_SORT_LAST_UPDATE_TIME, ID_SORT_NAME,
       sortModeToResID(activeSortMode_) , MF_BYCOMMAND);
 
+    // Determine if MS Windows is right aligned and get position of the sort button
+    // depending on it
+    int x = isBiDi(LOCALE_SYSTEM_DEFAULT) ? sortButtonRect.right : sortButtonRect.left;
     const BOOL trackResult = sortSubMenu->TrackPopupMenu(trackFlags,
-      sortButtonRect.left, sortButtonRect.bottom, this);
+      x, sortButtonRect.top, this);
 
     if (FALSE == trackResult)
       throw Error("Failed to track sort menu\n");
@@ -437,7 +441,7 @@ bool SidebarWindow::onToolbarCustomDraw(LPNMTBCUSTOMDRAW messageInfo,
 void SidebarWindow::OnShowWindow(BOOL bShow, UINT nStatus) {
   UNREFERENCED_PARAMETER(nStatus);
   isVisible_ = (bShow == TRUE);
-  LOG4CPLUS_DEBUG(LogUtils::getLogger(), "SidebarWindow::OnShowWindow Show = " << bShow << " status = " << nStatus);
+  //LOG4CPLUS_DEBUG(LogUtils::getLogger(), "SidebarWindow::OnShowWindow Show = " << bShow << " status = " << nStatus);
 }
 
 

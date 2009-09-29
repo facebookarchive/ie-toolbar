@@ -36,7 +36,7 @@
 #include "StdAfx.h"
 
 #include <Tlhelp32.h>
-
+#include <shlobj.h>
 #include <boost/algorithm/string/case_conv.hpp>
 
 #include "ShellUtils.h"
@@ -109,6 +109,18 @@ bool terminateAllProcesses(const String& processName) {
   }
 
   CloseHandle(snapshot);
+  return result;
+}
+
+bool isBiDi(int localeId) {
+  bool result = false;
+  LOCALESIGNATURE ls;
+
+  if(GetLocaleInfoW(localeId, LOCALE_FONTSIGNATURE, (LPWSTR)&ls, 
+    sizeof(ls) / sizeof(WCHAR)) > 0 && ((ls.lsUsb[3] & 0x8000000) != 0)) {
+    result = true;
+  }
+
   return result;
 }
 

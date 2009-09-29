@@ -81,13 +81,13 @@ BEGIN
     CONTROL         "Enable Pop-up Notification",IDC_CHK_POPUP_NOTIF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,5,6,181,9
     GROUPBOX        "Notification about me",IDC_STATIC_GR1,6,19,180,128
     CONTROL         "New friend request",IDC_CHK_NFRIEND_REQ,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,32,165,9
-    CONTROL         "New message",IDC_CHK_NMESSAGE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,47,162,9
-    CONTROL         "New poke",IDC_CHK_NPOKE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,61,163,9
-    CONTROL         "New friend",IDC_CHK_NFRIEND,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,76,164,9
-    CONTROL         "New event invite",IDC_CHK_NEVENT_INV,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,91,164,9
-    CONTROL         "New group invite",IDC_CHK_GROUP_INV,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,105,163,9
-    CONTROL         "New share",IDC_CHK_NSHARE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,119,162,9
-    CONTROL         "Someone wrote on your wall",IDC_CHK_SWROTE_WALL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,133,163,9
+    CONTROL         "New message",IDC_CHK_NMESSAGE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,47,165,9
+    CONTROL         "New poke",IDC_CHK_NPOKE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,61,165,9
+    CONTROL         "New friend",IDC_CHK_NFRIEND,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,76,165,9
+    CONTROL         "New event invite",IDC_CHK_NEVENT_INV,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,91,165,9
+    CONTROL         "New group invite",IDC_CHK_GROUP_INV,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,105,165,9
+    CONTROL         "New share",IDC_CHK_NSHARE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,119,165,9
+    CONTROL         "Someone wrote on your wall",IDC_CHK_SWROTE_WALL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,133,165,9
     GROUPBOX        "Notification about my friends",IDC_STATIC_GR2,6,149,180,81
     CONTROL         "A friend updated his/her profile",IDC_CHK_AFU_PROFILE,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,162,165,9
@@ -95,12 +95,12 @@ BEGIN
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,176,165,9
     CONTROL         "A friend updated his/her albums",IDC_CHK_AFU_ALBUMS,
                     "Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,189,165,9
-    CONTROL         "A friend updated his/her wall",IDC_CHK_AFU_WALL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,203,164,9
+    CONTROL         "A friend updated his/her wall",IDC_CHK_AFU_WALL,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,203,165,9
     CONTROL         "A friend wrote a note",IDC_CHK_AF_NOTE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,14,216,165,9
     PUSHBUTTON      "OK",IDOK,97,267,43,13
     PUSHBUTTON      "Cancel",IDCANCEL,143,267,43,13
-    CONTROL         "Check For Updates",IDC_CHK_UPDATES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,237,173,9
-    LTEXT           "",IDC_UPDATE_STATUS,14,250,164,8
+    CONTROL         "Check For Updates",IDC_CHK_UPDATES,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,6,237,180,9
+    LTEXT           "",IDC_UPDATE_STATUS,14,250,163,8
 END
 
 
@@ -138,6 +138,7 @@ IDR_TOOLBAR_CSS         HTML                    "res\\toolbar.css"
 IDR_TOOLBAR_JS          HTML                    "res\\toolbar.js"
 IDR_LIB_JS              HTML                    "res\\lib.js"
 IDR_LANGUAGE_FILE       HTML                    "res\\messages.default.xml"
+IDR_TOOLBAR_CSS_RTL     HTML                    "res\\toolbar-Rtl.css"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -152,6 +153,8 @@ IDB_IETOOLBAR_HOT_BUTTONS BITMAP                  "res\\toolbar_hot_buttons.bmp"
 IDB_SMALL_LOGO          BITMAP                  "res\\facebook_small_logo.bmp"
 IDB_SHARE_PLUS          BITMAP                  "res\\share_plus.bmp"
 IDB_SHARE_HOT_PLUS      BITMAP                  "res\\share_plus_hot.bmp"
+IDB_IETOOLBAR_BUTTONS_RTL BITMAP                  "res\\toolbar_buttons-Rtl.bmp"
+IDB_IETOOLBAR_HOT_BUTTONS_RTL BITMAP                  "res\\toolbar_hot_buttons-Rtl.bmp"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -221,6 +224,7 @@ END
 
 IDR_POPUP_FRIEND_LIST_XSLT XSLT                    "res\\view-popup.xsl"
 IDR_SIDEBAR_FRIEND_LIST_XSLT XSLT                    "res\\view-sidebar.xsl"
+IDR_SIDEBAR_FRIEND_LIST_RTL_XSLT XSLT                    "res\\view-sidebar-Rtl.xsl"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -350,8 +354,7 @@ END
 //
 // Generated from the TEXTINCLUDE 3 resource.
 //
-
-
+
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED
 

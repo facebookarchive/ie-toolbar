@@ -3,16 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "FBIE-MSI", "FBIE-MSI\FBIE-MSI.vdproj", "{E786B4BB-03FD-4BC0-9A1E-792AD2EF82DE}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "setup", "setup\setup.vcproj", "{D6F6FC45-D337-4689-903B-AA1DF9B3BAF9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E786B4BB-03FD-4BC0-9A1E-792AD2EF82DE} = {E786B4BB-03FD-4BC0-9A1E-792AD2EF82DE}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Default = Debug|Default
-		Release|Default = Release|Default
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E786B4BB-03FD-4BC0-9A1E-792AD2EF82DE}.Debug|Default.ActiveCfg = Debug
-		{E786B4BB-03FD-4BC0-9A1E-792AD2EF82DE}.Debug|Default.Build.0 = Debug
-		{E786B4BB-03FD-4BC0-9A1E-792AD2EF82DE}.Release|Default.ActiveCfg = Release
-		{E786B4BB-03FD-4BC0-9A1E-792AD2EF82DE}.Release|Default.Build.0 = Release
+		{E786B4BB-03FD-4BC0-9A1E-792AD2EF82DE}.Debug|Win32.ActiveCfg = Debug
+		{E786B4BB-03FD-4BC0-9A1E-792AD2EF82DE}.Release|Win32.ActiveCfg = Release
+		{E786B4BB-03FD-4BC0-9A1E-792AD2EF82DE}.Release|Win32.Build.0 = Release
+		{D6F6FC45-D337-4689-903B-AA1DF9B3BAF9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D6F6FC45-D337-4689-903B-AA1DF9B3BAF9}.Debug|Win32.Build.0 = Debug|Win32
+		{D6F6FC45-D337-4689-903B-AA1DF9B3BAF9}.Release|Win32.ActiveCfg = Release|Win32
+		{D6F6FC45-D337-4689-903B-AA1DF9B3BAF9}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

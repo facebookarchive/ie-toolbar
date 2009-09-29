@@ -93,6 +93,12 @@ public:
   static String getMessage(const String key, bool reload = false);
 
   /**
+   * Get text alignment of the current culture
+   * @return true if text right aligned, false otherwise
+   */
+  static bool isTextRightAligned();
+
+  /**
    * static method to get the instance of the language manager
    *
    * @return Language manager

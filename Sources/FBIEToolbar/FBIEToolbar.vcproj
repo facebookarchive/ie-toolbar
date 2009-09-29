@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="FBIEToolbar"
 	ProjectGUID="{365CECD5-DCC6-41A2-B436-3211C4064584}"
 	RootNamespace="FBIEToolbar"
@@ -66,7 +66,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				RegisterOutput="false"
-				AdditionalDependencies="iepmapi.lib Wininet.lib Version.lib psapi.lib"
+				AdditionalDependencies="iepmapi.lib Wininet.lib Version.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../lib/"
 				IgnoreDefaultLibraryNames=""
@@ -146,7 +146,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="iepmapi.lib Wininet.lib Version.lib psapi.lib"
+				AdditionalDependencies="iepmapi.lib Wininet.lib Version.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../lib/"
 				ModuleDefinitionFile="FBIEToolbar.def"
@@ -228,7 +228,7 @@
 			<Tool
 				Name="VCLinkerTool"
 				RegisterOutput="false"
-				AdditionalDependencies="iepmapi.lib log4cplusud.lib Wininet.lib Version.lib  psapi.lib"
+				AdditionalDependencies="iepmapi.lib log4cplusud.lib Wininet.lib Version.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../lib/"
 				IgnoreDefaultLibraryNames=""
@@ -308,7 +308,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="iepmapi.lib log4cplusu.lib Wininet.lib Version.lib  psapi.lib"
+				AdditionalDependencies="iepmapi.lib log4cplusu.lib Wininet.lib Version.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../lib/"
 				ModuleDefinitionFile="FBIEToolbar.def"
@@ -349,14 +349,6 @@
 			Filter="rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav"
 			UniqueIdentifier="{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}"
 			>
-			<File
-				RelativePath=".\res\bitmap4.bmp"
-				>
-			</File>
-			<File
-				RelativePath=".\res\bitmap5.bmp"
-				>
-			</File>
 			<File
 				RelativePath=".\res\facebook_small_logo.bmp"
 				>
@@ -402,6 +394,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\res\toolbar-Rtl.css"
+				>
+			</File>
+			<File
 				RelativePath=".\res\toolbar.bmp"
 				>
 			</File>
@@ -414,11 +410,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\res\toolbar_buttons-Rtl.bmp"
+				>
+			</File>
+			<File
 				RelativePath=".\res\toolbar_buttons.bmp"
 				>
 			</File>
 			<File
 				RelativePath=".\res\toolbar_hot.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\toolbar_hot_buttons-Rtl.bmp"
 				>
 			</File>
 			<File
@@ -436,6 +440,10 @@
 			</File>
 			<File
 				RelativePath=".\res\view-popup.xsl"
+				>
+			</File>
+			<File
+				RelativePath=".\res\view-sidebar-Rtl.xsl"
 				>
 			</File>
 			<File
@@ -626,6 +634,14 @@
 			</File>
 			<File
 				RelativePath=".\TargetVer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\XslLangCache.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\XslLangCache.h"
 				>
 			</File>
 		</Filter>

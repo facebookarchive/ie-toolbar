@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
+<setting name="isRightAligned">0</setting>
+  
 <data name="languageName">Nederlands</data>
 <data name="facebookToolbar">Facebook-werkbalk</data>
 <data name="settingsConfigureTheFacebookToolbar">De Facebook-werkbalk configureren</data>
@@ -128,4 +130,25 @@
 <data name="YesterdaySmall">gisteren</data>
 <data name="Today">Vandaag</data>
 <data name="TodaySmall">vandaag</data>
+
+<data name="AboutWeekAgoSmall">ongeveer een week geleden</data>
+<data name="AboutTwoWeekAgoSmall">ongeveer twee weken geleden</data>
+<!-- {p0} > 2 -->
+<data name="AboutWeekAgoParam">ongeveer {p0} weken geleden</data>
+<data name="AboutMonthAgoSmall">ongeveer een maand geleden</data>
+<!--
+{p1} - 24h hours
+{p2} - minutes
+-->
+<!-- Standalone format-->
+<!-- {p0}: Yesterday, Today -->
+<data name="DateTimeFormat">{p0} om {p1}:{p2}</data>
+<!-- {p0}: Sunday, Monday, Tuesday, Wednesday,Thursday, Friday, Saturday -->
+<data name="WeekDateTimeFormat">{p0} om {p1}:{p2}</data>
+
+<!-- Action text format-->
+<!-- {p0}: yesterday, today -->
+<data name="ProfileTimeFormat">Profiel bijgewerkt {p0} om {p1}:{p2}</data>
+<!-- {p0}: Sunday, Monday, Tuesday, Wednesday,Thursday, Friday, Saturday -->
+<data name="ProfileWeekTimeFormat">Profiel bijgewerkt {p0} om {p1}:{p2}</data>
 </root>

@@ -3,8 +3,8 @@
 /* this ALWAYS GENERATED file contains the proxy stub code */
 
 
- /* File created by MIDL compiler version 7.00.0500 */
-/* at Mon Aug 17 14:16:42 2009
+ /* File created by MIDL compiler version 7.00.0499 */
+/* at Thu Sep 10 14:59:00 2009
  */
 /* Compiler settings for .\FBClientService.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -1429,7 +1429,7 @@ static const MIDL_STUB_DESC Object_StubDesc =
     0, /* -error bounds_check flag */
     0x50002, /* Ndr library version */
     0,
-    0x70001f4, /* MIDL Version 7.0.500 */
+    0x70001f3, /* MIDL Version 7.0.499 */
     0,
     UserMarshalRoutines,
     0,  /* notify & notify_flag routine table */

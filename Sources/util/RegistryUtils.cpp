@@ -162,7 +162,7 @@ bool RegistryUtils::getWritableRegistryKey(HKEY &rootKey) {
 	    res = RegCreateKey(HKEY_CURRENT_USER, kLowAccessRegistryEntry.c_str(), &rootKey);
 	  }
   } else {
-    // if we are running not from IE - het the same path
+    // if we are running not from IE - get the same path
     res = RegCreateKey(HKEY_CURRENT_USER, kLowAccessRegistryEntry.c_str(), &rootKey);
   }
 	return res == S_OK;

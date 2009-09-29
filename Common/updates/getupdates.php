@@ -74,7 +74,7 @@ public static function getScriptPathURL(){
 class VersionComparator {
 
 /**
-  * Compares two file names in format "setup.major-ver.minor-ver.release-ver.build-ver.msi"
+  * Compares two file names in format "setup.major-ver.minor-ver.release-ver.build-ver.exe"
   *
   * @param $file1 name of first file to compare
   * @param $file2 name of second file to compare
@@ -124,7 +124,7 @@ public static function compareVersionNames($file1, $file2){
 
 /**
   * Compares current product version and file name with version 
-  * in format "setup.major-ver.minor-ver.release-ver.build-ver.msi"
+  * in format "setup.major-ver.minor-ver.release-ver.build-ver.exe"
   *
   * @param $current_ver version to compare with
   * @param $latest_file name of file to get version from
@@ -134,7 +134,7 @@ public static function compareVersionNames($file1, $file2){
   *        -1 - if $latest_file version is newer
   */
 public static function compare($current_ver, $latest_file){
-  $currentFile = "setup.".$current_ver.".msi"; 
+  $currentFile = "setup.".$current_ver.".exe"; 
 
   // build file name for passed product version and compare file names
   return VersionComparator::compareVersionNames($currentFile, $latest_file);
@@ -155,7 +155,7 @@ public static function checkFormat($version){
 
 /**
   * Checks if parameter matches format 
-  * "setup.major-ver.minor-ver.release-ver.build-ver.msi"
+  * "setup.major-ver.minor-ver.release-ver.build-ver.exe"
   *
   * @param $file to check name format
   *
@@ -163,7 +163,7 @@ public static function checkFormat($version){
   *         false - otherwise 
   */
 public static function checkFileFormat($file){
-  return preg_match("(setup.[0-9]+(.)[0-9]+(.)[0-9]+(.)[0-9]+(.msi))", $file);
+  return preg_match("(setup.[0-9]+(.)[0-9]+(.)[0-9]+(.)[0-9]+(.exe))", $file);
 }
 
 
@@ -186,7 +186,7 @@ class UpdatesService {
 
 /**
   * Analyze files which fit
-  * "setup.major-ver.minor-ver.release-ver.build-ver.msi" pattern
+  * "setup.major-ver.minor-ver.release-ver.build-ver.exe" pattern
   * and return one with latest version
   *
   * @param $files array of files
@@ -228,7 +228,7 @@ private function getNewestURL(){
 
   // calculates latest file from directory 
   // based on file name pattern 
-  $newest_file = $this->getNevestFile(Util::getFiles("setup.*.msi")); 
+  $newest_file = $this->getNevestFile(Util::getFiles("setup.*.exe")); 
 
   if(VersionComparator::compare($this->current_version, $newest_file) < 0){
     $result = Util::getScriptPathURL()."/".$newest_file;

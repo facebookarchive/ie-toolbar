@@ -37,6 +37,7 @@
 
 #include "CommonConstants.h"
 #include <mshtml.h>
+#include <string>
 
 #include <boost/bind.hpp>
 
@@ -67,9 +68,9 @@ public:
 
 public:
 
-  CultureInfo():id_(kDefaultCultureId) {}
+  CultureInfo():id_(kDefaultCultureId), isRightAligned_(false) {}
 
-  CultureInfo(const String id):id_(id) {}
+  CultureInfo(const String id):id_(id), isRightAligned_(false) {}
 
   ~CultureInfo() {};
 
@@ -95,6 +96,22 @@ public:
   }
 
   /**
+   * Gets text alignment of the culture 
+   * @return true - if text is right alignment, false - otherwise
+   */
+  bool getAlignment() {
+    return isRightAligned_;
+  }
+
+  /**
+   * Set text alignment of the culture
+   * @param isRightAligned true - if text is right alignment, false - otherwise
+   */
+  void setAlignment(bool isRightAligned) {
+    isRightAligned_ = isRightAligned;
+  }
+
+  /**
    * Add new message to this culture
    *
    * @param key - message key to get from culture
@@ -108,7 +125,7 @@ private:
 
   String id_;
   Dictionary messages_;
-
+  bool isRightAligned_;
 };
 
 
@@ -188,6 +205,15 @@ String ResourceMessages::getMessage(const String key, bool reload) {
   return result;
 }
 
+bool ResourceMessages::isTextRightAligned() {
+  bool result = false;
+  if (messages.currentCulture_) {
+    result = messages.currentCulture_->getAlignment();
+  }
+
+  return result;
+}
+
 String ResourceMessages::getCultureName(const String& fileName) {
   String result;
   unsigned int firstPosition = fileName.find('.');
@@ -242,6 +268,8 @@ void ResourceMessages::loadCulture(const String& searchFolder, const String& fil
 
 void readCultureFromXml(CultureInfo& data, 
                         MSXML2::IXMLDOMDocumentPtr xmlDoc) {
+  const String kIsRightAligned = _T("isRightAligned");
+
   // load the root node
   MSXML2::IXMLDOMNodePtr rootNode = xmlDoc->selectSingleNode(_T("root"));
   if (rootNode == NULL) {
@@ -253,6 +281,7 @@ void readCultureFromXml(CultureInfo& data,
   if (FAILED(getChildNodesRes)) {
     throw std::exception("failed to load data nodes");
   }
+
   MSXML2::IXMLDOMNodePtr dataNode = NULL;
   MSXML2::IXMLDOMNodePtr attributeNode = NULL;
   for(long index = 0;  index < children->Getlength(); ++index) {
@@ -268,8 +297,14 @@ void readCultureFromXml(CultureInfo& data,
       // no needed attribute
       continue;
     }
-    data.addMessage(XMLUtils::getNodeText(attributeNode), 
-      XMLUtils::getNodeText(dataNode));
+
+    if (XMLUtils::getNodeText(attributeNode).compare(kIsRightAligned)) {
+      data.addMessage(XMLUtils::getNodeText(attributeNode), 
+        XMLUtils::getNodeText(dataNode));
+    } else {
+      bool alignment = XMLUtils::getNodeText(dataNode).compare(_T("0")) ? true : false;
+      data.setAlignment(alignment);
+    }
   }
 }
 
@@ -385,6 +420,12 @@ std::map<String, String> ResourceMessages::getCulturesList() {
       continue;
     }
     if (data->getMessage(kCultureName, name)) {
+      // If MS Windows is right alignment, replace
+      // braces to the proper one for right alignment language
+      if (isBiDi(LOCALE_SYSTEM_DEFAULT) && name.find(_T("(")) != String::npos) {
+        name.erase(name.end() - 1, name.end());
+        name =  _T("(") + name;
+      }
       cultures[data->getId()] = name;
     }
   }

@@ -40,48 +40,39 @@
 #include "StringUtils.h"
 
 
-namespace facebook{
+namespace facebook {
 
   /**
    * Creates Rect region and return pointer on it
-   *
    * @param rect (by ref)
-   *
-   * return pointer to rect region created
+   * @return pointer to rect region created
    */
   RgnPtr createRectRegion(const CRect& rect);
 
   /**
    * Loads bitmap from resources 
-   *
    * @param resourceId - id of bitmap resource (by value)
-   *
-   * return pointer to rectloaded bitmap
+   * @return pointer to rectloaded bitmap
    */
   BitmapPtr loadBitmap(const UINT resourceId);
 
   /**
    * Calculates bitmap size 
-   *
    * @param bitmap (by ref)
-   *
-   * return size of bitmap
+   * @return size of bitmap
    */
   CSize getBitmapSize(CBitmap& bitmap);
 
   /**
    * Calculates message length in pixels 
-   *
    * @param message message text
    * @param font message font
-   *
-   * return size of the text
+   * @return size of the text
    */
   SIZE getMessageLength(const String& message, const CFont& font);
 
   /**
    * Create and set font for device context 
-   *
    * @param memDC device context
    * @param fontSize font size
    * @param fontFamily font family
@@ -89,41 +80,32 @@ namespace facebook{
    */
   void setFont(CDC* memDC, int fontSize, LPCTSTR fontFamily, CFont& font);
 
-
   /**
    * Calculates bitmap size, template function 
-   *
    * @param bitmap (by ref pointer)
-   *
-   * return size of bitmap
+   * @return size of bitmap
    */
   template <typename T>
-  CSize getBitmapSize(const boost::shared_ptr<T>& bitmap){
+  CSize getBitmapSize(const boost::shared_ptr<T>& bitmap) {
      return getBitmapSize(*bitmap);
   }
 
 
   /**
    * Resets clip retion 
-   *
    * @param devide context (by ref)
-   *
-   * return void
+   * @return void
    */
-  inline
-  void resetClip(CDC& deviceCntx){
+  inline void resetClip(CDC& deviceCntx) {
      deviceCntx.SelectClipRgn(0);
   }
 
   /**
    * Checks if rect has empty size 
-   *
    * @param rect (by ref)
-   *
-   * return true, if rect is empty
+   * @return true, if rect is empty
    */
-  inline
-  bool isEmpty(const CRect& rect){
+  inline bool isEmpty(const CRect& rect) {
      return !rect.Width() || !rect.Height();
   }
 

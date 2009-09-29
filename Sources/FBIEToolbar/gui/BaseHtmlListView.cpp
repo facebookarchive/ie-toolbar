@@ -47,6 +47,7 @@
 
 #include "../FriendListXmlBuilder.h"
 #include "../resource.h"
+#include "../XslLangCache.h"
 
 #include "../system/ClassIds.h"
 #include "../system/RuntimeContext.h"
@@ -120,9 +121,8 @@ void BaseHtmlListView::changeFilter(const String& filter,bool needReload) {
 
 
 String BaseHtmlListView::getXsl() {
-  if(friendsXSL_.empty()) { 
-    friendsXSL_ = loadStringFromResources(getFriendsListXslResource(), _T("XSLT"));
-  }
+  friendsXSL_ = XslLangCache::Instance()->getXsl(getFriendsListXslResource(), _T("XSLT"));
+
   return friendsXSL_;
 }
 
@@ -343,8 +343,13 @@ void BaseHtmlListView::processContent(String& content) {
   // handle default path variable from resources: 
   
   //processing {toolbar-css-path}
+  int toolbarCssId = IDR_TOOLBAR_CSS;
+  if (ResourceMessages::isTextRightAligned()) {
+    toolbarCssId = IDR_TOOLBAR_CSS_RTL;
+  }
+
   String resourceUrl = buildHtmlResourceUrl(getModuleFileName(AfxGetInstanceHandle()), 
-    IDR_TOOLBAR_CSS);
+    toolbarCssId);
    
   replace_all(content, _T("@toolbar-css-path"), resourceUrl);
 

@@ -39,12 +39,9 @@
 #include "PtrUtils.h"
 
 
+namespace facebook {
 
-
-namespace facebook{
-
-
-RgnPtr facebook::createRectRegion(const CRect& rect) {
+RgnPtr createRectRegion(const CRect& rect) {
    RgnPtr region(new CRgn());
 
    const BOOL createResult = region->CreateRectRgnIndirect(rect);
@@ -55,8 +52,7 @@ RgnPtr facebook::createRectRegion(const CRect& rect) {
    return region;
 }
 
-
-BitmapPtr facebook::loadBitmap(const UINT resourceId) {
+BitmapPtr loadBitmap(const UINT resourceId) {
    BitmapPtr bitmap(new CBitmap());
 
    const BOOL loadResult = bitmap->LoadBitmap(resourceId);
@@ -67,14 +63,14 @@ BitmapPtr facebook::loadBitmap(const UINT resourceId) {
    return bitmap;
 }
 
-CSize facebook::getBitmapSize(CBitmap& bitmap) {
+CSize getBitmapSize(CBitmap& bitmap) {
    BITMAP bitmapData = {0};
    bitmap.GetBitmap(&bitmapData);
 
    return CSize(bitmapData.bmWidth, bitmapData.bmHeight);
 }
 
-SIZE facebook::getMessageLength(const String& message, const CFont& font) {
+SIZE getMessageLength(const String& message, const CFont& font) {
   SIZE textSize;
   HDC context = ::GetDC(0);
   SelectObject(context, font);
@@ -84,7 +80,7 @@ SIZE facebook::getMessageLength(const String& message, const CFont& font) {
   return textSize;
 }
 
-void facebook::setFont(CDC* memDC, int fontSize, LPCTSTR fontFamily, CFont& font) {
+void setFont(CDC* memDC, int fontSize, LPCTSTR fontFamily, CFont& font) {
   font.CreateFont(fontSize, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE, 0, OUT_DEFAULT_PRECIS, 
     CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, fontFamily); 
   memDC->SelectObject(font); 

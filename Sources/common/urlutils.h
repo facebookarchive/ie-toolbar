@@ -70,7 +70,7 @@ namespace facebook {
    const String kPhotosPage = _T("photos.php");
    const String kPokesPage = _T("pokes.php");
    const String kWallPostsPage = _T("wallposts.php");
-   const String kSearchPage = _T("srch.php");
+   const String kSearchPage = _T("s.php");
    const String kMessagesPage = _T("inbox/");
    const String kSharePage = _T("sharer.php");
    const String kHomePage = _T("home.php");

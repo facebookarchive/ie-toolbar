@@ -33,7 +33,7 @@
 */ 
 
 #ifndef TOOLBARSETTINGSDLG_H
-#define  TOOLBARSETTINGSDLG_H
+#define TOOLBARSETTINGSDLG_H
 
 #include "../resource.h"
 
@@ -97,27 +97,37 @@ private:
   /**
    * Set window size depend on the text length
    */
-  void setWindowSize();
+  void adjustWindowSize();
 
   /**
    * Set controls size depend on the window size
    * @param oldWindowSize old position and size of the window
    */
-  void setControlsSize(CRect oldWindowSize);
+  void resizeControls(CRect oldWindowSize);
 
   /**
    * Set button size and position depend on the text
    */
-  void setButtonsPos();
+  void adjustButtonsPos();
 
   /*
-   * Move button in horirontal dimension
+   * Move button in horizontal dimension
    *
    * @param id id of the button
    * @param width width of the button
    * @param offsetX offset in the horizontal dimension
    */
   void moveButton(int id, int width, int offsetX);
+
+  /**
+   * Invert current dialog
+   */
+  virtual void invertDialog();
+
+  /**
+   * Initialize control list
+   */
+  void initControlList();
 
    // data members
 private:
@@ -136,6 +146,7 @@ private:
   BOOL popupNotification_; // Enable Pop-up Notification
   BOOL groupInv_; // New group invite 
   BOOL checkUpdates_;
+  std::list<CWnd*> controls_; // Control list
 };
 
 } // !namespace facebook

@@ -44,8 +44,11 @@
 #include "../../common/ResourceMessages.h"
 
 #include "../../util/BitsUtils.h"
+#include "../../util/GdiUtils.h"
+#include "../../util/ShellUtils.h"
+#include "../../util/WndUtils.h"
 
-namespace facebook{
+namespace facebook {
 
 // ---------------------------------------------------------------------
 // class ToolbarSettingsDlg
@@ -106,12 +109,9 @@ void ToolbarSettingsDlg::DoDataExchange(CDataExchange* pDX) {
 
 BOOL ToolbarSettingsDlg::OnInitDialog() {
    loadData();
-   CRect rect;
-   GetWindowRect(&rect);
-   setWindowSize();
-   setControlsSize(rect);
-   setButtonsPos();
+   initControlList();
    updateView(0);
+
    return CDialog::OnInitDialog();
 }
 
@@ -141,38 +141,57 @@ void ToolbarSettingsDlg::updateView(int changeId) {
   SetDlgItemText(IDCANCEL, ResourceMessages::getMessage(kButtonCancel).c_str());
 
   loadUpdatesStatus();
+
+  // Set dimensions snd position, depend on the text
+  CRect rect;
+  GetWindowRect(&rect);
+  adjustWindowSize();
+  resizeControls(rect);
+  adjustButtonsPos();
+
+  // Invert current dialog if current toolbar language is right aligned
+  if (ResourceMessages::isTextRightAligned()) {
+    invertDialog();
+  }
 }
 
-void ToolbarSettingsDlg::setWindowSize() {
+void ToolbarSettingsDlg::invertDialog() {
+  // Margin between window border and test static box
+  const int updateTextMargin = 34;
+  alignDialogButtons(this);
+
+  CRect rectUpdateText, rectWindow;
+  GetDlgItem(IDC_UPDATE_STATUS)->GetWindowRect(&rectUpdateText);
+  GetWindowRect(&rectWindow);
+  ScreenToClient(&rectUpdateText);
+  ScreenToClient(&rectWindow);
+  // Move Update text notification to the correct 
+  // position for right aligned dialog
+  GetDlgItem(IDC_UPDATE_STATUS)->SetWindowPos(NULL, 
+    rectWindow.Width() - rectUpdateText.Width() - updateTextMargin,
+    rectUpdateText.top, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
+
+  // Set controls style to right to left
+  for (std::list<CWnd*>::iterator it = controls_.begin(); it != controls_.end(); it++) {
+    addExStyle((*it)->GetSafeHwnd(), WS_EX_LAYOUTRTL);
+  }
+  // Set window style to right to left
+  addExStyle(GetSafeHwnd(), WS_EX_LAYOUTRTL, true);
+}
+
+void ToolbarSettingsDlg::adjustWindowSize() {
   SIZE textSize;
   HFONT windowFont = (HFONT)::SendMessage(GetSafeHwnd(), WM_GETFONT, 0, 0);
   HDC context = ::GetDC(GetSafeHwnd());
   SelectObject(context, windowFont);
 
-  std::list<String> messages;
-  messages.push_back(ResourceMessages::getMessage(kSettingsEnablePopUpNotification));
-  messages.push_back(ResourceMessages::getMessage(kSettingsNotificationAboutMe));
-  messages.push_back(ResourceMessages::getMessage(kSettingsNewFriendRequest));
-  messages.push_back(ResourceMessages::getMessage(kSettingsNewMessage));
-  messages.push_back(ResourceMessages::getMessage(kSettingsNewPoke));
-  messages.push_back(ResourceMessages::getMessage(kSettingsNewFriend));
-  messages.push_back(ResourceMessages::getMessage(kSettingsNewEventInvite));
-  messages.push_back(ResourceMessages::getMessage(kSettingsNewGroupInvite));
-  messages.push_back(ResourceMessages::getMessage(kSettingsNewShare));
-  messages.push_back(ResourceMessages::getMessage(kSettingsSomeoneWroteOnYourWall));
-  messages.push_back(ResourceMessages::getMessage(kSettingsNotificationAboutMyFriends));
-  messages.push_back(ResourceMessages::getMessage(kSettingsAFriendUpdatedHisHerProfile));
-  messages.push_back(ResourceMessages::getMessage(kSettingsAFriendUpdatedHisHerStatus));
-  messages.push_back(ResourceMessages::getMessage(kSettingsAFriendUpdatedHisHerAlbums));
-  messages.push_back(ResourceMessages::getMessage(kSettingsAFriendUpdatedHisHerWall));
-  messages.push_back(ResourceMessages::getMessage(kSettingsAFriendWroteANote));
-  messages.push_back(ResourceMessages::getMessage(kSettingsCheckForUpdates));
-  messages.push_back(ResourceMessages::getMessage(kButtonOk) +
-    ResourceMessages::getMessage(kButtonCancel));
-
   int maxLength = 0; 
-  for (std::list<String>::iterator it = messages.begin(); it != messages.end(); it++) {
-    GetTextExtentPoint32(context, (*it).c_str(), (*it).length(), &textSize);
+  CString controlText;
+  // Determine max text length in pixels
+  for (std::list<CWnd*>::iterator it = controls_.begin(); it != controls_.end(); it++) {
+    (*it)->GetWindowText(controlText);
+    GetTextExtentPoint32(context, String(controlText.GetString()).c_str(), 
+      String(controlText.GetString()).length(), &textSize);
     if (textSize.cx > maxLength) {
       maxLength = textSize.cx;
     }
@@ -183,35 +202,17 @@ void ToolbarSettingsDlg::setWindowSize() {
   const int additionWidth = 122; // Additional width for dialog
   const int minWidth = 298; // Minimum window width
   if (maxLength + additionWidth > minWidth) {
-    SetWindowPos(0, 0, 0, maxLength + additionWidth, rect.Height(), SWP_NOZORDER | SWP_NOMOVE);
+    SetWindowPos(0, 0, 0, maxLength + additionWidth, rect.Height(),
+      SWP_NOZORDER | SWP_NOMOVE);
   }
 }
 
-void ToolbarSettingsDlg::setControlsSize(CRect oldWindowSize) {
-  std::list<CWnd*> controls;
-  controls.push_back(GetDlgItem(IDC_CHK_POPUP_NOTIF));
-  controls.push_back(GetDlgItem(IDC_STATIC_GR1));
-  controls.push_back(GetDlgItem(IDC_CHK_NFRIEND_REQ));
-  controls.push_back(GetDlgItem(IDC_CHK_NMESSAGE));
-  controls.push_back(GetDlgItem(IDC_CHK_NPOKE));
-  controls.push_back(GetDlgItem(IDC_CHK_NFRIEND));
-  controls.push_back(GetDlgItem(IDC_CHK_NEVENT_INV));
-  controls.push_back(GetDlgItem(IDC_CHK_GROUP_INV));
-  controls.push_back(GetDlgItem(IDC_CHK_NSHARE));
-  controls.push_back(GetDlgItem(IDC_CHK_SWROTE_WALL));
-  controls.push_back(GetDlgItem(IDC_STATIC_GR2));
-  controls.push_back(GetDlgItem(IDC_CHK_AFU_PROFILE));
-  controls.push_back(GetDlgItem(IDC_CHK_AFU_STATUS));
-  controls.push_back(GetDlgItem(IDC_CHK_AFU_ALBUMS));
-  controls.push_back(GetDlgItem(IDC_CHK_AFU_WALL));
-  controls.push_back(GetDlgItem(IDC_CHK_AF_NOTE));
-  controls.push_back(GetDlgItem(IDC_CHK_UPDATES));
-
+void ToolbarSettingsDlg::resizeControls(CRect oldWindowSize) {
   CRect controlRect;
   CRect windowRect;
   GetWindowRect(&windowRect);
   int additionWidth = windowRect.Width() - oldWindowSize.Width() - 2;
-  for (std::list<CWnd*>::iterator it = controls.begin(); it != controls.end(); it++) {
+  for (std::list<CWnd*>::iterator it = controls_.begin(); it != controls_.end(); it++) {
     (*it)->GetWindowRect(&controlRect);
     ScreenToClient(&controlRect);
     (*it)->MoveWindow(controlRect.left, controlRect.top, 
@@ -219,7 +220,7 @@ void ToolbarSettingsDlg::setControlsSize(CRect oldWindowSize) {
   }
 }
 
-void ToolbarSettingsDlg::setButtonsPos() {
+void ToolbarSettingsDlg::adjustButtonsPos() {
   const int textMargin = 20; // Button text margin
   const int btnPadding = 15; // Button padding
   
@@ -335,6 +336,27 @@ BOOL ToolbarSettingsDlg::PreTranslateMessage(MSG* pMsg) {
     }
   }
   return CDialog::PreTranslateMessage(pMsg);
+}
+
+void ToolbarSettingsDlg::initControlList() {
+  controls_.push_back(GetDlgItem(IDC_CHK_POPUP_NOTIF));
+  controls_.push_back(GetDlgItem(IDC_STATIC_GR1));
+  controls_.push_back(GetDlgItem(IDC_CHK_NFRIEND_REQ));
+  controls_.push_back(GetDlgItem(IDC_CHK_NMESSAGE));
+  controls_.push_back(GetDlgItem(IDC_CHK_NPOKE));
+  controls_.push_back(GetDlgItem(IDC_CHK_NFRIEND));
+  controls_.push_back(GetDlgItem(IDC_CHK_NEVENT_INV));
+  controls_.push_back(GetDlgItem(IDC_CHK_GROUP_INV));
+  controls_.push_back(GetDlgItem(IDC_CHK_NSHARE));
+  controls_.push_back(GetDlgItem(IDC_CHK_SWROTE_WALL));
+  controls_.push_back(GetDlgItem(IDC_STATIC_GR2));
+  controls_.push_back(GetDlgItem(IDC_CHK_AFU_PROFILE));
+  controls_.push_back(GetDlgItem(IDC_CHK_AFU_STATUS));
+  controls_.push_back(GetDlgItem(IDC_CHK_AFU_ALBUMS));
+  controls_.push_back(GetDlgItem(IDC_CHK_AFU_WALL));
+  controls_.push_back(GetDlgItem(IDC_CHK_AF_NOTE));
+  controls_.push_back(GetDlgItem(IDC_CHK_UPDATES));
+  controls_.push_back(GetDlgItem(IDC_UPDATE_STATUS));
 }
 
 } //!namespace facebook

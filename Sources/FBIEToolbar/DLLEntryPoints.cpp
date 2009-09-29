@@ -52,10 +52,13 @@ namespace facebook{
 
 STDAPI DllCanUnloadNow() {
    AFX_MANAGE_STATE(AfxGetStaticModuleState());
-
+   if (ObjectsServer::isLocked()) {
+     LOG4CPLUS_DEBUG(LogUtils::getLogger(), "DLL DllCanUnloadNow can't unload");
+   } else {
+     LOG4CPLUS_DEBUG(LogUtils::getLogger(), "DLL DllCanUnloadNow unload");
+   }
    return ObjectsServer::isLocked() ? S_FALSE : S_OK;
 }
-
 
 STDAPI DllGetClassObject(REFCLSID classId, REFIID interfaceId,
       LPVOID* interfacePointer) {
@@ -135,7 +138,7 @@ private:
     if (FALSE == initResult) {
          return initResult;
     }
-    LOG4CPLUS_DEBUG(LogUtils::getLogger(), "DLL Init Instance pre loading...");
+    //LOG4CPLUS_DEBUG(LogUtils::getLogger(), "DLL Init Instance pre loading...");
     // load the cultures. need this here because automatic 
     // loading is made too early and we have no acees to the resources
     ResourceMessages::getInstance().loadCurrentCulture();

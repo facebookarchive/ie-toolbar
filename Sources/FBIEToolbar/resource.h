@@ -47,6 +47,11 @@
 #define IDD_UPDATEURLPROMPT             139
 #define IDB_SHARE_PLUS                  142
 #define IDB_SHARE_HOT_PLUS              143
+#define IDR_SIDEBAR_FRIEND_LIST_RTL_XSLT 144
+#define IDR_HTML2                       145
+#define IDR_TOOLBAR_CSS_RTL             145
+#define IDB_IETOOLBAR_BUTTONS_RTL       146
+#define IDB_IETOOLBAR_HOT_BUTTONS_RTL   147
 #define IDC_CHK_POPUP_NOTIF             1001
 #define IDC_CHK_NFRIEND_REQ             1002
 #define IDC_CHK_NMESSAGE                1003
@@ -146,7 +151,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        144
+#define _APS_NEXT_RESOURCE_VALUE        148
 #define _APS_NEXT_COMMAND_VALUE         40040
 #define _APS_NEXT_CONTROL_VALUE         1020
 #define _APS_NEXT_SYMED_VALUE           123

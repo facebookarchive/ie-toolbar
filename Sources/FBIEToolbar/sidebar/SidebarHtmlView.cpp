@@ -39,6 +39,7 @@
 
 #include "../system/RuntimeContext.h"
 #include "../system/UserDataObserver.h"
+#include "../../common/ResourceMessages.h"
 #include "../../common/ToolbarMessages.h"
 
 namespace facebook{
@@ -63,7 +64,9 @@ SidebarHtmlView::~SidebarHtmlView() {
 }
 
 int SidebarHtmlView::getFriendsListXslResource() {
-   return IDR_SIDEBAR_FRIEND_LIST_XSLT;
+  return ResourceMessages::isTextRightAligned() ?
+    IDR_SIDEBAR_FRIEND_LIST_RTL_XSLT :
+    IDR_SIDEBAR_FRIEND_LIST_XSLT;
 }
 
 bool SidebarHtmlView::handleHtmlLoad(LPCTSTR url, BOOL* cancelAction, CWnd* notifyWindow) {

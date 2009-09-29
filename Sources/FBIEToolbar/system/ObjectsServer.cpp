@@ -39,6 +39,7 @@
 #include "RegistrationUtils.h"
 
 #include "../../util/ModuleUtils.h"
+#include "../../util/LogUtils.h"
 
 
 
@@ -52,11 +53,13 @@ static LONG locksCount = 0;
 // ---------------------------------------------------------------------
 
 const LONG ObjectsServer::lock() {
+  LOG4CPLUS_DEBUG(LogUtils::getLogger(), _T("ObjectsServer::lock counter = ") << locksCount);
   return InterlockedIncrementAcquire(&locksCount);
 }
 
 
 const LONG ObjectsServer::unlock() {
+   LOG4CPLUS_DEBUG(LogUtils::getLogger(), _T("ObjectsServer::unlock counter = ") << locksCount);
    return InterlockedDecrementRelease(&locksCount);
 }
 
@@ -99,7 +102,8 @@ const String ObjectsServer::getInstanceFileName() {
 
 
 const bool ObjectsServer::isLocked() {
-  return InterlockedCompareExchange(&locksCount, 0, 0) == 0;
+  LOG4CPLUS_DEBUG(LogUtils::getLogger(), _T("ObjectsServer::isLocked counter = ") << locksCount);
+  return InterlockedCompareExchange(&locksCount, 0, 0) != 0;
 }
 
 } // !namespace facebook

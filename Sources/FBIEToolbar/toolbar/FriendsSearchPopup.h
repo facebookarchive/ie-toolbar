@@ -94,6 +94,7 @@ private:
   SearchPopupHtmlView* friendsHtmlView_; // friends list html view   
   CRect calculateWindowRect() const;
   HWND parentWindow_;
+  CPoint initialLocation_;
 
   void resize(int height);
 

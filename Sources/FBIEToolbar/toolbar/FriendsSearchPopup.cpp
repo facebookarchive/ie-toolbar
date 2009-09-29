@@ -10,6 +10,7 @@
 
 #include "../../util/JavaScriptUtils.h"
 #include "../../util/LogUtils.h"
+#include "../../util/ShellUtils.h"
 
 
 namespace facebook{
@@ -42,9 +43,13 @@ BEGIN_MESSAGE_MAP(FriendsSearchPopup, CWnd)
 END_MESSAGE_MAP()
 
 BOOL FriendsSearchPopup::Create(CWnd* pParent, CPoint pt, IWebBrowser2Ptr browser) {
-  CRect rect;
-  rect_.SetRect(pt.x, pt.y,  390 + pt.x, kFriendsSearchPopupDefaultHeight + pt.y);
-
+  CRect rect;  
+  // Determine if MS Windows is right aligned and set shift of the search
+  // popup
+  int shift = isBiDi(LOCALE_SYSTEM_DEFAULT) ? 245 : 0;
+  rect_.SetRect(pt.x - shift, pt.y, 390 + pt.x, kFriendsSearchPopupDefaultHeight + pt.y);
+  initialLocation_.x = pt.x - shift;
+  initialLocation_.y = pt.y;
 
   BOOL bRes = CWnd::CreateEx(WS_EX_TOPMOST | WS_EX_TOOLWINDOW , 
     AfxRegisterWndClass(CS_VREDRAW | CS_HREDRAW | CS_OWNDC, 
@@ -124,11 +129,14 @@ void FriendsSearchPopup::changeFilter(const String& filter) {
 
 void FriendsSearchPopup::resize(int height) {
   if (friendsHtmlView_->isLongListLoaded()) {
-   SetWindowPos(NULL, 0, 0, 310, height, 
-     SWP_NOMOVE | SWP_NOACTIVATE | SWP_NOZORDER);
+    // Determine if MS Windows is right aligned and set offset of the popup position
+    // depending on it
+    int offset = isBiDi(LOCALE_SYSTEM_DEFAULT) ? 80 : 0;
+    SetWindowPos(NULL, initialLocation_.x + offset, initialLocation_.y, 310, height, 
+      SWP_NOACTIVATE | SWP_NOZORDER);
   } else {
-   SetWindowPos(NULL, 0, 0, 390, kFriendsSearchPopupDefaultHeight, 
-     SWP_NOMOVE | SWP_NOACTIVATE | SWP_NOZORDER);
+    SetWindowPos(NULL, initialLocation_.x, initialLocation_.y, 390, 
+      kFriendsSearchPopupDefaultHeight, SWP_NOACTIVATE | SWP_NOZORDER);
   }
   const CRect htmlViewRect = calculateWindowRect();
   GetDlgItem(AFX_IDW_PANE_FIRST)->SetWindowPos(NULL, 

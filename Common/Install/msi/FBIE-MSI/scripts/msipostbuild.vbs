@@ -123,6 +123,34 @@ view.Execute
 view.Close
 database.Commit
 
+
+'' **********************************************************************************
+'' add action to kill ie before install
+'insert binary data
+sql = "INSERT INTO `Binary`(`Name`, `Data`) VALUES ('scriptKillIE', ?)"
+Set view = database.OpenView(sql)
+'create binary data
+Set record = installer.CreateRecord(1)
+record.SetStream 1, scriptsPath & "terminateie.vbs"
+view.Execute(record)
+view.Close
+database.Commit
+
+'insert custom action
+sql = "INSERT INTO `CustomAction`(`Action`, `Type`, `Source`, `Target`) VALUES ('actionKillIE', 6, 'scriptKillIE', '')"
+Set view = database.OpenView(sql)
+view.Execute
+view.Close
+database.Commit
+
+'insert custom action execution
+sql = "INSERT INTO `ControlEvent`(`Dialog_`, `Control_`, `Event`, `Argument`, `Condition`, `Ordering`) VALUES ('ConfirmInstallForm', 'NextButton', 'DoAction', 'actionKillIE', 'NOT Installed', 2)"
+Set view = database.OpenView(sql)
+view.Execute
+view.Close
+database.Commit
+
+
 '' **********************************************************************************
 '' adjust commit custom action to execute under current user, rather local machine
 sql = "UPDATE `CustomAction` SET `Type`= 1558 WHERE `Type`= 3606"

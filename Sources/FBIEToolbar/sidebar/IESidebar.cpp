@@ -66,17 +66,19 @@ IESidebar::IESidebar():
    parentWindow_(),
    sidebarWindow_(),
    bandId_((DWORD)-1) {
+  LOG4CPLUS_DEBUG(LogUtils::getLogger(), _T("IESidebar::IESidebar"));
   ObjectsServer::lock();
   ResourceMessages::subscribeObserver(this);
 }
 
 
 IESidebar::~IESidebar() {
+  LOG4CPLUS_DEBUG(LogUtils::getLogger(), _T("IESidebar::~IESidebar"));
   undockFromSite();
-
   UserDataObserver::releaseInstance();
-  ObjectsServer::unlock();
   ResourceMessages::unsubscribeObserver(this);
+
+  ObjectsServer::unlock();
 }
 
 
@@ -115,11 +117,13 @@ STDMETHODIMP IESidebar::QueryInterface(REFIID interfaceId,
 
 
 STDMETHODIMP_(DWORD) IESidebar::AddRef() {
+  //LOG4CPLUS_DEBUG(LogUtils::getLogger(), _T("IESidebar::AddRef count=") << objRefsCount_);
   return ++objRefsCount_;
 }
 
 
 STDMETHODIMP_(DWORD) IESidebar::Release() {
+  //LOG4CPLUS_DEBUG(LogUtils::getLogger(), _T("IESidebar::Release count=") << objRefsCount_);
   if (--objRefsCount_ == 0) {
     delete this;
     return 0;
@@ -145,7 +149,7 @@ STDMETHODIMP IESidebar::ShowDW(BOOL show) {
   if (!RuntimeContext::getToolbar()) {
     return S_OK;
   }
-  LOG4CPLUS_DEBUG(LogUtils::getLogger(), "IESidebar::ShowDW show = " << show);
+  //LOG4CPLUS_DEBUG(LogUtils::getLogger(), "IESidebar::ShowDW show = " << show);
   if (show == TRUE) {
     sidebarWindow_.ShowWindow(SW_SHOW);
     RuntimeContext::getToolbar()->sidebarIsOpen();
@@ -357,7 +361,7 @@ void IESidebar::dockToSite(IUnknown* sitePtr) {
 }
 
 void IESidebar::initialUpdateSidebarWindow() {
-  LOG4CPLUS_DEBUG(LogUtils::getLogger(), "IESidebar::initialUpdateSidebarWindow");
+  //LOG4CPLUS_DEBUG(LogUtils::getLogger(), "IESidebar::initialUpdateSidebarWindow");
   sidebarWindow_.refresh(UserDataObserver::getInstance().isLoggedIn());
 }
 

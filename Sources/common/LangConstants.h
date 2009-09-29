@@ -169,6 +169,27 @@ const String kUpdateAvailable  = _T("statusUpdateAvailable");
 const String kNotifierDownloadNewUpdates = _T("notifierDownloadNewUpdates");
 const String kNotifierInstallNewUpdates = _T("notifierInstallNewUpdates");
 
+const String kMonday = _T("Monday");
+const String kTuesday = _T("Tuesday");
+const String kWednesday = _T("Wednesday");
+const String kThursday = _T("Thursday");
+const String kFriday = _T("Friday");
+const String kSaturday = _T("Saturday");
+const String kSunday = _T("Sunday");
+const String kYesterday = _T("Yesterday");
+const String kYesterdaySmall = _T("YesterdaySmall");
+const String kToday = _T("Today");
+const String kTodaySmall = _T("TodaySmall");
+
+const String kAboutWeekAgoSmall = _T("AboutWeekAgoSmall");
+const String kAboutTwoWeekAgoSmall = _T("AboutTwoWeekAgoSmall");
+const String kAboutWeekAgoParam = _T("AboutWeekAgoParam");
+const String kAboutMonthAgoSmall = _T("AboutMonthAgoSmall");
+const String kDateTimeFormat = _T("DateTimeFormat");
+const String kWeekDateTimeFormat = _T("WeekDateTimeFormat");
+const String kProfileTimeFormat = _T("ProfileTimeFormat");
+const String kProfileWeekTimeFormat = _T("ProfileWeekTimeFormat");
+
 } // !namespace facebook
 
 #endif

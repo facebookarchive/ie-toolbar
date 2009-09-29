@@ -40,6 +40,9 @@
 #include "../common/ResourceMessages.h"
 #include "../common/ToolbarMessages.h"
 
+#include "../util/WndUtils.h"
+#include "../util/ShellUtils.h"
+
 #include "system/ProtocolFactory.h"
 
 namespace facebook{
@@ -139,6 +142,12 @@ BOOL LoginDlg::OnInitDialog() {
 
 void LoginDlg::updateView(int changeId) {
   UNREFERENCED_PARAMETER(changeId);
+  
+  // Change Window to RTL in the RTL MS Windows
+  if (isBiDi(LOCALE_SYSTEM_DEFAULT)) {
+    addExStyle(GetSafeHwnd(), WS_EX_LAYOUTRTL, true);
+  }
+
   SetWindowText(ResourceMessages::getMessage(kLoginLoginToFacebook, true).c_str());
 
   SetDlgItemText(IDOK, 

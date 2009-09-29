@@ -74,6 +74,13 @@ namespace facebook{
   */
  bool terminateAllProcesses(const String& processName);
 
+ /**
+  * Determine if LCID is bidirectional
+  * @param localeId LCID of the locale
+  * @return true if locale is bidirectional, false - otherwise
+  */
+ bool isBiDi(int localeId);
+
 } // !namespace facebook
 
 

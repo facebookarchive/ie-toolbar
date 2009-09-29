@@ -44,6 +44,7 @@
 #include "../util/BrowserUtils.h"
 #include "../util/ModuleUtils.h"
 #include "../util/ResourceUtils.h"
+#include "../util/ShellUtils.h"
 
 
 
@@ -139,7 +140,11 @@ void NotifierPopup::initView() {
    popupHtmlView_->Create(0, 0, WS_CHILD | WS_VISIBLE, calculateWindowRect(), 
       this, AFX_IDW_PANE_FIRST);
 
-   String notifierHtml = loadStringFromResources(IDR_HTML_NOTIFIER, RT_HTML);
+   int notifierIdr = IDR_HTML_NOTIFIER;
+   if (ResourceMessages::isTextRightAligned()) {
+     notifierIdr = IDR_HTML_NOTIFIER_RTL;
+   }
+   String notifierHtml = loadStringFromResources(notifierIdr, RT_HTML);
 
    String caption = ResourceMessages::getMessage(kNotifierFacebookNotification, true);
    
@@ -158,10 +163,14 @@ CRect NotifierPopup::calculatePositionRect() const{
 
    SystemParametersInfo(SPI_GETWORKAREA, 0, &rectWin, 0);
 
-   result.SetRect(rectWin.right - kNotifWidth - kNotifShift, 
-                  rectWin.bottom - kNotifHeight* counter_, 
-                  rectWin.right - kNotifShift,
-                  rectWin.bottom - kNotifHeight * (counter_ - 1) - kNotifShift);
+   // Determine if MS Windows is right aligned and set x position
+   // of the notifier popup and width
+   int xPosition = isBiDi(LOCALE_SYSTEM_DEFAULT) ? kNotifShift :
+     rectWin.right - kNotifWidth - kNotifShift;
+   int width = isBiDi(LOCALE_SYSTEM_DEFAULT) ? kNotifShift + kNotifWidth :
+     rectWin.right - kNotifShift;
+   result.SetRect(xPosition, rectWin.bottom - kNotifHeight * counter_, 
+                  width, rectWin.bottom - kNotifHeight * (counter_ - 1) - kNotifShift);
 
 
    return result;

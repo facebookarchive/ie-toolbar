@@ -43,6 +43,7 @@
 #include "../resource.h"
 
 #include "../FriendListXmlBuilder.h"
+#include "../XslLangCache.h"
 
 #include "../system/RuntimeContext.h"
 #include "../system/UserDataObserver.h"
@@ -103,7 +104,7 @@ bool SearchPopupHtmlView::handleHtmlLoad(LPCTSTR url,
                                          BOOL* cancelAction, 
                                          CWnd* notifyWindow) {
   
-  LOG4CPLUS_DEBUG(LogUtils::getLogger(), _T("SearchPopupHtmlView::handleHtmlLoad url = ") << url);
+  //LOG4CPLUS_DEBUG(LogUtils::getLogger(), _T("SearchPopupHtmlView::handleHtmlLoad url = ") << url);
   // check if url contain command prefix "app:"
   // and exit if not
   if (!isCustomAction(url)) {
@@ -161,11 +162,8 @@ bool SearchPopupHtmlView::isCustomHtmlView(const FriendsList &friendsToShow,
     replace_all(messageHtml, _T("@action"), action);
     result = messageHtml;
   } else if (friendsToShow.size() == 1) {
-    LOG4CPLUS_DEBUG(LogUtils::getLogger(), 
-      _T("SearchPopupHtmlView::isCustomHtmlView show 1 friend"));
-  // if there is only one friend then show specific html
-    messageHtml = loadStringFromResources(IDR_ONE_FRIEND_VIEW, 
-      RT_HTML);
+    // if there is only one friend then show specific html
+    messageHtml = XslLangCache::Instance()->getXsl(IDR_ONE_FRIEND_VIEW, _T("HTML"));
     const String friendsXML = FriendsListXmlBuilder::friendsToXml(friendsToShow); 
     result = XSLTUtils::generateHtml(messageHtml, friendsXML);
     longListLoaded_ = true;

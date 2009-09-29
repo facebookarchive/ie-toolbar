@@ -42,7 +42,7 @@
 
 #include "../sidebar/IESidebar.h"
 #include "../toolbar/IEToolbar.h"
-
+#include "../../util/LogUtils.h"
 
 namespace facebook{
 
@@ -53,11 +53,13 @@ namespace facebook{
 BandFactory::BandFactory(const CLSID& classId):
   classId_(classId),
   objRefsCount_(0) {
+  LOG4CPLUS_DEBUG(LogUtils::getLogger(), _T("BandFactory::BandFactory"));
   ObjectsServer::lock();
 }
 
 
 BandFactory::~BandFactory() {
+  LOG4CPLUS_DEBUG(LogUtils::getLogger(), _T("BandFactory::~BandFactory"));
   ObjectsServer::unlock();
 }
 
@@ -125,6 +127,7 @@ STDMETHODIMP BandFactory::CreateInstance(LPUNKNOWN agregate,
 
 
 STDMETHODIMP BandFactory::LockServer(BOOL) {
+  LOG4CPLUS_DEBUG(LogUtils::getLogger(), _T(" BandFactory::LockServer"));
   return ObjectsServer::lock();
 }
 

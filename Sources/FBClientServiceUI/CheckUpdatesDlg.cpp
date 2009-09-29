@@ -38,9 +38,15 @@
 
 #include "../common/ResourceMessages.h"
 #include "../data/ToolbarSettings.h"
+#include "../util/GdiUtils.h"
+#include "../util/ShellUtils.h"
+#include "../util/WndUtils.h"
 
 namespace facebook {
-// CheckUpdatesDlg dialog
+
+// ---------------------------------------------------------------------
+// class CheckUpdatesDlg
+// ---------------------------------------------------------------------
 
 IMPLEMENT_DYNAMIC(CheckUpdatesDlg, CDialog)
 
@@ -61,7 +67,8 @@ BOOL CheckUpdatesDlg::OnInitDialog() {
   // make the line correct
   CRect rect;
   GetDlgItem(IDC_LINE)->GetClientRect(&rect);
-  GetDlgItem(IDC_LINE)->SetWindowPos(NULL, 0, 0, rect.Width(), 2, SWP_NOZORDER | SWP_NOMOVE);
+  GetDlgItem(IDC_LINE)->SetWindowPos(NULL, 0, 0, rect.Width(), 2,
+    SWP_NOZORDER | SWP_NOMOVE);
   return CDialog::OnInitDialog();
 }
 
@@ -83,6 +90,11 @@ void  CheckUpdatesDlg::OnCancel() {
 
 void CheckUpdatesDlg::updateView(int changeId) {
   UNREFERENCED_PARAMETER(changeId);
+  // Invert current dialog if current toolbar language is right aligned
+  if (ResourceMessages::isTextRightAligned()) {
+    invertDialog();
+  }
+
   SetWindowText(ResourceMessages::getMessage(kFacebookToolbar).c_str());
 
   SetDlgItemText(IDC_LABEL, 
@@ -98,6 +110,28 @@ void CheckUpdatesDlg::updateView(int changeId) {
     ResourceMessages::getMessage(kButtonYes).c_str());
   SetDlgItemText(IDCANCEL, 
     ResourceMessages::getMessage(kButtonNo).c_str());
+}
+
+void CheckUpdatesDlg::invertDialog() {
+  // Move bitmap
+  CRect rectImg, rectLabel;
+  GetDlgItem(IDC_STATIC)->GetWindowRect(&rectImg);
+  GetDlgItem(IDC_LABEL)->GetWindowRect(&rectLabel);
+  ScreenToClient(&rectImg);
+  ScreenToClient(&rectLabel);
+  GetDlgItem(IDC_STATIC)->SetWindowPos(NULL, rectLabel.right - rectImg.Width(),
+    rectImg.top, 0, 0, SWP_NOZORDER | SWP_NOSIZE);
+  GetDlgItem(IDC_LABEL)->SetWindowPos(NULL, rectImg.left, rectLabel.top, 0, 0,
+    SWP_NOZORDER | SWP_NOSIZE);
+
+  // Move buttons
+  alignDialogButtons(this);
+
+  // Set right align
+  addExStyle(GetSafeHwnd(), WS_EX_LAYOUTRTL);
+  addExStyle(GetDlgItem(IDC_LABEL)->GetSafeHwnd(), WS_EX_LAYOUTRTL);
+  addExStyle(GetDlgItem(IDC_LABEL_YES)->GetSafeHwnd(), WS_EX_LAYOUTRTL);
+  addExStyle(GetDlgItem(IDC_LABEL_NO)->GetSafeHwnd(), WS_EX_LAYOUTRTL, true);
 }
 
 

@@ -5,8 +5,8 @@
 /* link this file in with the server and any clients */
 
 
- /* File created by MIDL compiler version 7.00.0500 */
-/* at Mon Aug 17 14:16:42 2009
+ /* File created by MIDL compiler version 7.00.0499 */
+/* at Thu Sep 10 14:59:00 2009
  */
 /* Compiler settings for .\FBClientService.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)

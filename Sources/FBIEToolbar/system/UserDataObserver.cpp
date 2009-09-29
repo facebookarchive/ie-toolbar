@@ -42,6 +42,7 @@
 
 #include "RuntimeContext.h"
 
+#include "../XslLangCache.h"
 #include "../../common/CommonConstants.h"
 #include "../../common/ToolbarMessages.h"
 #include "../../common/ResourceMessages.h"
@@ -570,6 +571,7 @@ void UserDataObserver::handleLanguageUpdate() {
 void UserDataObserver::handleDataUpdate(int dataId) {
   // handle the language changes
   if (dataId == FBM_UPDATE_VIEW) {
+    XslLangCache::Instance()->update();
     ResourceMessages::getInstance().loadCurrentCulture();
     ResourceMessages::getInstance().notifyObservers();
   }

@@ -65,6 +65,10 @@ protected:
   virtual BOOL OnInitDialog();
   virtual void  OnOK();
   virtual void  OnCancel();
+  /**
+   * Invert current dialog
+   */
+  virtual void invertDialog();
 
 	DECLARE_MESSAGE_MAP()
 

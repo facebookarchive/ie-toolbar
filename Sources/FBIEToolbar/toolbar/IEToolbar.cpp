@@ -57,6 +57,7 @@
 #include "../../common/ResourceMessages.h"
 #include "../../util/LogUtils.h"
 #include "../../util/PtrUtils.h"
+#include "../../util/ShellUtils.h"
 #include "../../util/WndUtils.h"
 
 #include "../resource.h"
@@ -135,19 +136,20 @@ IEToolbar::IEToolbar():
   loginButtonIndex_(invalidItemIndex_),
   loginSpacerIndex_(invalidItemIndex_),
   toolbarState_(TS_USER_LOGGED_OUT) {
+  LOG4CPLUS_DEBUG(LogUtils::getLogger(), _T("IEToolbar::IEToolbar"));
   ObjectsServer::lock();
-  initToolbarCommandActions();
-  LOG4CPLUS_DEBUG(LogUtils::getLogger(), "IEToolbar::IEToolbar");
+  initToolbarCommandActions(); 
   ResourceMessages::subscribeObserver(this);
   InitializeCriticalSection(&critialSection_);
 }
 
 
 IEToolbar::~IEToolbar() {
+  LOG4CPLUS_DEBUG(LogUtils::getLogger(), _T("IEToolbar::~IEToolbar"));
   undockFromSite();
   UserDataObserver::releaseInstance();
-  ObjectsServer::unlock();
   ResourceMessages::unsubscribeObserver(this);
+  ObjectsServer::unlock();
 }
 
 
@@ -445,14 +447,14 @@ HWND IEToolbar::getToolbarWindow() const {
 }
 
 void IEToolbar::dockToSite(IUnknownPtr site) {
-  LOG4CPLUS_DEBUG(LogUtils::getLogger(), "IEToolbar::dockToSite start...");
+  //LOG4CPLUS_DEBUG(LogUtils::getLogger(), "IEToolbar::dockToSite start...");
   acquireSite(site);
   acquireSiteWindow(site);
-  LOG4CPLUS_DEBUG(LogUtils::getLogger(), "IEToolbar::dockToSite createToolbarWindow...");
+  //LOG4CPLUS_DEBUG(LogUtils::getLogger(), "IEToolbar::dockToSite createToolbarWindow...");
   createToolbarWindow();
-  LOG4CPLUS_DEBUG(LogUtils::getLogger(), "IEToolbar::dockToSite updateView...");
+  //LOG4CPLUS_DEBUG(LogUtils::getLogger(), "IEToolbar::dockToSite updateView...");
   updateView();
-  LOG4CPLUS_DEBUG(LogUtils::getLogger(), "IEToolbar::dockToSite end");
+  //LOG4CPLUS_DEBUG(LogUtils::getLogger(), "IEToolbar::dockToSite end");
 }
 
 void IEToolbar::undockFromSite() {
@@ -598,7 +600,11 @@ void IEToolbar::createToolbarWindow() {
 
 
 void IEToolbar::setupToolbarImages() {
-  const BitmapPtr buttonsBitmap = loadBitmap(IDB_IETOOLBAR_BUTTONS);
+  // Determine if MS Windows is right aligned and load toolbar icons
+  // depending on it
+  int resId = isBiDi(LOCALE_SYSTEM_DEFAULT) ? 
+    IDB_IETOOLBAR_BUTTONS_RTL : IDB_IETOOLBAR_BUTTONS;
+  const BitmapPtr buttonsBitmap = loadBitmap(resId);
   const ImageListPtr buttonsImageList = createButtonsImageList(*buttonsBitmap);
   toolbarWindow_.setImageList(buttonsImageList);
 
@@ -607,7 +613,11 @@ void IEToolbar::setupToolbarImages() {
 
 
 void IEToolbar::setupToolbarHotImages() {
-  const BitmapPtr hotButtonsBitmap = loadBitmap(IDB_IETOOLBAR_HOT_BUTTONS);
+  // Determine if MS Windows is right aligned and load toolbar hot icons
+  // depending on it
+  int resId = isBiDi(LOCALE_SYSTEM_DEFAULT) ? 
+    IDB_IETOOLBAR_HOT_BUTTONS_RTL : IDB_IETOOLBAR_HOT_BUTTONS;
+  const BitmapPtr hotButtonsBitmap = loadBitmap(resId);
   const ImageListPtr hotButtonsImageList =
       createButtonsImageList(*hotButtonsBitmap);
   toolbarWindow_.setHotImageList(hotButtonsImageList);
@@ -1336,8 +1346,12 @@ bool IEToolbar::onQuickLinksDropdown(const NMTOOLBAR& messageInfo,
     buildLanguagesSubMenu(*settingsSubMenu);
     
     // Track pop-up menu.
+    // Determine if MS Windows is right aligned and set x position
+    // of the menu
+    int x = isBiDi(LOCALE_SYSTEM_DEFAULT) ? quickLinksButtonRect.right :
+      quickLinksButtonRect.left;
     const BOOL trackResult = settingsSubMenu->TrackPopupMenu(trackFlags,
-        quickLinksButtonRect.left, quickLinksButtonRect.bottom, &siteWindow_);
+      x, quickLinksButtonRect.bottom, &siteWindow_);
     if (FALSE == trackResult) {
       throw Error("Failed to track quick links menu\n");
     }
@@ -1539,6 +1553,8 @@ void IEToolbar::resizeShareButton() {
   const size_t buttonTextWidth = textSize.cx / spaceSize.cx + 6;
   const String text(buttonTextWidth, _T(' '));
   toolbarWindow_.setItemText(shareButtonIndex_, text.c_str());
+
+  ReleaseDC(toolbarWindow_.GetSafeHwnd(), context);
 }
 
 } // namespace facebook

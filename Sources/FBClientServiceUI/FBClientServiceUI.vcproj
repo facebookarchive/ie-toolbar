@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9.00"
+	Version="9,00"
 	Name="FBClientServiceUI"
 	ProjectGUID="{81E851E4-C9C3-413E-8601-4814381C27DC}"
 	RootNamespace="FBClientServiceUI"
@@ -66,7 +66,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="iepmapi.lib Wininet.lib User32.lib urlmon.lib version.lib psapi.lib"
+				AdditionalDependencies="iepmapi.lib Wininet.lib User32.lib urlmon.lib version.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../lib/"
 				ModuleDefinitionFile=".\FBClientServiceUI.def"
@@ -147,7 +147,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="iepmapi.lib Wininet.lib User32.lib urlmon.lib version.lib psapi.lib"
+				AdditionalDependencies="iepmapi.lib Wininet.lib User32.lib urlmon.lib version.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../lib/"
 				ModuleDefinitionFile=".\FBClientServiceUI.def"
@@ -229,7 +229,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="iepmapi.lib Wininet.lib User32.lib urlmon.lib version.lib psapi.lib"
+				AdditionalDependencies="iepmapi.lib Wininet.lib User32.lib urlmon.lib version.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="../../lib/"
 				ModuleDefinitionFile=".\FBClientServiceUI.def"
@@ -310,7 +310,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="iepmapi.lib Wininet.lib User32.lib urlmon.lib version.lib psapi.lib"
+				AdditionalDependencies="iepmapi.lib Wininet.lib User32.lib urlmon.lib version.lib"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="../../lib/"
 				ModuleDefinitionFile=".\FBClientServiceUI.def"
@@ -510,6 +510,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\res\notifierRtl.html"
+				>
+			</File>
+			<File
 				RelativePath=".\res\photo.gif"
 				>
 			</File>
@@ -572,6 +576,10 @@
 			</File>
 			<File
 				RelativePath="..\util\Error.h"
+				>
+			</File>
+			<File
+				RelativePath="..\util\GdiUtils.cpp"
 				>
 			</File>
 			<File
