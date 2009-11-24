@@ -63,7 +63,8 @@ enum ClientServiceEvents{
   EVENT_GET_LOGGED_IN_USER,
   EVENT_SET_STATUS,
   EVENT_DATA_UPDATE,
-  EVENT_LANGUAGE_UPDATE
+  EVENT_LANGUAGE_UPDATE,
+  EVENT_SET_SESSION
 };
 
 /**
@@ -227,6 +228,8 @@ public:
 
   void setStatus(const String& statusMessage);
 
+  void setSession(const String& session);
+
   void updateView(int changeId);
 
   void dataUpdated(unsigned long dataId);
@@ -246,6 +249,7 @@ private:
   void handleGetFriends();
   void handleGetLoggedInUser();
   void handleSetStatus(const String& statusMessage);
+  void handleSetSession(const String& session);
   void handleLanguageUpdate();
   void handleDataUpdate(int dataId);
   void handleError(HRESULT result);
@@ -263,6 +267,9 @@ private:
 
 private: 
   bool isInitialUpdate_;
+  //sometimes user data is empty so try to get one more time,
+  //but only once!
+  int getUserRequestsCount_; 
   //cached data
   bool isLoggedIn_;
   bool canChangeStatus_;

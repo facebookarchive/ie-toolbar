@@ -784,7 +784,8 @@ private:
                                    (under mouse pointer) for share button. */
   CRITICAL_SECTION critialSection_; // Holds critical section for an update view
 
-
+  CComPtr<IClassFactory> httpFactory_;
+  CComPtr<IClassFactory> httpsFactory_;
 };
 
 

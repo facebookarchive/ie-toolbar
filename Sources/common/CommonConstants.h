@@ -47,6 +47,7 @@ const String kToolbarSettingsRegistryPath = _T("Software\\Facebook\\IEToolbar");
 const String kSessionKeyEntryName = _T("sessionKey");
 const String kSessionUserIdEntryName = _T("sessionUserID");
 const String kSessionExpiresEntryName = _T("sessionExpires");
+const String kSessionSecretEntryName = _T("sessionSecret");
 const String kClientServicePath = _T("Software\\Facebook\\FBClientService");
 const String kFacebookSessionPath = kClientServicePath + _T("\\Session");
 

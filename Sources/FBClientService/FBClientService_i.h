@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0499 */
-/* at Thu Sep 10 14:59:00 2009
+/* at Thu Nov 19 11:50:26 2009
  */
 /* Compiler settings for .\FBClientService.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -153,6 +153,9 @@ EXTERN_C const IID IID_IFBClientService;
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE updateView( 
             /* [in] */ ULONG changeId) = 0;
         
+        virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE setSession( 
+            /* [in] */ BSTR session) = 0;
+        
     };
     
 #else 	/* C style interface */
@@ -253,6 +256,10 @@ EXTERN_C const IID IID_IFBClientService;
             IFBClientService * This,
             /* [in] */ ULONG changeId);
         
+        /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *setSession )( 
+            IFBClientService * This,
+            /* [in] */ BSTR session);
+        
         END_INTERFACE
     } IFBClientServiceVtbl;
 
@@ -327,6 +334,9 @@ EXTERN_C const IID IID_IFBClientService;
 
 #define IFBClientService_updateView(This,changeId)	\
     ( (This)->lpVtbl -> updateView(This,changeId) ) 
+
+#define IFBClientService_setSession(This,session)	\
+    ( (This)->lpVtbl -> setSession(This,session) ) 
 
 #endif /* COBJMACROS */
 

@@ -44,6 +44,7 @@ interface IFBClientService : IDispatch{
    [id(11), helpstring("method setStatus")] HRESULT setStatus([in] BSTR statusMessage);
    [id(12), helpstring("method canChangeStatus")] HRESULT canChangeStatus([out,retval] USHORT* allowed);
    [id(13), helpstring("method languageUpdate")] HRESULT updateView([in] ULONG changeId);
+   [id(14), helpstring("method setSession")] HRESULT setSession([in] BSTR session);
 };
 
 

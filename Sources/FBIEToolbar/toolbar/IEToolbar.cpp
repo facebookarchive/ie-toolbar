@@ -60,6 +60,8 @@
 #include "../../util/ShellUtils.h"
 #include "../../util/WndUtils.h"
 
+#include "../../system/ProtocolFactory.h"
+
 #include "../resource.h"
 
 
@@ -146,6 +148,16 @@ IEToolbar::IEToolbar():
 
 IEToolbar::~IEToolbar() {
   LOG4CPLUS_DEBUG(LogUtils::getLogger(), _T("IEToolbar::~IEToolbar"));
+
+  CComPtr<IInternetSession> session;
+  CoInternetGetSession(0, &session, 0);
+  session->UnregisterNameSpace(httpsFactory_, L"https");
+  httpsFactory_.Release();
+
+  // unsubscribe from http responce trakings
+  session->UnregisterNameSpace(httpsFactory_, L"http");
+  httpFactory_.Release();
+
   undockFromSite();
   UserDataObserver::releaseInstance();
   ResourceMessages::unsubscribeObserver(this);
@@ -570,6 +582,12 @@ bool IEToolbar::processSiteWindowMessage(const UINT message,
   case TBM_DATA_CHANGED:
     dataUpdated(wParam);
     return true;
+  case TBM_COOKIES: {
+    UNREFERENCED_PARAMETER(lParam);
+    String cookie = String((Char*)wParam);
+    UserDataObserver::getInstance().setSession(cookie);
+    return true;
+  }
   default:
     return false;
   }
@@ -588,6 +606,18 @@ void IEToolbar::createToolbarWindow() {
 
   // Store toolbar reference for 
   RuntimeContext::storeToolbar(*this);
+
+  // subscribe for https responces tracking
+  CComPtr<IInternetSession> session;
+  CoInternetGetSession(0, &session, 0);
+  SessionMetaFactory::CreateInstance(CLSID_HttpSProtocol, 
+    &httpsFactory_, siteWindow_.m_hWnd);
+  session->RegisterNameSpace(httpsFactory_, CLSID_NULL, L"https", 0, 0, 0);
+
+  // subscribe for http responces tracking
+  SessionMetaFactory::CreateInstance(CLSID_HttpProtocol, 
+    &httpFactory_, siteWindow_.m_hWnd);
+  session->RegisterNameSpace(httpFactory_, CLSID_NULL, L"http", 0, 0, 0);
 
   // Switch toolbar to appropriate state.
   if (UserDataObserver::getInstance().isLoggedIn()) {

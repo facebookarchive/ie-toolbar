@@ -41,13 +41,12 @@
 
 #include "../resource.h"
 
+#include "../../common/ResourceMessages.h"
+#include "../../common/ToolbarMessages.h"
 #include "../../util/Error.h"
 #include "../../util/GdiUtils.h"
-#include "../../common/ResourceMessages.h"
 #include "../../util/PtrUtils.h"
 #include "../../util/WndUtils.h"
-
-
 
 #undef min
 #undef max

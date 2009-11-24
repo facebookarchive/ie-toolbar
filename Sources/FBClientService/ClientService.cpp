@@ -80,6 +80,7 @@ DWORD WINAPI threadCheckForUpdatesHandler(LPVOID lpParameter) {
 
 void checkForUpdates() {
   DWORD threadId;
+
   CloseHandle(CreateThread(NULL, NULL, threadCheckForUpdatesHandler, NULL, NULL, &threadId));  
 }
 
@@ -346,6 +347,21 @@ STDMETHODIMP facebook::ClientService::updateView(ULONG changeId)
 {
   try{
     service_->updateView(changeId);
+  }
+  catch(_com_error& e) {
+    return e.Error();
+  }
+  catch(...) {
+    return E_FAIL;
+  }
+
+  return S_OK;
+}
+
+STDMETHODIMP facebook::ClientService::setSession(BSTR session) {
+  try{
+    _bstr_t sessionHolder(session, false);
+    service_->setSession(toString(sessionHolder) );
   }
   catch(_com_error& e) {
     return e.Error();

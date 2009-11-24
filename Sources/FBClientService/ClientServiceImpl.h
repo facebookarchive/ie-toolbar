@@ -131,6 +131,13 @@ public:
    */
   void setStatus(const String& statusString);
 
+  /**
+   * change current user session 
+   *
+   * @param - new value of session
+   */
+  void setSession(const String& session);
+
   bool canChangeStatus() const;
 
   /**

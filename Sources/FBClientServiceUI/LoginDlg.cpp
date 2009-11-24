@@ -43,7 +43,7 @@
 #include "../util/WndUtils.h"
 #include "../util/ShellUtils.h"
 
-#include "system/ProtocolFactory.h"
+#include "../system/ProtocolFactory.h"
 
 namespace facebook{
 

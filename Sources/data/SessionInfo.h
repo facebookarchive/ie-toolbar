@@ -51,17 +51,20 @@ struct SessionInfo{
 SessionInfo():  
   sessionKey_(_T("")), 
   uid_(_T("")), 
-  expires_(_T("")) {}
+  expires_(_T("")),
+  sessionSecret_(_T("")) {}
 
-SessionInfo(String sessionKey, String uid,  String expires) :
+SessionInfo(String sessionKey, String uid,  String expires, String secret) :
   sessionKey_(sessionKey),  
   uid_(uid),
-  expires_(expires) {}
+  expires_(expires),
+  sessionSecret_(secret) {}
 
 
 String sessionKey_; // facebook session key 
 String uid_; // logged in user
 String expires_; // session expires
+String sessionSecret_; //secret
 };
 
 } // !namespace facebook

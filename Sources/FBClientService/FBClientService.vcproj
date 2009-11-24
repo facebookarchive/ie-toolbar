@@ -432,6 +432,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\common\ResourceMessages.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\StdAfx.cpp"
 				>
 				<FileConfiguration
@@ -580,6 +584,10 @@
 			>
 			<File
 				RelativePath="..\common\DataChangeEvents.h"
+				>
+			</File>
+			<File
+				RelativePath="..\common\URLUtils.cpp"
 				>
 			</File>
 		</Filter>

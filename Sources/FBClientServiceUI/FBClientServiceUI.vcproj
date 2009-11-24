@@ -643,10 +643,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\common\ResourceMessages.cpp"
-				>
-			</File>
-			<File
 				RelativePath="..\common\ResourceMessages.h"
 				>
 			</File>
@@ -663,31 +659,31 @@
 			Name="system"
 			>
 			<File
-				RelativePath=".\system\BaseObject.h"
+				RelativePath="..\system\BaseObject.h"
 				>
 			</File>
 			<File
-				RelativePath=".\system\ProtocolFactory.h"
+				RelativePath="..\system\ProtocolFactory.h"
 				>
 			</File>
 			<File
-				RelativePath=".\system\ProtocolFactory.inl"
+				RelativePath="..\system\ProtocolFactory.inl"
 				>
 			</File>
 			<File
-				RelativePath=".\system\ProtocolImpl.h"
+				RelativePath="..\system\ProtocolImpl.h"
 				>
 			</File>
 			<File
-				RelativePath=".\system\ProtocolImpl.inl"
+				RelativePath="..\system\ProtocolImpl.inl"
 				>
 			</File>
 			<File
-				RelativePath=".\system\SessionSink.cpp"
+				RelativePath="..\system\SessionSink.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\system\SessionSink.h"
+				RelativePath="..\system\SessionSink.h"
 				>
 			</File>
 		</Filter>

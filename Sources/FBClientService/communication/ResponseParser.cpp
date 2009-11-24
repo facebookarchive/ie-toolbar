@@ -203,7 +203,6 @@ SessionInfo ResponseParser::parseCreateSessionResp(const String& response) {
       throw std::exception("failed to load xml");
    }
 
-
    MSXML2::IXMLDOMNodePtr sessionRespNode = xmlDoc->selectSingleNode(_T("auth_getSession_response"));
    if (sessionRespNode == NULL) {
       raiseBadResponseError(xmlDoc);
@@ -221,13 +220,20 @@ SessionInfo ResponseParser::parseCreateSessionResp(const String& response) {
    }
    const String uid = XMLUtils::getNodeText(uidNode);
 
-   MSXML2::IXMLDOMNodePtr expiresdNode = sessionRespNode->selectSingleNode(_T("expires"));
-   if (expiresdNode == NULL) {
+   MSXML2::IXMLDOMNodePtr expiresNode = sessionRespNode->selectSingleNode(_T("expires"));
+   if (expiresNode == NULL) {
       throw XMLUtils::ParseError();
    }
-  
-   const String expires = XMLUtils::getNodeText(expiresdNode);
-   return SessionInfo(sessionKey, uid, expires);
+   const String expires = XMLUtils::getNodeText(expiresNode);
+
+   MSXML2::IXMLDOMNodePtr secretNode = sessionRespNode->selectSingleNode(_T("secret"));
+   String secret;
+   if (secretNode != NULL) {
+     // no need of throw - we are in web mode, not application
+     // throw XMLUtils::ParseError();
+     secret = XMLUtils::getNodeText(secretNode);
+   }
+   return SessionInfo(sessionKey, uid, expires, secret);
 }
 
 
@@ -238,20 +244,15 @@ NotificationsData ResponseParser::parseGetNotificationsDataResponse(const String
    if (xmlLoadRes.boolVal == VARIANT_FALSE) {
       throw std::exception("failed to load xml");
    }
-
-  
    MSXML2::IXMLDOMNodePtr ntfnRespNode = xmlDoc->selectSingleNode(_T("notifications_get_response"));
    if (ntfnRespNode == NULL) {
       raiseBadResponseError(xmlDoc);
    }
-
-
    MSXML2::IXMLDOMNodePtr messagesNode = ntfnRespNode->selectSingleNode(_T("messages") );
    if (messagesNode == NULL) {
       throw XMLUtils::ParseError();
    }
    const String messageCount = XMLUtils::getChildText(messagesNode, _T("unread"));
-
 
    MSXML2::IXMLDOMNodePtr pokesNode = ntfnRespNode->selectSingleNode(_T("pokes") );
    if (messagesNode == NULL) {
@@ -259,7 +260,6 @@ NotificationsData ResponseParser::parseGetNotificationsDataResponse(const String
    }
    const String pokesCount = XMLUtils::getChildText(pokesNode, _T("unread"));
 
-   
    MSXML2::IXMLDOMNodePtr friendRequestsNode = ntfnRespNode->selectSingleNode(_T("friend_requests") );
    if (friendRequestsNode == NULL) {
       throw XMLUtils::ParseError();
@@ -272,12 +272,10 @@ NotificationsData ResponseParser::parseGetNotificationsDataResponse(const String
    }
    const size_t groupsInventationsCount = XMLUtils::getChildrenCount(groupsInvitesNode);
 
-
    MSXML2::IXMLDOMNodePtr eventEnvitesNode = ntfnRespNode->selectSingleNode(_T("event_invites") );
    if (eventEnvitesNode == NULL) {
       throw XMLUtils::ParseError();
    }
-
    const size_t eventInventationsCount = XMLUtils::getChildrenCount(eventEnvitesNode);
 
    return NotificationsData( lexical_cast<size_t>(pokesCount), 
@@ -310,8 +308,6 @@ FriendsList ResponseParser::parseFriendsListResp(const String& response) {
    if (xmlLoadRes.boolVal == VARIANT_FALSE) {
       throw std::exception("failed to load xml");
    }
-
-
    FriendsList res;
    MSXML2::IXMLDOMNodePtr fqlQueryResponse = xmlDoc->selectSingleNode(_T("fql_query_response"));
    if (fqlQueryResponse == NULL) {
@@ -328,8 +324,6 @@ FriendsList ResponseParser::parseUsersInfoResp(const String& response) {
    if (xmlLoadRes.boolVal == VARIANT_FALSE) {
       throw std::exception("failed to load xml");
    }
-
-
    FriendsList res;
    MSXML2::IXMLDOMNodePtr usersInfoResponse = 
       xmlDoc->selectSingleNode(_T("users_getInfo_response"));

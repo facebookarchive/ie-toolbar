@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0499 */
-/* at Thu Sep 10 14:59:00 2009
+/* at Thu Nov 19 11:50:26 2009
  */
 /* Compiler settings for .\FBClientService.idl:
     Oicf, W1, Zp8, env=Win32 (32b run)
@@ -50,7 +50,7 @@
 #include "FBClientService_i.h"
 
 #define TYPE_FORMAT_STRING_SIZE   1125                              
-#define PROC_FORMAT_STRING_SIZE   463                               
+#define PROC_FORMAT_STRING_SIZE   499                               
 #define EXPR_FORMAT_STRING_SIZE   1                                 
 #define TRANSMIT_AS_TABLE_SIZE    0            
 #define WIRE_MARSHAL_TABLE_SIZE   2            
@@ -500,6 +500,36 @@ static const FBClientService_MIDL_PROC_FORMAT_STRING FBClientService__MIDL_ProcF
 /* 456 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
 /* 458 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
 /* 460 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Procedure setSession */
+
+/* 462 */	0x33,		/* FC_AUTO_HANDLE */
+			0x6c,		/* Old Flags:  object, Oi2 */
+/* 464 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 468 */	NdrFcShort( 0x14 ),	/* 20 */
+/* 470 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 472 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 474 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 476 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
+			0x2,		/* 2 */
+/* 478 */	0x8,		/* 8 */
+			0x5,		/* Ext Flags:  new corr desc, srv corr check, */
+/* 480 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 482 */	NdrFcShort( 0x5 ),	/* 5 */
+/* 484 */	NdrFcShort( 0x0 ),	/* 0 */
+
+	/* Parameter session */
+
+/* 486 */	NdrFcShort( 0x8b ),	/* Flags:  must size, must free, in, by val, */
+/* 488 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 490 */	NdrFcShort( 0x45a ),	/* Type Offset=1114 */
+
+	/* Return value */
+
+/* 492 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 494 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 496 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
 			0x0
@@ -1334,7 +1364,8 @@ static const unsigned short IFBClientService_FormatStringOffsetTable[] =
     318,
     354,
     390,
-    426
+    426,
+    462
     };
 
 static const MIDL_STUBLESS_PROXY_INFO IFBClientService_ProxyInfo =
@@ -1358,7 +1389,7 @@ static const MIDL_SERVER_INFO IFBClientService_ServerInfo =
     0,
     0,
     0};
-CINTERFACE_PROXY_VTABLE(20) _IFBClientServiceProxyVtbl = 
+CINTERFACE_PROXY_VTABLE(21) _IFBClientServiceProxyVtbl = 
 {
     &IFBClientService_ProxyInfo,
     &IID_IFBClientService,
@@ -1381,7 +1412,8 @@ CINTERFACE_PROXY_VTABLE(20) _IFBClientServiceProxyVtbl =
     (void *) (INT_PTR) -1 /* IFBClientService::isLoggedIn */ ,
     (void *) (INT_PTR) -1 /* IFBClientService::setStatus */ ,
     (void *) (INT_PTR) -1 /* IFBClientService::canChangeStatus */ ,
-    (void *) (INT_PTR) -1 /* IFBClientService::updateView */
+    (void *) (INT_PTR) -1 /* IFBClientService::updateView */ ,
+    (void *) (INT_PTR) -1 /* IFBClientService::setSession */
 };
 
 
@@ -1403,6 +1435,7 @@ static const PRPC_STUB_FUNCTION IFBClientService_table[] =
     NdrStubCall2,
     NdrStubCall2,
     NdrStubCall2,
+    NdrStubCall2,
     NdrStubCall2
 };
 
@@ -1410,7 +1443,7 @@ CInterfaceStubVtbl _IFBClientServiceStubVtbl =
 {
     &IID_IFBClientService,
     &IFBClientService_ServerInfo,
-    20,
+    21,
     &IFBClientService_table[-3],
     CStdStubBuffer_DELEGATING_METHODS
 };

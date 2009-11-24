@@ -45,7 +45,9 @@ using namespace ATL;
 #include <iterator>
 #include <deque>
 
+#include "Wininet.h"
 
+#include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/erase.hpp>
 #pragma warning(disable : 4180)
 #include <boost/bind.hpp>
@@ -206,6 +208,30 @@ void ClientServiceImpl::setStatus(const String& statusString) {
      RequestsComposer::composeSetStatusRequest(statusString);
 
   serviceLoop_->postCustomRequest(setSatusRequest);
+}
+
+void ClientServiceImpl::setSession(const String& session) {
+  if (session.empty()) {
+    return;
+  }
+  // no need to set cookies if we are logged in
+  if (isLoggedIn()) {
+    return;
+  }
+  std::vector<String> cookieParts;
+  split(cookieParts, session, boost::is_any_of(_T("=;")));
+  for (unsigned int index = 0; index < cookieParts.size();) {
+    if (cookieParts[index].empty()) {
+      //exit if there will be empty string
+      break;
+    }
+    InternetSetCookie(kFacebookRoot.c_str(), cookieParts[index].c_str(),
+      cookieParts[index + 1].c_str());
+    index += 2;
+  }
+
+  // then try silent login
+  login(0);
 }
 
 
@@ -369,8 +395,11 @@ bool ClientServiceImpl::storeSessionInfo(const SessionInfo& sessionInfo) {
   RegStrEntry sessionExpireEntry(HKEY_CURRENT_USER, 
       kFacebookSessionPath, kSessionExpiresEntryName,  sessionInfo.expires_);
 
+   RegStrEntry sessionSecretEntry(HKEY_CURRENT_USER, 
+     kFacebookSessionPath, kSessionSecretEntryName,  sessionInfo.sessionSecret_);
+
   return sessionKeyEntry.write() && sessionUserEntry.write() && 
-      sessionExpireEntry.write();
+      sessionExpireEntry.write() && sessionSecretEntry.write();
 }
 
 
@@ -383,17 +412,22 @@ bool ClientServiceImpl::restoreSessionInfo(SessionInfo& sessionInfo) {
 
   RegStrEntry sessionExpireEntry(HKEY_CURRENT_USER, 
      kFacebookSessionPath, kSessionExpiresEntryName,  _T(""));
+
+  RegStrEntry sessionSecretEntry(HKEY_CURRENT_USER, 
+     kFacebookSessionPath, kSessionSecretEntryName,  _T(""));
   
   String sessionkey;
   if (!sessionKeyEntry.read() || 
        !sessionUserEntry.read() || 
-       !sessionExpireEntry.read()) {
+       !sessionExpireEntry.read() ||
+       !sessionSecretEntry.read()) {
      return false;
   }
   
   sessionInfo.sessionKey_ = sessionKeyEntry._value;
   sessionInfo.uid_ = sessionUserEntry._value;
   sessionInfo.expires_ = sessionExpireEntry._value;
+  sessionInfo.sessionSecret_ = sessionSecretEntry._value;
 
   return true;
 }
@@ -408,9 +442,13 @@ void ClientServiceImpl::cleanupSessionInfo() {
   RegStrEntry sessionExpireEntry(HKEY_CURRENT_USER, 
      kFacebookSessionPath, kSessionExpiresEntryName,  _T(""));
 
+  RegStrEntry sessionSecretEntry(HKEY_CURRENT_USER, 
+     kFacebookSessionPath, kSessionSecretEntryName,  _T(""));
+
   sessionKeyEntry.remove();
   sessionUserEntry.remove();
   sessionExpireEntry.remove();
+  sessionSecretEntry.remove();
 }
 
 

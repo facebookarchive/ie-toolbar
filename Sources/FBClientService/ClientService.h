@@ -130,6 +130,8 @@ public:
 
   STDMETHOD(updateView)(ULONG changeid);
 
+  STDMETHOD(setSession)(BSTR session);
+
 // Methods
 
 public:

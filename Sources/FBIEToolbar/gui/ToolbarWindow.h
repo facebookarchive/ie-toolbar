@@ -129,7 +129,6 @@ protected:
    */
   afx_msg void OnClose();
   // Methods
-
 public:
 
   /**

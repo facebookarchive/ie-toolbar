@@ -107,6 +107,7 @@ UserDataObserver::UserDataObserver(const DWORD&  threadId) {
    eventsCount_ = 0;
    groupsInvsCount_ = 0;
    isInitialUpdate_ = true;
+   getUserRequestsCount_ = 0;
 }
 
 UserDataObserver::~UserDataObserver(void) {
@@ -258,6 +259,10 @@ void UserDataObserver::processCustomRequest(ClientServiceMessage requestData) {
     }
     case EVENT_SET_STATUS: {
        handleSetStatus(requestData.getStatusMessage());
+       break;
+    }
+    case EVENT_SET_SESSION: {
+       handleSetSession(requestData.getStatusMessage());
        break;
     }
     case EVENT_DATA_UPDATE: {
@@ -506,8 +511,9 @@ void UserDataObserver::handleGetFriends() {
 }
 
 void UserDataObserver::setCookies(String cookies) {
-  if (cookies.empty())
+  if (cookies.empty()) {
     return;
+  }
   std::vector<String> cookieParts;
   split(cookieParts, cookies, boost::is_any_of(_T("=;")));
   for (unsigned int index = 0; index < cookieParts.size();) {
@@ -541,7 +547,12 @@ void UserDataObserver::handleGetLoggedInUser() {
   }
   // if we don't get the user correctly - try to reget
   if (loggedInUser_.getName().empty()) {
-    getLoggedInUser();
+    if (getUserRequestsCount_ == 0) {
+       getUserRequestsCount_++;
+       getLoggedInUser();
+    }
+  } else {
+    getUserRequestsCount_ = 0;
   }
 }
 
@@ -553,6 +564,18 @@ void UserDataObserver::handleSetStatus(const facebook::String& statusMessage) {
 
    const HRESULT setStatusRes = 
       clientService->setStatus(SysAllocString( toBSTR(statusMessage)));
+
+  handleError(setStatusRes);
+}
+
+void UserDataObserver::handleSetSession(const facebook::String& session) {
+   ClientServicePtr clientService = serviceConnection.getClientService(threadId_);
+   if (clientService == NULL) {
+      return;
+   }
+
+   const HRESULT setStatusRes = 
+      clientService->setSession(SysAllocString( toBSTR(session)));
 
   handleError(setStatusRes);
 }
@@ -675,6 +698,10 @@ void UserDataObserver::unsubscribeServiceObserver(ClientServiceObserver* observe
 
 void UserDataObserver::setStatus(const facebook::String& statusMessage) {
   postCustomRequest(ClientServiceMessage(EVENT_SET_STATUS, statusMessage));
+}
+
+void UserDataObserver::setSession(const facebook::String& session) {
+  postCustomRequest(ClientServiceMessage(EVENT_SET_SESSION, session));
 }
 
 void UserDataObserver::updateView(int changeId) {

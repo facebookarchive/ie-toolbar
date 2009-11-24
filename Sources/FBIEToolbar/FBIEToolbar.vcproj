@@ -657,6 +657,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\system\BaseObject.h"
+				>
+			</File>
+			<File
 				RelativePath=".\system\ClassIds.h"
 				>
 			</File>
@@ -689,6 +693,22 @@
 				>
 			</File>
 			<File
+				RelativePath="..\system\ProtocolFactory.h"
+				>
+			</File>
+			<File
+				RelativePath="..\system\ProtocolFactory.inl"
+				>
+			</File>
+			<File
+				RelativePath="..\system\ProtocolImpl.h"
+				>
+			</File>
+			<File
+				RelativePath="..\system\ProtocolImpl.inl"
+				>
+			</File>
+			<File
 				RelativePath=".\system\RegistrationUtils.cpp"
 				>
 			</File>
@@ -702,6 +722,14 @@
 			</File>
 			<File
 				RelativePath=".\system\RuntimeContext.h"
+				>
+			</File>
+			<File
+				RelativePath="..\system\SessionSink.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\system\SessionSink.h"
 				>
 			</File>
 			<File

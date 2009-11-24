@@ -3,6 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FBIEToolbar", "FBIEToolbar\FBIEToolbar.vcproj", "{365CECD5-DCC6-41A2-B436-3211C4064584}"
 	ProjectSection(ProjectDependencies) = postProject
+		{9C469015-0E51-4B78-A50F-94B0D2E6CB7E} = {9C469015-0E51-4B78-A50F-94B0D2E6CB7E}
 		{CD99E340-3A17-4229-8996-8F66FAB2F96E} = {CD99E340-3A17-4229-8996-8F66FAB2F96E}
 	EndProjectSection
 EndProject
@@ -44,6 +45,7 @@ Global
 		{CD99E340-3A17-4229-8996-8F66FAB2F96E}.Release|Win32.Build.0 = Release|Win32
 		{9C469015-0E51-4B78-A50F-94B0D2E6CB7E}.Debug.Logged|Win32.ActiveCfg = Debug.Logged|Win32
 		{9C469015-0E51-4B78-A50F-94B0D2E6CB7E}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9C469015-0E51-4B78-A50F-94B0D2E6CB7E}.Debug|Win32.Build.0 = Debug|Win32
 		{9C469015-0E51-4B78-A50F-94B0D2E6CB7E}.Release.Logged|Win32.ActiveCfg = Release.Logged|Win32
 		{9C469015-0E51-4B78-A50F-94B0D2E6CB7E}.Release.Logged|Win32.Build.0 = Release.Logged|Win32
 		{9C469015-0E51-4B78-A50F-94B0D2E6CB7E}.Release|Win32.ActiveCfg = Release|Win32
