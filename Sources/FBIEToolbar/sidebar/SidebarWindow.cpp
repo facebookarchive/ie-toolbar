@@ -226,7 +226,7 @@ void SidebarWindow::loading() {
 
 void SidebarWindow::loaded(const FriendsList& friendsList) {
  // LOG4CPLUS_DEBUG(LogUtils::getLogger(), "SidebarWindow::loaded");
-  friendsView_->loaded(friendsList);
+  friendsView_->loaded(friendsList, false);
   friendsView_->changeSortMode(activeSortMode_);
 }
 

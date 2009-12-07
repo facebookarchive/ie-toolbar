@@ -7,5 +7,4 @@ curDir = Session.Property("CustomActionData")
 Set wshShell = CreateObject ("WScript.Shell")
 If Not wshShell Is Nothing Then
 wshShell.Run("""" + curDir + "FBClientService.exe""" + " -unregister")
-wshShell.Run("""" + curDir + "FBClientService.exe""" + " -closeall")
 End If

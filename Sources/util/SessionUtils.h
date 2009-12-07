@@ -30,39 +30,20 @@
 * FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
 * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 * DEALINGS IN THE SOFTWARE.
-*/
+*/ 
 
-#ifndef ERROR_H
-#define ERROR_H
+#ifndef SESSIONUTILS_H
+#define SESSIONUTILS_H
 
-#include <exception>
-#include <stdexcept>
+#include "StringUtils.h"
 
-namespace facebook{
+namespace facebook {
 
+void saveSession(const String& session);
 
-/**
- * class Error
- *
- * Class for error handling
- * 
- */
- 
-class Error : public std::runtime_error {
+void loadSession(String& session);
 
-// Construction
-
-public:
-
-   Error():
-      std::runtime_error("Unspecified error\n") {
-   }
-
-   explicit Error(const std::string& message):
-      std::runtime_error(message) {
-   }
-
-};
+void applySession(const String& session);
 
 }// !namespace facebook
 

@@ -432,10 +432,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\common\ResourceMessages.cpp"
-				>
-			</File>
-			<File
 				RelativePath=".\StdAfx.cpp"
 				>
 				<FileConfiguration
@@ -700,6 +696,14 @@
 			</File>
 			<File
 				RelativePath="..\util\ScopeGuard.h"
+				>
+			</File>
+			<File
+				RelativePath="..\util\SessionUtils.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\util\SessionUtils.h"
 				>
 			</File>
 			<File

@@ -129,7 +129,8 @@ void FriendsSearchEdit::OnKillFocus(CWnd* wnd) {
    } else {
      TRACE(_T("FriendsSearchEdit::OnKillFocus friendsSearchPopup_\n"));
      if(!friendsSearchPopup_ || 
-        friendsSearchPopup_ && !friendsSearchPopup_->isWindowOurDescendant(wnd->GetSafeHwnd())) { 
+        friendsSearchPopup_ && 
+        !friendsSearchPopup_->isWindowOurDescendant(wnd->GetSafeHwnd())) { 
        disablePopup_ = false;
        freeFriendsSearchPopup();
        BaseType::OnKillFocus(wnd);
@@ -138,18 +139,19 @@ void FriendsSearchEdit::OnKillFocus(CWnd* wnd) {
 }
 
 int FriendsSearchEdit::OnCreate(LPCREATESTRUCT createStructure) {
-   if (BaseType::OnCreate(createStructure) == -1)
-      return -1;
+  if (BaseType::OnCreate(createStructure) == -1)
+    return -1;
 
-   SetLimitText(50);
-   const BitmapPtr symbolBitmap = loadBitmap(IDB_SMALL_LOGO);
+  SetLimitText(50);
+  const BitmapPtr symbolBitmap = loadBitmap(IDB_SMALL_LOGO);
 
-   setSymbolBitmap(symbolBitmap);
-   return 0;
+  setSymbolBitmap(symbolBitmap);
+  return 0;
 }
 
 void FriendsSearchEdit::CreatePopupFilter() {
   friendsSearchPopup_ = getFriendsSearchPopup();
+
   CRect rect;
   GetWindowRect(&rect);
   CPoint pt(rect.left + 20, rect.bottom);
@@ -176,6 +178,7 @@ void FriendsSearchEdit::OnKeyUp(UINT character, UINT repeatCount, UINT flags) {
       break;
     case VK_ESCAPE:
       KillFocus();
+      ::SetFocus(GetParent()->GetSafeHwnd());
     case VK_MENU:
       if (!RuntimeContext::isSidebarOpened()) {
         freeFriendsSearchPopup();
@@ -191,7 +194,8 @@ void FriendsSearchEdit::OnKeyUp(UINT character, UINT repeatCount, UINT flags) {
         if (!UserDataObserver::getInstance().isLoggedIn(false)) {
           UserDataObserver::getInstance().login();
         } else if (filterText == _T("")) {
-          if (!RuntimeContext::isSidebarOpened() && RuntimeContext::getToolbar()) {
+          if (!RuntimeContext::isSidebarOpened() && 
+              RuntimeContext::getToolbar()) {
             // open the sidebar
             RuntimeContext::getToolbar()->postMessage(WM_COMMAND, 
                 IDC_TBI_SIDEBAR, 0);

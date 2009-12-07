@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
 <setting name="isRightAligned">0</setting>
   
@@ -131,11 +131,11 @@
 <data name="Today">Vandaag</data>
 <data name="TodaySmall">vandaag</data>
 
-<data name="AboutWeekAgoSmall">ongeveer een week geleden</data>
-<data name="AboutTwoWeekAgoSmall">ongeveer twee weken geleden</data>
+<data name="AboutWeekAgoSmall">Profiel bijgewerkt ongeveer een week geleden</data>
+<data name="AboutTwoWeekAgoSmall">Profiel bijgewerkt ongeveer twee weken geleden</data>
 <!-- {p0} > 2 -->
-<data name="AboutWeekAgoParam">ongeveer {p0} weken geleden</data>
-<data name="AboutMonthAgoSmall">ongeveer een maand geleden</data>
+<data name="AboutWeekAgoParam">Profiel bijgewerkt ongeveer {p0} weken geleden</data>
+<data name="AboutMonthAgoSmall">Profiel bijgewerkt ongeveer een maand geleden</data>
 <!--
 {p1} - 24h hours
 {p2} - minutes

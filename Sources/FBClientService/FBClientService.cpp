@@ -15,6 +15,7 @@
 #include "../util/RegistryUtils.h"
 #include "../util/ScopeGuard.h"
 #include "../util/ShellUtils.h"
+#include "../util/SessionUtils.h"
 #include "../util/StringUtils.h"
 
 using namespace ATL;
@@ -55,6 +56,7 @@ public :
          TranslateMessage(&msg);
          DispatchMessage(&msg);
       }
+      terminateAllProcesses(getModuleFileNameOnly());
    }
 };
 
@@ -83,7 +85,7 @@ void deletePostSetupEntries() {
 
   bool result = false;
   for (unsigned int i = 0; i < entries.size(); ++i) {
-     result = entries[i].remove();
+     result = entries[i].removeKey();
   }
 }
 
@@ -105,6 +107,8 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE,
     BitsUtils bits;
     bits.cancelDownload(kFacebookUpdateJobName);
 	  deletePostSetupEntries();
+    terminateAllProcesses(getModuleFileNameOnly());
+
     return 0;
   }
   // if there is a unregister call - just register and exit
@@ -118,11 +122,13 @@ int WINAPI _tWinMain(HINSTANCE, HINSTANCE,
     boost::bind(CoUninitializeWrapper()));
     BitsUtils bits;
     bits.cancelDownload(kFacebookUpdateJobName);
+    terminateAllProcesses(getModuleFileNameOnly());
+
     return 0;
   }
   // if there is an closeall call - just close all the exes and exit
   if (parameters.find(_T("-closeall")) != facebook::String.npos) {
-    terminateAllProcesses(_T("FBClientService.exe"));
+    terminateAllProcesses(getModuleFileNameOnly());
     return 0;
   }
 

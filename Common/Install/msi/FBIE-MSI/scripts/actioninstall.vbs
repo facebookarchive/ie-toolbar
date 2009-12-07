@@ -8,7 +8,6 @@ Set wshShell = CreateObject ("WScript.Shell")
 
 If Not wshShell Is Nothing Then
   wshShell.Run """" & curDir & "FBClientService.exe""" & " -register", 0, True
-  wshShell.Run """" & curDir & "FBClientService.exe""" & " -closeall", 0, True
 End If
 
 Set wshShell = Nothing

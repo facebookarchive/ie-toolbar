@@ -45,12 +45,13 @@ void showLoginDialog(const String& loginUrl, ULONG parentWindow, String& cookies
   CWnd *parent = CWnd::FromHandle((HWND)parentWindow);
   // initialize COM for this thread
   CoInitialize(0);
-  LoginDlg login(loginUrl, parent);
-  login.DoModal();
-  
   ScopeGuard coUninitializeGuard(
     boost::bind(CoUninitializeWrapper()));
-  cookies = login.getCookies();
+  if (::IsWindow((HWND)parentWindow)) {
+    LoginDlg login(loginUrl, parent);
+    login.DoModal();
+    cookies = login.getCookies();
+  }
 }
 
 __declspec(dllexport)
@@ -118,7 +119,7 @@ void showNewVersionAvailablePopup() {
   ScopeGuard coUninitializeGuard(
     boost::bind(CoUninitializeWrapper()));
   String updateUrl = getUpdateUrl();
-  String updateFile = getApplicationDataDir() + _T("update.msi"); // temporary name
+  String updateFile = getApplicationDataDir() + _T("update.exe"); // temporary name
   if (updateUrl.empty()) {
     // if no new versions available but there are old updates - delete them
     if (PathFileExists(updateFile.c_str())) {

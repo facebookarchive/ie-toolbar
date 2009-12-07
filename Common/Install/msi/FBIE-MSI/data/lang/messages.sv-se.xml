@@ -131,11 +131,11 @@
 <data name="Today">Idag</data>
 <data name="TodaySmall">idag</data>
 
-<data name="AboutWeekAgoSmall">för ungefär en vecka sedan</data>
-<data name="AboutTwoWeekAgoSmall">för ungefär två veckor sedan</data>
+<data name="AboutWeekAgoSmall">Uppdaterade profil för ungefär en vecka sedan</data>
+<data name="AboutTwoWeekAgoSmall">Uppdaterade profil för ungefär två veckor sedan</data>
 <!-- {p0} > 2 -->
-<data name="AboutWeekAgoParam">för ungefär {p0} veckor sedan</data>
-<data name="AboutMonthAgoSmall">för ungefär en månad sedan</data>
+<data name="AboutWeekAgoParam">Uppdaterade profil för ungefär {p0} veckor sedan</data>
+<data name="AboutMonthAgoSmall">Uppdaterade profil för ungefär en månad sedan</data>
 <!--
 {p1} - 24h hours
 {p2} - minutes

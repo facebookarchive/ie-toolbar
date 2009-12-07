@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="FBIEToolbar"
 	ProjectGUID="{365CECD5-DCC6-41A2-B436-3211C4064584}"
 	RootNamespace="FBIEToolbar"
@@ -890,6 +890,14 @@
 			</File>
 			<File
 				RelativePath="..\util\ResourceUtils.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\util\SessionUtils.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\util\SessionUtils.h"
 				>
 			</File>
 			<File

@@ -110,6 +110,15 @@ namespace facebook {
       static bool deleteKey(const HKEY rootKey, const String subKey);
 
       /**
+       * static function that delete value from registry
+       * @param rootKey a root key (by const)
+       * @param subKey a sub key (by const)
+       * @param value value of subkey
+       */
+      static bool deleteValue(const HKEY rootKey, const String subKey, 
+                              const String value);
+
+      /**
        * static function that gets the possible registry path where we can store settings
        * depending on the calling process rights
        * @param rootKey a root key that will be used
@@ -139,8 +148,11 @@ namespace facebook {
       bool write() {
          return RegistryUtils::writeString(_rootKey, _subKey, _name, _value);
       }
-      bool remove() {
+      bool removeKey() {
          return RegistryUtils::deleteKey(_rootKey, _subKey);
+      }
+      bool remove() {
+        return RegistryUtils::deleteValue(_rootKey, _subKey, _name);
       }
       bool read() {
          return RegistryUtils::readString(_rootKey, _subKey, _name, _value);

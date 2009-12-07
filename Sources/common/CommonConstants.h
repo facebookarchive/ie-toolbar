@@ -43,7 +43,6 @@ namespace facebook {
 const String kFacebookUpdatesUrl = _T("http://www.facebook.com/toolbar/ie/getupdates.php?version=");
 
 const String kToolbarSettingsRegistryPath = _T("Software\\Facebook\\IEToolbar");
-
 const String kSessionKeyEntryName = _T("sessionKey");
 const String kSessionUserIdEntryName = _T("sessionUserID");
 const String kSessionExpiresEntryName = _T("sessionExpires");

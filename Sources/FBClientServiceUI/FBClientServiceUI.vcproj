@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="windows-1251"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="9,00"
+	Version="9.00"
 	Name="FBClientServiceUI"
 	ProjectGUID="{81E851E4-C9C3-413E-8601-4814381C27DC}"
 	RootNamespace="FBClientServiceUI"
@@ -640,6 +640,10 @@
 			>
 			<File
 				RelativePath="..\common\DataChangeEvents.h"
+				>
+			</File>
+			<File
+				RelativePath="..\common\ResourceMessages.cpp"
 				>
 			</File>
 			<File

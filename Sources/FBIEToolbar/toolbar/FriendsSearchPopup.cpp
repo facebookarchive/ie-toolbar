@@ -50,27 +50,29 @@ BOOL FriendsSearchPopup::Create(CWnd* pParent, CPoint pt, IWebBrowser2Ptr browse
   rect_.SetRect(pt.x - shift, pt.y, 390 + pt.x, kFriendsSearchPopupDefaultHeight + pt.y);
   initialLocation_.x = pt.x - shift;
   initialLocation_.y = pt.y;
-
-  BOOL bRes = CWnd::CreateEx(WS_EX_TOPMOST | WS_EX_TOOLWINDOW , 
+  BOOL bRes = CWnd::CreateEx(WS_EX_NOACTIVATE, 
     AfxRegisterWndClass(CS_VREDRAW | CS_HREDRAW | CS_OWNDC, 
     LoadCursor(NULL, IDC_ARROW), NULL), 
-    sFriendsSearchPopupWindowName.c_str(), WS_POPUP | WS_BORDER,
+    sFriendsSearchPopupWindowName.c_str(), WS_POPUP | WS_BORDER | WS_CHILD,
     rect_, pParent, 0);
   SetOwner(NULL);
+
   const CRect htmlViewRect = calculateWindowRect();
 
   friendsHtmlView_ = new SearchPopupHtmlView();
+ 
   friendsHtmlView_->addUIShowingFlags(DOCHOSTUIFLAG_NO3DBORDER | DOCHOSTUIFLAG_SCROLL_NO);
   // set the zero heigght - will resize after loading
   friendsHtmlView_->Create(0, 0, WS_CHILD, CRect(0, 0, htmlViewRect.Width(), 0), 
     this, AFX_IDW_PANE_FIRST);
   friendsHtmlView_->renderHtml();
-
   if (UserDataObserver::getInstance().isLoggedIn(false)) {
-    friendsHtmlView_->loaded(UserDataObserver::getInstance().getFriends(false));
+    friendsHtmlView_->loaded(UserDataObserver::getInstance().getFriends(false), 
+      true);
   } else {
     friendsHtmlView_->loggedOut();
   }
+
   return bRes;
 }
 

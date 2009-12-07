@@ -1,4 +1,4 @@
-﻿<root>
+<root>
 <setting name="isRightAligned">0</setting>
   
 <data name="languageName">Українська</data>
@@ -113,7 +113,7 @@
 <data name="htmlPopupWallPost">Написати у {1} на стіні</data>
 
 <data name="statusNoUpdates">Оноволень не знайдено</data>
-<data name="statusUpdateInProgress">Оновдення завантажуються...</data>
+<data name="statusUpdateInProgress">Оновлення завантажуються...</data>
 <data name="statusUpdateAvailable">Оновлення готові для встановлення</data>
 <data name="notifierDownloadNewUpdates">Будь-ласка клацніть тут для завантаження нової версії Фейсбук Тулбару</data>
 <data name="notifierInstallNewUpdates">Будь-ласка клацніть тут для встановлення нової версії Фейсбук Тулбару</data>
@@ -130,10 +130,10 @@
 <data name="Today">Сьогодні</data>
 <data name="TodaySmall">сьогодні</data>
 
-<data name="AboutWeekAgoSmall">тиждень назад</data>
-<data name="AboutTwoWeekAgoSmall">два тиждні назад</data>
-<data name="AboutWeekAgoParam">{p0} тижднів назад</data>
-<data name="AboutMonthAgoSmall">місяць назад</data>
+<data name="AboutWeekAgoSmall">Профіль оновлено тиждень назад</data>
+<data name="AboutTwoWeekAgoSmall">Профіль оновлено два тиждні назад</data>
+<data name="AboutWeekAgoParam">Профіль оновлено {p0} тиждні назад</data>
+<data name="AboutMonthAgoSmall">Профіль оновлено місяць назад</data>
 <!--
 {p1} - 24h hours
 {p2} - minutes

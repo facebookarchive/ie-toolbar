@@ -216,10 +216,13 @@ bool BaseHtmlListView::isCustomHtmlView(const FriendsList &friendsToShow,
 }
 
 
-void  BaseHtmlListView::loaded(const FriendsList& friendsList) {
-   fullFriendsList_ = friendsList;
-   viewState_ = VS_FRIENDS_LOADED;
-   renderHtml();
+void  BaseHtmlListView::loaded(const FriendsList& friendsList, 
+                               const bool needRefresh) {
+  fullFriendsList_ = friendsList;
+  viewState_ = VS_FRIENDS_LOADED;
+  if (needRefresh) {
+    renderHtml();
+  }
 }
 
 
@@ -236,7 +239,7 @@ void BaseHtmlListView::loading() {
   renderHtml();
 }
 
-void BaseHtmlListView::processBrowserCommand(const String& commandURL) {
+void BaseHtmlListView::processBrowserCommand(const String& commandURL, bool needEncode) {
    using namespace boost;
    String changedCommand = commandURL;
    if (isCustomAction(changedCommand)) {
@@ -270,7 +273,7 @@ void BaseHtmlListView::processBrowserCommand(const String& commandURL) {
    // use current browser to perform action from the list
 
    IWebBrowser2Ptr browser = RuntimeContext::getBrowser();
-   BrowserUtils::navigate(browser, buildActionURL(page,  userID) + additionalParams);
+   BrowserUtils::navigate(browser, buildActionURL(page,  userID, needEncode) + additionalParams);
 }
 
 String BaseHtmlListView::getViewAction(String url) {

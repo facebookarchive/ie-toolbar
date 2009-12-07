@@ -85,7 +85,7 @@ void initToolbarCommandActions() {
   }
 
   toolbarCommandActions[IDC_TBI_HOME] = kHomePageUrl;
-  toolbarCommandActions[IDC_TBI_POKES] = kHomePageUrl;
+  toolbarCommandActions[IDC_TBI_POKES] = kPokesUrl;
   toolbarCommandActions[IDC_TBI_REQUESTS] = kFriendsRequestsUrl;
   toolbarCommandActions[IDC_TBI_MESSAGES] = kMessagesUrl;
   toolbarCommandActions[IDC_TBI_EVENTINVS] = kEventsInvitationsUrl;
@@ -593,7 +593,6 @@ bool IEToolbar::processSiteWindowMessage(const UINT message,
   }
 }
 
-
 void IEToolbar::createToolbarWindow() {
   toolbarWindow_.create(siteWindow_);
 
@@ -988,7 +987,12 @@ void IEToolbar::setProfileName(const String& profileName) {
 
 void IEToolbar::setStatusText(const String& statusText) {
   // do not set status if the status window is active, 
-  // e.g. current text is the same as statusText
+
+  if (GetActiveWindow() == statusEdit_.GetSafeHwnd() ||
+    GetFocus() == statusEdit_.GetSafeHwnd()) {
+    return;
+  }
+  // also if current text is the same as statusText
   if (statusText != statusEdit_.getEnteredText()) {
     statusEdit_.setText(decodeCharsHtmlCode(statusText));
   }
@@ -1440,14 +1444,23 @@ bool IEToolbar::onShareCmd() {
 
     BSTR locationAsBSTR;
     const HRESULT getLocationUrl = browser->get_LocationURL(&locationAsBSTR);
-    if (FAILED(getLocationUrl))
-      _com_raise_error(getLocationUrl);
+    if (SUCCEEDED(getLocationUrl)) {
+      _bstr_t bstrLocationHolder(locationAsBSTR);
+      SysFreeString(locationAsBSTR);
+      String locationUrl = bstrLocationHolder;
 
-    _bstr_t bstrLocationHolder(locationAsBSTR);
-    String locationUrl = bstrLocationHolder;
-    locationUrl = buildShareContentURL(locationUrl);
-
-    BrowserUtils::IEPopup(locationUrl, shareWindowWidth, shareWindowHeight);
+      BSTR nameAsBSTR;
+      //get the title if possible
+      String locationName;
+      const HRESULT getLocationName = browser->get_LocationName(&nameAsBSTR);
+      if (SUCCEEDED(getLocationName)) {
+        _bstr_t bstrNameHolder(nameAsBSTR);
+         SysFreeString(nameAsBSTR);
+         locationName = bstrNameHolder;
+      }
+      locationUrl = buildShareContentURL(locationUrl, locationName);
+      BrowserUtils::IEPopup(locationUrl, shareWindowWidth, shareWindowHeight);
+    }
   }
 
   return true;

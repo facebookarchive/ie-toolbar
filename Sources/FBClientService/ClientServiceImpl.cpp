@@ -68,6 +68,7 @@ using namespace ATL;
 #include "../util/BrowserUtils.h"
 #include "../util/LogUtils.h"
 #include "../util/ScopeGuard.h"
+#include "../util/SessionUtils.h"
 #include "../util/StringUtils.h"
 #include "../util/RegistryUtils.h"
 #include "../util/PtrUtils.h"
@@ -84,9 +85,7 @@ extern ClientService* clientService;
 
 namespace {
 
-
 const DWORD UPDATE_TIMEOUT = 30000; // each 30 seconds
-
 
 // this is a shared resources
 // do not forget to synchronize 
@@ -99,7 +98,6 @@ FriendsChangeEventsQueue _friendsChangesPopupNotifications;
 EventsToAlbumsIDsQueue _albumsChanges;
 }
 
-
 //Note:  include communication service and loop 
 // after declaring critical section facebookDataCritSect
 
@@ -107,22 +105,24 @@ EventsToAlbumsIDsQueue _albumsChanges;
 #include "communication/CommunicationService.cpp"
 #include "communication/CommunicationServiceLoop.cpp"
 
-
 // ---------------------------------------------------------------------
 // class ClientServiceImpl
 // ---------------------------------------------------------------------
 
-
 ClientServiceImpl::ClientServiceImpl():
-   serviceLoop_(NULL),
-   initialUpdate_(true) {
-   const HRESULT initRes = facebookDataCritSect.Init();
-   if (FAILED(initRes)) {
-      _com_raise_error(initRes);
-   }
-   startStoredSession();
+  serviceLoop_(NULL),
+  initialUpdate_(true) {
+  const HRESULT initRes = facebookDataCritSect.Init();
+  if (FAILED(initRes)) {
+    _com_raise_error(initRes);
+  }
+  String result;
+  loadSession(result);
+  if (!result.empty()) {
+   applySession(result);
+  }
+  startStoredSession();
 }
-
 
 ClientServiceImpl::~ClientServiceImpl() {
    // this will kill serviceLoop_
@@ -131,7 +131,6 @@ ClientServiceImpl::~ClientServiceImpl() {
       serviceLoop_->postShutdown();
    }
 }
-
 
 void ClientServiceImpl::startStoredSession() {
   LOG4CPLUS_DEBUG(LogUtils::getLogger(), "ClientServiceImpl::startStoredSession");
@@ -151,7 +150,6 @@ void ClientServiceImpl::startStoredSession() {
     LOG4CPLUS_DEBUG(LogUtils::getLogger(), "ClientServiceImpl::startStoredSession session is invalid");
   }
 }
-
 
 void ClientServiceImpl::startSession(CommunicationService* communicator) {
    // This will start data retrieval thread 
@@ -198,10 +196,10 @@ void ClientServiceImpl::logout() {
     serviceLoop_ = 0;
     cleanUpCollectedData();
   }
+  saveSession(_T(""));
   cleanupSessionInfo();
   clientService->Fire_dataUpdated(FBM_LOGOUT_INITIATED);
 }
-
 
 void ClientServiceImpl::setStatus(const String& statusString) {
   const XMLRequest setSatusRequest = 
@@ -218,27 +216,16 @@ void ClientServiceImpl::setSession(const String& session) {
   if (isLoggedIn()) {
     return;
   }
-  std::vector<String> cookieParts;
-  split(cookieParts, session, boost::is_any_of(_T("=;")));
-  for (unsigned int index = 0; index < cookieParts.size();) {
-    if (cookieParts[index].empty()) {
-      //exit if there will be empty string
-      break;
-    }
-    InternetSetCookie(kFacebookRoot.c_str(), cookieParts[index].c_str(),
-      cookieParts[index + 1].c_str());
-    index += 2;
-  }
+  saveSession(session);
+  applySession(session);
 
   // then try silent login
   login(0);
 }
 
-
 bool ClientServiceImpl::isLoggedIn() const{
   return (serviceLoop_ != NULL);
 }
-
 
 size_t ClientServiceImpl::getPokesCount() const{
   // lock on construction, unlock on destruction
@@ -250,7 +237,6 @@ size_t ClientServiceImpl::getPokesCount() const{
   return nftnDta.getPokesCount();
 }
 
-
 size_t ClientServiceImpl::getMessageCount() const{
   ScopeGuard fbCritSectGuard(
         bind(&CComCriticalSection::Lock, ref(facebookDataCritSect)),
@@ -259,7 +245,6 @@ size_t ClientServiceImpl::getMessageCount() const{
   NotificationsData nftnDta = _currentData.getNotificationsData();
   return nftnDta.getMessageCount();
 }
-
 
 size_t ClientServiceImpl::getRequestsCount() const{
   ScopeGuard fbCritSectGuard(
@@ -270,7 +255,6 @@ size_t ClientServiceImpl::getRequestsCount() const{
   return nftnDta.getRequestsCount();
 }
 
-
 size_t ClientServiceImpl::getEventsCount() const{
   ScopeGuard fbCritSectGuard(
         bind(&CComCriticalSection::Lock, ref(facebookDataCritSect)),
@@ -279,7 +263,6 @@ size_t ClientServiceImpl::getEventsCount() const{
   NotificationsData nftnDta = _currentData.getNotificationsData();
   return nftnDta.getEventsCount();
 }
-
 
 size_t ClientServiceImpl::getGroupsInvsCount() const{
   ScopeGuard fbCritSectGuard(
@@ -290,7 +273,6 @@ size_t ClientServiceImpl::getGroupsInvsCount() const{
   return nftnDta.getGroupsInvsCount();
 }
 
-
 FriendsList ClientServiceImpl::getFriends() const{
   ScopeGuard fbCritSectGuard(
         bind(&CComCriticalSection::Lock, ref(facebookDataCritSect)),
@@ -298,7 +280,6 @@ FriendsList ClientServiceImpl::getFriends() const{
   
   return _currentData.getFriends(); 
 }
-
 
 UserData ClientServiceImpl::getLoggedInUser() const{
   ScopeGuard fbCritSectGuard(
@@ -321,7 +302,6 @@ void ClientServiceImpl::cleanUpCollectedData() {
   _currentData = emptyData;
 }
 
-
 bool ClientServiceImpl::canChangeStatus() const{
   if (isNull( serviceLoop_ )) {
     return false;
@@ -335,7 +315,6 @@ void ClientServiceImpl::updateView(ULONG changeId) {
   UNREFERENCED_PARAMETER(changeId);
   clientService->Fire_dataUpdated(FBM_UPDATE_VIEW);
 }
-
 
 void ClientServiceImpl::FireUpdates(ClientService* clientService) {
   ScopeGuard fbCritSectGuard(
@@ -402,7 +381,6 @@ bool ClientServiceImpl::storeSessionInfo(const SessionInfo& sessionInfo) {
       sessionExpireEntry.write() && sessionSecretEntry.write();
 }
 
-
 bool ClientServiceImpl::restoreSessionInfo(SessionInfo& sessionInfo) {
   RegStrEntry sessionKeyEntry(HKEY_CURRENT_USER, 
      kFacebookSessionPath, kSessionKeyEntryName, _T(""));
@@ -445,10 +423,10 @@ void ClientServiceImpl::cleanupSessionInfo() {
   RegStrEntry sessionSecretEntry(HKEY_CURRENT_USER, 
      kFacebookSessionPath, kSessionSecretEntryName,  _T(""));
 
-  sessionKeyEntry.remove();
-  sessionUserEntry.remove();
-  sessionExpireEntry.remove();
-  sessionSecretEntry.remove();
+  sessionKeyEntry.removeKey();
+  sessionUserEntry.removeKey();
+  sessionExpireEntry.removeKey();
+  sessionSecretEntry.removeKey();
 }
 
 

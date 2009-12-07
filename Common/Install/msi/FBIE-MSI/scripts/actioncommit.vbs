@@ -25,7 +25,7 @@ Set fso = CreateObject("Scripting.FileSystemObject")
 If fso.FileExists("""" + curDir + "FBClientService.exe""") Then
   If Not wshShell Is Nothing Then
   	wshShell.Run """" & curDir & "FBClientService.exe""" & " -closeall", 0, True	
-   wshShell.Run """" & curDir & "FBClientService.exe""" & " -unregister", 0, True
+    wshShell.Run """" & curDir & "FBClientService.exe""" & " -unregister", 0, True
   End If
 End If
 
@@ -46,7 +46,6 @@ End If
 ' start FBClientService.exe with register parameter
 If Not wshShell Is Nothing Then
   wshShell.Run """" & curDir & "FBClientService.exe""" & " -register", 0, True
-  wshShell.Run """" & curDir & "FBClientService.exe""" & " -closeall", 0, True
 End If
 
 Set wshShell = Nothing

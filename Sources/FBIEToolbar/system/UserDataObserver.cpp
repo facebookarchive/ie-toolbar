@@ -52,7 +52,7 @@
 
 #include "../../util/LogUtils.h"
 #include "../../util/ScopeGuard.h"
-
+#include "../../util/SessionUtils.h"
 
 
 namespace facebook {
@@ -511,20 +511,7 @@ void UserDataObserver::handleGetFriends() {
 }
 
 void UserDataObserver::setCookies(String cookies) {
-  if (cookies.empty()) {
-    return;
-  }
-  std::vector<String> cookieParts;
-  split(cookieParts, cookies, boost::is_any_of(_T("=;")));
-  for (unsigned int index = 0; index < cookieParts.size();) {
-    if (cookieParts[index].empty()) {
-      //exit if there will be empty string
-      break;
-    }
-    InternetSetCookie(kFacebookRoot.c_str(), cookieParts[index].c_str(),
-      cookieParts[index + 1].c_str());
-    index += 2;
-  }
+  applySession(cookies);
 }
 void UserDataObserver::handleGetLoggedInUser() {
   FBUserData data;

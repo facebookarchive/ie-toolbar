@@ -30,41 +30,59 @@
 * FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
 * ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 * DEALINGS IN THE SOFTWARE.
-*/
+*/ 
 
-#ifndef ERROR_H
-#define ERROR_H
+#include "StdAfx.h"
+#include "SessionUtils.h"
 
-#include <exception>
-#include <stdexcept>
+#include "Wininet.h"
 
-namespace facebook{
+#include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/erase.hpp>
+#pragma warning(disable : 4180)
+#include <boost/bind.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/noncopyable.hpp>
+
+#include "../common/CommonConstants.h"
+#include "../common/urlutils.h"
+
+#include "RegistryUtils.h"
 
 
-/**
- * class Error
- *
- * Class for error handling
- * 
- */
- 
-class Error : public std::runtime_error {
+namespace facebook {
 
-// Construction
+void saveSession(const String& session) {
+  String result;
+  HKEY hKey;
+  if (RegistryUtils::getWritableRegistryKey(hKey)) {
+    RegistryUtils::writeString(hKey, 
+      kToolbarSettingsRegistryPath, _T("session"), session);
+    RegCloseKey(hKey);
+  }
+}
 
-public:
+void loadSession(String& session) {
+  HKEY hKey;
+  if (RegistryUtils::getWritableRegistryKey(hKey)) {
+    RegistryUtils::readString(hKey, 
+      kToolbarSettingsRegistryPath, _T("session"), session);
+    RegCloseKey(hKey);
+  }
+}
+const String kFacebookRootTrunc = _T("http://facebook.com/");
 
-   Error():
-      std::runtime_error("Unspecified error\n") {
-   }
-
-   explicit Error(const std::string& message):
-      std::runtime_error(message) {
-   }
-
-};
+void applySession(const String& session) {
+  std::vector<String> cookieParts;
+  split(cookieParts, session, boost::is_any_of(_T("\t")));
+  for (unsigned int index = 0; index < cookieParts.size(); ++index) {
+    if (cookieParts[index].empty()) {
+      //exit if there will be empty string
+      continue;
+    }
+    InternetSetCookie(kFacebookRootTrunc.c_str(), NULL,
+      cookieParts[index].c_str());
+  }
+}
 
 }// !namespace facebook
-
-
-#endif

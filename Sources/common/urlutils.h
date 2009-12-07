@@ -113,9 +113,11 @@ namespace facebook {
     * Build url for action
     * @param actionPage an string that contain action page (by const-ref)
     * @param userID an id of the user(by const-ref)
+    * @param needEncode - whether need to url encode params
     * @return built string (by value)
     */
-   String buildActionURL(const String& actionPage, const String& userID);
+   String buildActionURL(const String& actionPage, const String& userID, 
+     const bool needEncode);
 
    /**
     * Build url for search action
@@ -126,10 +128,11 @@ namespace facebook {
 
    /**
     * Build url for ShareContent
-    * @param 
+    * @param contentUrl - url to share
+    * @param title - titler of the page to share
     * @return built string (by value)
     */
-   String buildShareContentURL(const String& contentUrl);
+   String buildShareContentURL(const String& contentUrl, const String& title);
 
    /**
     * Build url for Profile of the user

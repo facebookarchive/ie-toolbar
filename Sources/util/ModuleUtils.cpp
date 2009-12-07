@@ -50,6 +50,12 @@ String getModuleFileName(const HMODULE moduleHandle) {
   return String(buffer.begin(), buffer.begin() + nameSize);
 }
 
+String getModuleFileNameOnly(const HMODULE moduleHandle) {
+  String mudulePath = getModuleFileName(moduleHandle);
+  int position = mudulePath.rfind(_T("\\"));
+  return String(mudulePath.begin() + position + 1, mudulePath.end());
+}
+
 String getModuleVersion(const HMODULE moduleHandle) {
   String result;
   String filename = getModuleFileName(moduleHandle);

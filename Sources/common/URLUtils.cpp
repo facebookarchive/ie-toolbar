@@ -54,17 +54,20 @@
 
 namespace facebook{
 
-String buildShareContentURL(const String& contentUrl) {
+String buildShareContentURL(const String& contentUrl, const String& title) {
   StringStream ss;
   ss << kFacebookRoot 
     << kSharePage 
     <<  _T("?src=tb&v=4&u=") 
-    << contentUrl;
+    << encodeUrl(contentUrl)
+    <<  _T("&t=") 
+    <<  encodeUrl(title);
   return ss.str(); 
 }
 
 String buildActionURL(const String& actionPage, 
-                      const String& userID) {
+                      const String& userID,
+                      const bool needEncode) {
   StringStream ss;
   ss << kFacebookRoot << actionPage;
 
@@ -76,7 +79,11 @@ String buildActionURL(const String& actionPage,
     ss << _T("?id=");
   }
 
-  ss  << encodeUrl(userID);
+  if (needEncode) {
+    ss  << encodeUrl(userID); 
+  } else {
+    ss  << userID;
+  }
 
   return ss.str(); 
 }

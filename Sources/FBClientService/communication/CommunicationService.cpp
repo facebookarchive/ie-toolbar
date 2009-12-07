@@ -227,7 +227,8 @@ private:
    }
 
   void doRequest(const XMLRequest& request, const String& format, String& response) { 
-    XMLRequest::RequestParams full_params = request.getRequestParams();
+    try {
+      XMLRequest::RequestParams full_params = request.getRequestParams();
 
       // TODO: convert time to UTC here
       const String callID = boost::lexical_cast<String>(timeGetTime());
@@ -265,9 +266,14 @@ private:
       } else {
         throw std::exception("bad request");
       }
-   }
+    }
+    catch(...) {
+      // catch added for handle error if LAN connection broken
+    }
+  }
 
    void doGetRequest(const String& paramsString, String& response) {
+     try {
        const HRESULT openResult = httpRequest_->open(_T("GET"), 
          paramsString.c_str() , false);
        if FAILED(openResult) {
@@ -280,30 +286,38 @@ private:
        }
 
        response = toString(httpRequest_->responseText);
+     }
+     catch(...) {
+       // catch added for handle error if LAN connection broken
+     }
    }
 
    void doPostRequest(const String& paramsString, const String& targetURL, String& response) {
-      const HRESULT openResult = httpRequest_->open(_T("POST"), targetURL.c_str() , false);
-      if FAILED(openResult) {
+     try { 
+       const HRESULT openResult = httpRequest_->open(_T("POST"), targetURL.c_str() , false);
+       if FAILED(openResult) {
          _com_raise_error(openResult);
-      }
+       }
 
-      HRESULT setHeaderRes = httpRequest_->setRequestHeader(_T("Content-type"), 
+       HRESULT setHeaderRes = httpRequest_->setRequestHeader(_T("Content-type"), 
             _T("application/x-www-form-urlencoded"));
 
-      setHeaderRes = httpRequest_->setRequestHeader(_T("text/html,application/xhtml+xml"), 
+       setHeaderRes = httpRequest_->setRequestHeader(_T("text/html,application/xhtml+xml"), 
             _T("application/xml;q=0.9,*/*;q=0.8"));
 
-     
-      const String contentLength = boost::lexical_cast<String>(paramsString.size());
-      setHeaderRes = httpRequest_->setRequestHeader(_T("Content-length"),contentLength.c_str());
+       const String contentLength = boost::lexical_cast<String>(paramsString.size());
+       setHeaderRes = httpRequest_->setRequestHeader(_T("Content-length"),contentLength.c_str());
 
-      const HRESULT sendResult = httpRequest_->send(paramsString.c_str());
-      if FAILED(sendResult) {
+       const HRESULT sendResult = httpRequest_->send(paramsString.c_str());
+       if FAILED(sendResult) {
          _com_raise_error(openResult);
-      }
+       }
 
-      response = toString(httpRequest_->responseText);
+       response = toString(httpRequest_->responseText);
+     }
+     catch(...) {
+       // catch added for handle error if LAN connection broken
+     }
    }
 
   

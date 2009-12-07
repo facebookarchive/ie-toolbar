@@ -79,8 +79,19 @@ int UserStatusEdit::OnCreate(LPCREATESTRUCT createStructure) {
 
 void UserStatusEdit::OnKeyUp(UINT character, UINT repeatCount, UINT flags) {
   BaseType::OnKeyUp(character, repeatCount, flags);
-  if (character == VK_RETURN) {
+  if (VK_RETURN == character) {
     saveUserStatus();
+  }
+  if (VK_ESCAPE == character) {
+    String status = UserDataObserver::getInstance().
+      getLoggedInUser(false).getStatusMessage();
+    if (status.empty()) {
+      enterDefaultText();
+    } else {
+      setText(status);
+    }
+    // selete the whole text
+    SetSel(0, -1);
   }
 }
 
@@ -103,13 +114,15 @@ void UserStatusEdit::saveUserStatus() {
     // if there remains default text - remove the status
     status.clear();
   }
-  if (UserDataObserver::getInstance().getLoggedInUser(false).getStatusMessage() == status) {
+  if (UserDataObserver::getInstance().
+    getLoggedInUser(false).getStatusMessage() == status) {
     // don't save it if  nothing was changed
     return;
   }
 
   if (UserDataObserver::getInstance().canChangeStatus()) {
-      UserDataObserver::getInstance().setStatus(encodeCharsHtmlCode(getEnteredText()));
+      UserDataObserver::getInstance().
+        setStatus(encodeCharsHtmlCode(getEnteredText()));
   } else {
      authorizeSetStatus();
   }

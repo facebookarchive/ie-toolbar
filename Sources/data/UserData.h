@@ -43,7 +43,7 @@
 namespace facebook{
 
 /**
- * class ExampleClass
+ * class UserData
  *
  * Holds information about the 
  * facebook's user

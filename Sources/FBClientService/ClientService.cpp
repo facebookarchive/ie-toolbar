@@ -80,7 +80,6 @@ DWORD WINAPI threadCheckForUpdatesHandler(LPVOID lpParameter) {
 
 void checkForUpdates() {
   DWORD threadId;
-
   CloseHandle(CreateThread(NULL, NULL, threadCheckForUpdatesHandler, NULL, NULL, &threadId));  
 }
 
@@ -153,7 +152,6 @@ STDMETHODIMP facebook::ClientService::getMessagesCount(ULONG* messagesCount) {
   return S_OK;
 }
 
-
 STDMETHODIMP facebook::ClientService::getRequestsCount(ULONG* requestsCount) {
   try{
     *requestsCount = service_->getRequestsCount();
@@ -167,7 +165,6 @@ STDMETHODIMP facebook::ClientService::getRequestsCount(ULONG* requestsCount) {
 
   return S_OK;
 }
-
 
 STDMETHODIMP facebook::ClientService::getEventsCount(ULONG* eventsCount) {
   try{

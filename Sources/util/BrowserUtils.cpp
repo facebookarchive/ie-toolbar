@@ -108,14 +108,19 @@ void IEPopup(const String& url,
   if (FAILED(putHeigthRes)) {
    _com_raise_error(putHeigthRes);
   }
-
   //show browser
   const HRESULT putVisibleRes = browser->put_Visible(VARIANT_TRUE);
   if (FAILED(putVisibleRes)) {
    _com_raise_error(putVisibleRes);
   }
-
+  //put it on the front
+  HWND handle;
+  const HRESULT getHandleRes = browser->get_HWND((SHANDLE_PTR*)&handle);
+  if (SUCCEEDED(getHandleRes)) {
+    ::SetForegroundWindow(handle);
+  }
   navigate(browser, url);
+  
 }
 
 void navigate(IWebBrowser2Ptr& browser, const String& url) {
@@ -172,12 +177,15 @@ void openUrlNewWindow(const String& url) {
   // perform a DDE command that will open new tab in IE (or another default action)
   // the same as defayut system handling
   DWORD instance = 0;
-  UINT res = DdeInitialize(&instance, (PFNCALLBACK)(&DdeCallbackFunction), APPCMD_CLIENTONLY, 0);
+  UINT res = DdeInitialize(&instance, 
+    (PFNCALLBACK)(&DdeCallbackFunction), APPCMD_CLIENTONLY, 0);
   if (res != DMLERR_NO_ERROR) {
     return;
   }
-  HSZ applicationName = DdeCreateStringHandle(instance, _T("IExplore"), CP_WINUNICODE);
-  HSZ topic = DdeCreateStringHandle(instance, _T("WWW_OpenURLNewWindow"), CP_WINUNICODE);
+  HSZ applicationName = DdeCreateStringHandle(instance, 
+    _T("IExplore"), CP_WINUNICODE);
+  HSZ topic = DdeCreateStringHandle(instance, 
+    _T("WWW_OpenURLNewWindow"), CP_WINUNICODE);
   //open connection to the ie instance
   HCONV conversation = DdeConnect(instance, applicationName, topic, NULL);
   if (conversation == 0) {

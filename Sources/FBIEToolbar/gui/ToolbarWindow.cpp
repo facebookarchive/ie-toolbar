@@ -117,7 +117,7 @@ void ToolbarWindow::OnSetFocus(CWnd* const oldWindow) {
 
 void ToolbarWindow::OnKillFocus(CWnd* const newWindow) {
   BaseType::OnKillFocus(newWindow);
-TRACE(_T("*** ToolbarWindow::OnKillFocus\n "));
+   TRACE(_T("*** ToolbarWindow::OnKillFocus\n "));
 }
 
 void ToolbarWindow::OnNmSetFocus(UINT id, NMHDR* messageHdr, LRESULT* lResult) {

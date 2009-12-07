@@ -52,8 +52,26 @@ String parseCookie(String data, String cookie) {
   if (startPosition == String::npos) {
     return result;
   }
+  String startLetter = data.substr(startPosition - 1, 1);
+  // we need start of the cookie name
+  if (startLetter != String(_T(" "))) {
+     return result;
+  }
   size_t endPosition = data.find(_T(";"), startPosition);
-  result = data.substr(startPosition, endPosition - startPosition + 1);
+  result = data.substr(startPosition, endPosition - startPosition);
+  //add expiration, if it exists
+  size_t expirePosition = data.find(_T("expires="));
+  if (expirePosition != String::npos) {
+    endPosition = data.find(_T(";"), expirePosition);
+    result += _T("; ") + data.substr(expirePosition, endPosition - expirePosition);
+  }
+
+  //add expiration, if it exists
+//  expirePosition = data.find(_T("httponly"));
+ // if (expirePosition != String::npos) {
+//    result += _T("; httponly");
+//  }
+  result += _T("\t");
   return result;
 }
 
@@ -89,6 +107,7 @@ void SessionSink::processHeader(String header) {
     }
     // get the xs cookie
     cookies += parseCookie(responseParts[index], _T("xs="));
+    
     //get the c_user cookie
     cookies += parseCookie(responseParts[index], _T("c_user="));
   }

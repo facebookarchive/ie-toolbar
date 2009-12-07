@@ -147,6 +147,22 @@ bool RegistryUtils::deleteKey(const HKEY rootKey, const String subKey) {
    return RegDeleteKey(rootKey, subKey.c_str()) == ERROR_SUCCESS;
 }
 
+bool RegistryUtils::deleteValue(const HKEY rootKey, const String subKey, const String value) {
+  bool result = false;
+  HKEY key = NULL;
+  HRESULT res = RegOpenKeyEx(rootKey, subKey.c_str(), 0, KEY_WRITE, &key);
+
+  if (res == ERROR_SUCCESS) {
+    const LRESULT deleteValueResult = ::RegDeleteValue(key, value.c_str());
+    ::RegCloseKey(key);
+    if (deleteValueResult == ERROR_SUCCESS) {
+      result = true;
+    }
+  }
+
+  return result;
+}
+
 bool RegistryUtils::getWritableRegistryKey(HKEY &rootKey) {
 	
   String kLowAccessRegistryEntry = _T("Software\\AppDataLow");

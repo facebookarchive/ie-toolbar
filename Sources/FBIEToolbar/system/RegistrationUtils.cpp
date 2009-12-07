@@ -188,7 +188,7 @@ bool unRegisterServer(const CLSID& classId) {
       moduleFileName);
 
    for (unsigned int i = 0; i < entries.size(); ++i) {
-     entries[i].remove();
+     entries[i].removeKey();
    }
 
    return deleteExtension(classIdString);
@@ -262,7 +262,7 @@ void facebook::deletePostSetupEntries()
 
   bool result = false;
   for (unsigned int i = 0; i < entries.size(); ++i) {
-     result = entries[i].remove();
+     result = entries[i].removeKey();
   }
 }
 

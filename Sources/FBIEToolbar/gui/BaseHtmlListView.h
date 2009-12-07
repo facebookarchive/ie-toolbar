@@ -88,7 +88,7 @@ public:
    // public interface
 public:
    
-  void loaded(const FriendsList& friendsList);
+  void loaded(const FriendsList& friendsList, const bool needRefresh);
 
   /**
    * Redraws friends list html according
@@ -187,8 +187,9 @@ protected:
    * 
    * @param commandURL - contains all the information
    *                     about command to be executed
+   * @param needEncode - check whether need to encode url
    */
-  static void processBrowserCommand(const String& commandURL);
+  static void processBrowserCommand(const String& commandURL, bool needEncode = false);
 
   // private methods
 private: 

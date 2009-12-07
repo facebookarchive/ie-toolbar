@@ -85,7 +85,7 @@ bool SidebarHtmlView::handleHtmlLoad(LPCTSTR url, BOOL* cancelAction, CWnd* noti
       if (!UserDataObserver::getInstance().isLoggedIn()) {
                UserDataObserver::getInstance().login();
          } else {
-            SidebarHtmlView::processBrowserCommand(viewAction);
+            SidebarHtmlView::processBrowserCommand(viewAction, false);
          }
       *cancelAction = TRUE; // cancel navigation for our custom notification
       return true;

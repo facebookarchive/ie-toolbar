@@ -50,6 +50,15 @@ namespace facebook{
 String getModuleFileName(const HMODULE moduleHandle = 0);
 
 /**
+ * get Module file name
+ *
+ * @param moduleHandle a handler of the module (by const)
+ *
+ * @return module file name by handle
+ */
+String getModuleFileNameOnly(const HMODULE moduleHandle = 0);
+
+/**
  * get Module version
  *
  * @param moduleHandle a handler of the module (by const)
